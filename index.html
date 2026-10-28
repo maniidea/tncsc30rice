@@ -44,9 +44,9 @@ sm:flex-row justify-between items-center z-20 shadow-xs gap-3">
                 <h1 class="font-bold text-slate-800 text-base leading-tight">TNCSC - 
 
 Rs.30/- Rice & Paddy Master Sheet</h1>
-                <p class="text-[11px] text-slate-500">Google Sheets Style Live 
+                <p class="text-[11px] text-slate-500">Google Sheets Style Live Ledger 
 
-Ledger</p>
+& Consolidated Reports</p>
             </div>
         </div>
 
@@ -87,34 +87,34 @@ xs">
 x-auto shrink-0 select-none" id="sheet-tabs-container">
         <button onclick="switchSheet('MillReceipts')" id="tab-MillReceipts" 
 
-class="sheet-tab px-5 py-2.5 text-xs font-bold text-slate-700 bg-white border-t-2 
+class="sheet-tab px-4 py-2.5 text-xs font-bold text-slate-700 bg-white border-t-2 
 
 border-emerald-700 rounded-t-lg transition flex items-center space-x-2 shadow-xs">
-            <i class="fa-solid fa-table text-emerald-700"></i><span>1. Mill 
+            <i class="fa-solid fa-table text-emerald-700"></i><span>1. Receipts Rice 
 
-Receipts</span>
+MillwiseReceipts</span>
         </button>
         <button onclick="switchSheet('RegionIssues')" id="tab-RegionIssues" 
 
-class="sheet-tab px-5 py-2.5 text-xs font-semibold text-slate-600 hover:bg-slate-
+class="sheet-tab px-4 py-2.5 text-xs font-semibold text-slate-600 hover:bg-slate-
 
 300/60 rounded-t-lg transition flex items-center space-x-2">
-            <i class="fa-solid fa-table text-slate-500"></i><span>2. Issues to 
+            <i class="fa-solid fa-table text-slate-500"></i><span>2. Issues Rice to 
 
 Regions</span>
         </button>
         <button onclick="switchSheet('PaddyIssues')" id="tab-PaddyIssues" 
 
-class="sheet-tab px-5 py-2.5 text-xs font-semibold text-slate-600 hover:bg-slate-
+class="sheet-tab px-4 py-2.5 text-xs font-semibold text-slate-600 hover:bg-slate-
 
 300/60 rounded-t-lg transition flex items-center space-x-2">
-            <i class="fa-solid fa-table text-slate-500"></i><span>3. Paddy Issued From 
+            <i class="fa-solid fa-table text-slate-500"></i><span>3. Issued Paddy to 
 
-Region</span>
+Mill Wise</span>
         </button>
         <button onclick="switchSheet('ADS_Issues')" id="tab-ADS_Issues" class="sheet-
 
-tab px-5 py-2.5 text-xs font-semibold text-slate-600 hover:bg-slate-300/60 rounded-t-
+tab px-4 py-2.5 text-xs font-semibold text-slate-600 hover:bg-slate-300/60 rounded-t-
 
 lg transition flex items-center space-x-2">
             <i class="fa-solid fa-table text-slate-500"></i><span>4. Issues to 
@@ -123,24 +123,35 @@ ADS</span>
         </button>
         <button onclick="switchSheet('Coop_Issues')" id="tab-Coop_Issues" 
 
-class="sheet-tab px-5 py-2.5 text-xs font-semibold text-slate-600 hover:bg-slate-
+class="sheet-tab px-4 py-2.5 text-xs font-semibold text-slate-600 hover:bg-slate-
 
 300/60 rounded-t-lg transition flex items-center space-x-2">
-            <i class="fa-solid fa-table text-slate-500"></i><span>5. Co-operative 
+            <i class="fa-solid fa-table text-slate-500"></i><span>5. Issues to Co-
 
-Shops</span>
+operative </span>
+        </button>
+        <button onclick="switchSheet('ConsolidatedReport')" id="tab-
+
+ConsolidatedReport" class="sheet-tab px-4 py-2.5 text-xs font-bold text-blue-800 bg-
+
+blue-50 border-t-2 border-blue-600 rounded-t-lg transition flex items-center space-x-2 
+
+shadow-xs">
+            <i class="fa-solid fa-chart-pie text-blue-600"></i><span>📊 Consolidated 
+
+Reports</span>
         </button>
         <!-- HO Master Control Tab -->
         <button onclick="switchSheet('MasterAllotment')" id="tab-MasterAllotment" 
 
-class="sheet-tab hidden px-5 py-2.5 text-xs font-semibold text-amber-800 hover:bg-
+class="sheet-tab hidden px-4 py-2.5 text-xs font-semibold text-amber-800 hover:bg-
 
 amber-100 rounded-t-lg transition flex items-center space-x-2 bg-amber-50 border-t-2 
 
 border-amber-600">
-            <i class="fa-solid fa-gear text-amber-700"></i><span>HO Master Control 
+            <i class="fa-solid fa-gear text-amber-700"></i><span>⚙️ HO Master 
 
-(Allotments)</span>
+Allotments</span>
         </button>
     </nav>
 
@@ -218,7 +229,7 @@ inline-flex items-center">
             </div>
         </div>
 
-        <!-- Master Control Action Bar (Appears only on Master Allotment tab) -->
+        <!-- Master Control Action Bar -->
         <div id="master-toolbar" class="hidden bg-amber-50 p-3.5 rounded-xl border 
 
 border-amber-300 shadow-xs flex justify-between items-center shrink-0">
@@ -233,6 +244,24 @@ amber-800 text-white px-5 py-2 rounded-lg font-bold text-xs shadow transition in
 
 flex items-center">
                 <i class="fa-solid fa-floppy-disk mr-1.5"></i> Save Allotments
+            </button>
+        </div>
+
+        <!-- Consolidated Report Action Bar -->
+        <div id="report-toolbar" class="hidden bg-blue-50 p-3.5 rounded-xl border 
+
+border-blue-300 shadow-xs flex justify-between items-center shrink-0">
+            <span class="text-xs font-bold text-blue-900"><i class="fa-solid fa-
+
+chart-bar mr-1.5 text-blue-700"></i> Summary of total rice quantities issued across 
+
+all 39 regions for Regions, ADS, and Co-operative .</span>
+            <button onclick="exportConsolidatedExcel()" class="bg-blue-700 hover:bg-
+
+blue-800 text-white px-4 py-2 rounded-lg font-bold text-xs shadow transition inline-
+
+flex items-center">
+                <i class="fa-solid fa-download mr-1.5"></i> Export Consolidated Report
             </button>
         </div>
 
@@ -366,24 +395,30 @@ allotment: 350 }
         function switchSheet(sheetName) {
             activeSheet = sheetName;
             document.querySelectorAll('.sheet-tab').forEach(btn => {
-                btn.className = "sheet-tab px-5 py-2.5 text-xs font-semibold text-
+                btn.className = "sheet-tab px-4 py-2.5 text-xs font-semibold text-
 
 slate-600 hover:bg-slate-300/60 rounded-t-lg transition flex items-center space-x-2";
                 let icon = btn.querySelector('i');
-                if(icon && !btn.id.includes('MasterAllotment')) icon.className = "fa-
+                if(icon && !btn.id.includes('MasterAllotment') && !btn.id.includes
 
-solid fa-table text-slate-500";
+('ConsolidatedReport')) icon.className = "fa-solid fa-table text-slate-500";
             });
             let activeBtn = document.getElementById('tab-' + sheetName);
             if(activeBtn) {
                 if (sheetName === 'MasterAllotment') {
-                    activeBtn.className = "sheet-tab px-5 py-2.5 text-xs font-bold 
+                    activeBtn.className = "sheet-tab px-4 py-2.5 text-xs font-bold 
 
 text-amber-800 bg-amber-50 border-t-2 border-amber-600 rounded-t-lg transition flex 
 
 items-center space-x-2 shadow-xs";
+                } else if (sheetName === 'ConsolidatedReport') {
+                    activeBtn.className = "sheet-tab px-4 py-2.5 text-xs font-bold 
+
+text-blue-800 bg-blue-50 border-t-2 border-blue-600 rounded-t-lg transition flex 
+
+items-center space-x-2 shadow-xs";
                 } else {
-                    activeBtn.className = "sheet-tab px-5 py-2.5 text-xs font-bold 
+                    activeBtn.className = "sheet-tab px-4 py-2.5 text-xs font-bold 
 
 text-slate-700 bg-white border-t-2 border-emerald-700 rounded-t-lg transition flex 
 
@@ -395,12 +430,18 @@ items-center space-x-2 shadow-xs";
 
             let toolbar = document.getElementById('toolbar-container');
             let masterToolbar = document.getElementById('master-toolbar');
+            let reportToolbar = document.getElementById('report-toolbar');
+
+            toolbar.style.display = 'none';
+            masterToolbar.classList.add('hidden');
+            reportToolbar.classList.add('hidden');
+
             if (sheetName === 'MasterAllotment') {
-                toolbar.style.display = 'none';
                 masterToolbar.classList.remove('hidden');
+            } else if (sheetName === 'ConsolidatedReport') {
+                reportToolbar.classList.remove('hidden');
             } else {
                 toolbar.style.display = 'flex';
-                masterToolbar.classList.add('hidden');
             }
 
             resetForm();
@@ -473,7 +514,9 @@ full px-3 py-1.5 rounded border border-slate-300 text-xs bg-white">${millOpts}
                 if(currentRegion !== 'HEAD_OFFICE') document.getElementById('entry-
 
 source-dest').value = currentRegion;
-            } else if (activeSheet !== 'MasterAllotment') {
+            } else if (activeSheet !== 'MasterAllotment' && activeSheet !== 
+
+'ConsolidatedReport') {
                 let labelTitle = activeSheet === 'ADS_Issues' ? 'SELECT ADS DISTRICT' 
 
 : 'SELECT CO-OP DISTRICT';
@@ -555,8 +598,6 @@ numericVal;
 
         function saveAllMasterAllotments() {
             let promises = [];
-            
-            // Save RegionsMaster
             regions.forEach(r => {
                 let data = regionAllotments[r];
                 let recordId = data.id || ('REG_' + Date.now() + Math.floor
@@ -575,7 +616,6 @@ coop_qty: data.coop })
                 );
             });
 
-            // Save MillsMaster
             mills.forEach(m => {
                 let millId = m.id || ('MILL_' + Date.now() + Math.floor(Math.random()
 
@@ -800,6 +840,82 @@ Allotment Master View Active`;
                 return;
             }
 
+            if (activeSheet === 'ConsolidatedReport') {
+                thead.innerHTML = `<tr>
+                    <th class="p-3 border-r border-slate-300 w-16 text-
+
+center">S.No</th>
+                    <th class="p-3 border-r border-slate-300">Region Name</th>
+                    <th class="p-3 border-r border-slate-300 text-right">Total Issues 
+
+to Regions (MT)</th>
+                    <th class="p-3 border-r border-slate-300 text-right">Total Issues 
+
+to ADS (MT)</th>
+                    <th class="p-3 text-right">Total Issues to Co-operative (MT)</th>
+                </tr>`;
+
+                let html = "";
+                let totalRegSum = 0, totalAdsSum = 0, totalCoopSum = 0;
+
+                regions.forEach((r, idx) => {
+                    let regIssued = 0, adsIssued = 0, coopIssued = 0;
+
+                    db.RegionIssues.forEach(item => {
+                        if((item.destination || "").toUpperCase() === r.toUpperCase() 
+
+|| (item.source || "").toUpperCase() === r.toUpperCase()) {
+                            regIssued += item.qty;
+                        }
+                    });
+
+                    db.ADS_Issues.forEach(item => {
+                        if((item.entity || "").toUpperCase() === r.toUpperCase()) {
+                            adsIssued += item.qty;
+                        }
+                    });
+
+                    db.Coop_Issues.forEach(item => {
+                        if((item.entity || "").toUpperCase() === r.toUpperCase()) {
+                            coopIssued += item.qty;
+                        }
+                    });
+
+                    totalRegSum += regIssued;
+                    totalAdsSum += adsIssued;
+                    totalCoopSum += coopIssued;
+
+                    html += `<tr class="hover:bg-slate-50 border-b border-slate-200">
+                        <td class="p-3 border-r border-slate-200 text-center font-
+
+mono">${idx + 1}</td>
+                        <td class="p-3 border-r border-slate-200 font-medium">${r}
+
+</td>
+                        <td class="p-3 border-r border-slate-200 text-right font-
+
+mono">${regIssued.toFixed(2)}</td>
+                        <td class="p-3 border-r border-slate-200 text-right font-
+
+mono">${adsIssued.toFixed(2)}</td>
+                        <td class="p-3 text-right font-mono">${coopIssued.toFixed(2)}
+
+</td>
+                    </tr>`;
+                });
+
+                tbody.innerHTML = html;
+                document.getElementById('grid-row-count').innerText = `
+
+${regions.length} Regions Consolidated`;
+                document.getElementById('grid-total-summary').innerText = `Reg Issues: 
+
+${totalRegSum.toFixed(2)} | ADS: ${totalAdsSum.toFixed(2)} | Coop: 
+
+${totalCoopSum.toFixed(2)}`;
+                return;
+            }
+
             let fromDate = document.getElementById('filter-from-date')?.value || "";
             let toDate = document.getElementById('filter-to-date')?.value || "";
 
@@ -983,6 +1099,10 @@ ${totalQty.toFixed(2)} MT`;
 
         function exportCurrentSheetExcel() {
             if (activeSheet === 'MasterAllotment') return;
+            if (activeSheet === 'ConsolidatedReport') {
+                exportConsolidatedExcel();
+                return;
+            }
             let wb = XLSX.utils.book_new();
             let wsData = [];
             let fromDate = document.getElementById('filter-from-date')?.value || "";
@@ -1036,6 +1156,38 @@ i.entity, i.allotment, i.qty, cumulative, i.allotment - cumulative]); });
 
 activeSheet);
             XLSX.writeFile(wb, `TNCSC_${activeSheet}_${currentRegion}.xlsx`);
+        }
+
+        function exportConsolidatedExcel() {
+            let wb = XLSX.utils.book_new();
+            let wsData = [["S.No", "Region Name", "Total Issues to Regions (MT)", 
+
+"Total Issues to ADS (MT)", "Total Co-operative Sales (MT)"]];
+            
+            regions.forEach((r, idx) => {
+                let regIssued = 0, adsIssued = 0, coopIssued = 0;
+                db.RegionIssues.forEach(item => {
+                    if((item.destination || "").toUpperCase() === r.toUpperCase() || 
+
+(item.source || "").toUpperCase() === r.toUpperCase()) regIssued += item.qty;
+                });
+                db.ADS_Issues.forEach(item => {
+                    if((item.entity || "").toUpperCase() === r.toUpperCase()) 
+
+adsIssued += item.qty;
+                });
+                db.Coop_Issues.forEach(item => {
+                    if((item.entity || "").toUpperCase() === r.toUpperCase()) 
+
+coopIssued += item.qty;
+                });
+                wsData.push([idx + 1, r, regIssued, adsIssued, coopIssued]);
+            });
+
+            XLSX.utils.book_append_sheet(wb, XLSX.utils.aoa_to_sheet(wsData), 
+
+"Consolidated_Report");
+            XLSX.writeFile(wb, `TNCSC_Consolidated_Issues_Report.xlsx`);
         }
     </script>
 </body>

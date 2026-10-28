@@ -92,7 +92,7 @@ class="sheet-tab px-4 py-2.5 text-xs font-bold text-slate-700 bg-white border-t-
 border-emerald-700 rounded-t-lg transition flex items-center space-x-2 shadow-xs">
             <i class="fa-solid fa-table text-emerald-700"></i><span>1. Receipts Rice 
 
-MillwiseReceipts</span>
+Millwise</span>
         </button>
         <button onclick="switchSheet('RegionIssues')" id="tab-RegionIssues" 
 
@@ -128,7 +128,7 @@ class="sheet-tab px-4 py-2.5 text-xs font-semibold text-slate-600 hover:bg-slate
 300/60 rounded-t-lg transition flex items-center space-x-2">
             <i class="fa-solid fa-table text-slate-500"></i><span>5. Issues to Co-
 
-operative </span>
+operative</span>
         </button>
         <button onclick="switchSheet('ConsolidatedReport')" id="tab-
 
@@ -137,7 +137,7 @@ ConsolidatedReport" class="sheet-tab px-4 py-2.5 text-xs font-bold text-blue-800
 blue-50 border-t-2 border-blue-600 rounded-t-lg transition flex items-center space-x-2 
 
 shadow-xs">
-            <i class="fa-solid fa-chart-pie text-blue-600"></i><span>📊 Consolidated 
+            <i class="fa-solid fa-chart-pie text-blue-600"></i><span>6. Consolidated 
 
 Reports</span>
         </button>
@@ -149,7 +149,7 @@ class="sheet-tab hidden px-4 py-2.5 text-xs font-semibold text-amber-800 hover:b
 amber-100 rounded-t-lg transition flex items-center space-x-2 bg-amber-50 border-t-2 
 
 border-amber-600">
-            <i class="fa-solid fa-gear text-amber-700"></i><span> HO Master 
+            <i class="fa-solid fa-gear text-amber-700"></i><span>HO Master 
 
 Allotments</span>
         </button>
@@ -170,9 +170,14 @@ shrink-0">
 
 class="flex flex-wrap items-center gap-2.5 w-full lg:w-auto flex-1">
                 <input type="hidden" id="edit-record-id">
-                <input type="date" id="entry-date" required class="px-3 py-1.5 rounded 
+                <div class="flex flex-col">
+                    <label class="text-[10px] font-bold text-slate-500 mb-0.5">DATE 
 
-border border-slate-300 text-xs bg-slate-50 font-medium">
+(DD-MM-YYYY)</label>
+                    <input type="date" id="entry-date" required class="px-3 py-1.5 
+
+rounded border border-slate-300 text-xs bg-slate-50 font-medium cursor-pointer">
+                </div>
                 
                 <div id="dynamic-field-container-1" class="flex-1 min-w-[200px]">
                     <select id="entry-source-dest" required class="w-full px-3 py-1.5 
@@ -187,6 +192,9 @@ rounded border border-slate-300 text-xs bg-white font-medium"></select>
                 </div>
 
                 <div class="w-28">
+                    <label class="block text-[10px] font-bold text-slate-500 mb-
+
+0.5">QUANTITY</label>
                     <input type="number" step="0.01" id="entry-qty" required 
 
 placeholder="Qty (MT)" class="w-full px-3 py-1.5 rounded border border-slate-300 
@@ -194,18 +202,20 @@ placeholder="Qty (MT)" class="w-full px-3 py-1.5 rounded border border-slate-300
 text-xs font-mono">
                 </div>
 
-                <button type="submit" id="btn-submit-record" class="bg-emerald-700 
+                <div class="flex items-end gap-1.5 mt-4 lg:mt-0">
+                    <button type="submit" id="btn-submit-record" class="bg-emerald-700 
 
 hover:bg-emerald-800 text-white px-4 py-1.5 rounded font-semibold text-xs shadow-xs 
 
 transition">
-                    <i class="fa-solid fa-plus mr-1"></i> Add Entry
-                </button>
-                <button type="button" onclick="resetForm()" class="bg-slate-200 
+                        <i class="fa-solid fa-plus mr-1"></i> Add Entry
+                    </button>
+                    <button type="button" onclick="resetForm()" class="bg-slate-200 
 
 hover:bg-slate-300 text-slate-700 px-3 py-1.5 rounded font-semibold text-xs 
 
 transition">Cancel</button>
+                </div>
             </form>
 
             <div class="flex items-center space-x-2 shrink-0" id="filter-export-
@@ -214,11 +224,11 @@ group">
                 <span class="text-xs text-slate-500 font-medium">Filter:</span>
                 <input type="date" id="filter-from-date" class="px-2 py-1 rounded 
 
-border border-slate-300 text-xs" onchange="renderActiveGrid()">
+border border-slate-300 text-xs cursor-pointer" onchange="renderActiveGrid()">
                 <span class="text-xs text-slate-400">-</span>
                 <input type="date" id="filter-to-date" class="px-2 py-1 rounded border 
 
-border-slate-300 text-xs" onchange="renderActiveGrid()">
+border-slate-300 text-xs cursor-pointer" onchange="renderActiveGrid()">
                 <button onclick="exportCurrentSheetExcel()" class="bg-slate-800 
 
 hover:bg-slate-900 text-white px-3 py-1.5 rounded font-semibold text-xs transition 
@@ -253,9 +263,9 @@ flex items-center">
 border-blue-300 shadow-xs flex justify-between items-center shrink-0">
             <span class="text-xs font-bold text-blue-900"><i class="fa-solid fa-
 
-chart-bar mr-1.5 text-blue-700"></i> Summary of total rice quantities issued across 
+chart-bar mr-1.5 text-blue-700"></i> Summary of total quantities issued from source 
 
-all 39 regions for Regions, ADS, and Co-operative .</span>
+and received at destination across all regions.</span>
             <button onclick="exportConsolidatedExcel()" class="bg-blue-700 hover:bg-
 
 blue-800 text-white px-4 py-2 rounded-lg font-bold text-xs shadow transition inline-
@@ -351,11 +361,44 @@ allotment: 350 }
             MillsMaster: []
         };
 
+        function formatDateToDDMMYYYY(dateInput) {
+            if (!dateInput) return "";
+            let clean = dateInput.split('T')[0];
+            let parts = clean.split('-');
+            if (parts.length === 3) {
+                if (parts[0].length === 4) return `${parts[2]}-${parts[1]}-${parts
+
+[0]}`; 
+                return clean; 
+            }
+            let d = new Date(dateInput);
+            if (!isNaN(d.getTime())) {
+                let day = String(d.getDate()).padStart(2, '0');
+                let month = String(d.getMonth() + 1).padStart(2, '0');
+                let year = d.getFullYear();
+                return `${day}-${month}-${year}`;
+            }
+            return dateInput;
+        }
+
+        function formatDateToYYYYMMDD(dateInput) {
+            if (!dateInput) return "";
+            let clean = dateInput.split('T')[0];
+            let parts = clean.split('-');
+            if (parts.length === 3) {
+                if (parts[0].length === 2) return `${parts[2]}-${parts[1]}-${parts
+
+[0]}`; 
+                return clean; 
+            }
+            return clean;
+        }
+
         window.onload = () => {
             populateGlobalRegionDropdown();
-            let today = new Date().toISOString().split('T')[0];
-            document.getElementById('entry-date').value = today;
-            document.getElementById('filter-to-date').value = today;
+            let todayISO = new Date().toISOString().split('T')[0];
+            document.getElementById('entry-date').value = todayISO;
+            document.getElementById('filter-to-date').value = todayISO;
 
             setupFormFields();
             fetchAllData();
@@ -567,11 +610,11 @@ genAllot, ads: adsAllot, coop: coopAllot };
                             setupFormFields();
                         } else if (key !== "RegionsMaster" && key !== "MillsMaster") {
                             db[key] = data[key].slice(1).map(row => ({ 
-                                id: row[0], date: row[1], entity: row[2], allotment: 
+                                id: row[0], date: formatDateToDDMMYYYY(row[1]), 
 
-parseFloat(row[3])||0, qty: parseFloat(row[4])||0, source: row[5] || "", destination: 
+entity: row[2], allotment: parseFloat(row[3])||0, qty: parseFloat(row[4])||0, source: 
 
-row[6] || ""
+row[5] || "", destination: row[6] || ""
                             }));
                         }
                     }
@@ -644,7 +687,8 @@ coop_qty: data.coop })
         function handleFormSubmit(e) {
             e.preventDefault();
             let editId = document.getElementById('edit-record-id').value;
-            let date = document.getElementById('entry-date').value;
+            let dateInputValue = document.getElementById('entry-date').value;
+            let date = formatDateToDDMMYYYY(dateInputValue);
             let qty = parseFloat(document.getElementById('entry-qty').value) || 0;
             let field1Val = document.getElementById('entry-source-dest').value;
             let field2Val = document.getElementById('entry-extra')?.value || "";
@@ -708,7 +752,9 @@ entity, allotment, qty, source, destination };
             let item = db[activeSheet].find(x => x.id == id);
             if(!item) return;
             document.getElementById('edit-record-id').value = item.id;
-            document.getElementById('entry-date').value = item.date;
+            document.getElementById('entry-date').value = formatDateToYYYYMMDD
+
+(item.date);
             document.getElementById('entry-qty').value = item.qty;
 
             if (activeSheet === 'MillReceipts' || activeSheet === 'RegionIssues' || 
@@ -846,9 +892,12 @@ Allotment Master View Active`;
 
 center">S.No</th>
                     <th class="p-3 border-r border-slate-300">Region Name</th>
-                    <th class="p-3 border-r border-slate-300 text-right">Total Issues 
+                    <th class="p-3 border-r border-slate-300 text-right">Total Qty 
 
-to Regions (MT)</th>
+Issued (Source) (MT)</th>
+                    <th class="p-3 border-r border-slate-300 text-right">Total Qty 
+
+Received (Destination) (MT)</th>
                     <th class="p-3 border-r border-slate-300 text-right">Total Issues 
 
 to ADS (MT)</th>
@@ -856,16 +905,24 @@ to ADS (MT)</th>
                 </tr>`;
 
                 let html = "";
-                let totalRegSum = 0, totalAdsSum = 0, totalCoopSum = 0;
+                let totalIssuedSum = 0, totalReceivedSum = 0, totalAdsSum = 0, 
+
+totalCoopSum = 0;
 
                 regions.forEach((r, idx) => {
-                    let regIssued = 0, adsIssued = 0, coopIssued = 0;
+                    let issuedQty = 0, receivedQty = 0, adsIssued = 0, coopIssued = 0;
 
                     db.RegionIssues.forEach(item => {
-                        if((item.destination || "").toUpperCase() === r.toUpperCase() 
+                        if((item.source || "").toUpperCase() === r.toUpperCase()) {
+                            issuedQty += item.qty;
+                        }
+                    });
 
-|| (item.source || "").toUpperCase() === r.toUpperCase()) {
-                            regIssued += item.qty;
+                    db.RegionIssues.forEach(item => {
+                        if((item.destination || "").toUpperCase() === r.toUpperCase()) 
+
+{
+                            receivedQty += item.qty;
                         }
                     });
 
@@ -881,7 +938,8 @@ to ADS (MT)</th>
                         }
                     });
 
-                    totalRegSum += regIssued;
+                    totalIssuedSum += issuedQty;
+                    totalReceivedSum += receivedQty;
                     totalAdsSum += adsIssued;
                     totalCoopSum += coopIssued;
 
@@ -892,9 +950,12 @@ mono">${idx + 1}</td>
                         <td class="p-3 border-r border-slate-200 font-medium">${r}
 
 </td>
-                        <td class="p-3 border-r border-slate-200 text-right font-
+                        <td class="p-3 border-r border-slate-200 text-right font-mono 
 
-mono">${regIssued.toFixed(2)}</td>
+text-amber-700 font-semibold">${issuedQty.toFixed(2)}</td>
+                        <td class="p-3 border-r border-slate-200 text-right font-mono 
+
+text-emerald-700 font-semibold">${receivedQty.toFixed(2)}</td>
                         <td class="p-3 border-r border-slate-200 text-right font-
 
 mono">${adsIssued.toFixed(2)}</td>
@@ -908,26 +969,39 @@ mono">${adsIssued.toFixed(2)}</td>
                 document.getElementById('grid-row-count').innerText = `
 
 ${regions.length} Regions Consolidated`;
-                document.getElementById('grid-total-summary').innerText = `Reg Issues: 
+                document.getElementById('grid-total-summary').innerText = `Issued: 
 
-${totalRegSum.toFixed(2)} | ADS: ${totalAdsSum.toFixed(2)} | Coop: 
+${totalIssuedSum.toFixed(2)} | Received: ${totalReceivedSum.toFixed(2)} | ADS: 
 
-${totalCoopSum.toFixed(2)}`;
+${totalAdsSum.toFixed(2)} | Coop: ${totalCoopSum.toFixed(2)}`;
                 return;
             }
 
-            let fromDate = document.getElementById('filter-from-date')?.value || "";
-            let toDate = document.getElementById('filter-to-date')?.value || "";
+            let fromDateVal = document.getElementById('filter-from-date')?.value || 
+
+"";
+            let toDateVal = document.getElementById('filter-to-date')?.value || "";
+            let fromDateFormatted = fromDateVal ? formatDateToDDMMYYYY(fromDateVal) : 
+
+"";
+            let toDateFormatted = toDateVal ? formatDateToDDMMYYYY(toDateVal) : "";
 
             let items = db[activeSheet].filter(item => {
                 let matchRegion = true;
                 if (currentRegion !== 'HEAD_OFFICE') {
-                    if (activeSheet === 'MillReceipts' || activeSheet === 
-
-'RegionIssues' || activeSheet === 'PaddyIssues') {
+                    if (activeSheet === 'MillReceipts') {
                         matchRegion = (item.destination || "").toUpperCase() === 
 
-currentRegion.toUpperCase() || (item.source || "").toUpperCase() === 
+currentRegion.toUpperCase();
+                    } else if (activeSheet === 'RegionIssues') {
+                        // FIX: Only show when the current region is the SOURCE region 
+
+for this issue
+                        matchRegion = (item.source || "").toUpperCase() === 
+
+currentRegion.toUpperCase();
+                    } else if (activeSheet === 'PaddyIssues') {
+                        matchRegion = (item.source || "").toUpperCase() === 
 
 currentRegion.toUpperCase();
                     } else {
@@ -937,8 +1011,8 @@ currentRegion.toUpperCase();
                     }
                 }
                 if (!matchRegion) return false;
-                if (fromDate && item.date < fromDate) return false;
-                if (toDate && item.date > toDate) return false;
+                if (fromDateFormatted && item.date < fromDateFormatted) return false;
+                if (toDateFormatted && item.date > toDateFormatted) return false;
                 return true;
             });
 
@@ -1105,12 +1179,18 @@ ${totalQty.toFixed(2)} MT`;
             }
             let wb = XLSX.utils.book_new();
             let wsData = [];
-            let fromDate = document.getElementById('filter-from-date')?.value || "";
-            let toDate = document.getElementById('filter-to-date')?.value || "";
+            let fromDateVal = document.getElementById('filter-from-date')?.value || 
+
+"";
+            let toDateVal = document.getElementById('filter-to-date')?.value || "";
+            let fromDateFormatted = fromDateVal ? formatDateToDDMMYYYY(fromDateVal) : 
+
+"";
+            let toDateFormatted = toDateVal ? formatDateToDDMMYYYY(toDateVal) : "";
 
             let items = db[activeSheet].filter(item => {
-                if (fromDate && item.date < fromDate) return false;
-                if (toDate && item.date > toDate) return false;
+                if (fromDateFormatted && item.date < fromDateFormatted) return false;
+                if (toDateFormatted && item.date > toDateFormatted) return false;
                 return true;
             });
 
@@ -1160,16 +1240,24 @@ activeSheet);
 
         function exportConsolidatedExcel() {
             let wb = XLSX.utils.book_new();
-            let wsData = [["S.No", "Region Name", "Total Issues to Regions (MT)", 
+            let wsData = [["S.No", "Region Name", "Total Qty Issued (Source) (MT)", 
 
-"Total Issues to ADS (MT)", "Total Co-operative Sales (MT)"]];
+"Total Qty Received (Destination) (MT)", "Total Issues to ADS (MT)", "Total Co-
+
+operative Sales (MT)"]];
             
             regions.forEach((r, idx) => {
-                let regIssued = 0, adsIssued = 0, coopIssued = 0;
+                let issuedQty = 0, receivedQty = 0, adsIssued = 0, coopIssued = 0;
+                
                 db.RegionIssues.forEach(item => {
-                    if((item.destination || "").toUpperCase() === r.toUpperCase() || 
+                    if((item.source || "").toUpperCase() === r.toUpperCase()) 
 
-(item.source || "").toUpperCase() === r.toUpperCase()) regIssued += item.qty;
+issuedQty += item.qty;
+                });
+                db.RegionIssues.forEach(item => {
+                    if((item.destination || "").toUpperCase() === r.toUpperCase()) 
+
+receivedQty += item.qty;
                 });
                 db.ADS_Issues.forEach(item => {
                     if((item.entity || "").toUpperCase() === r.toUpperCase()) 
@@ -1181,7 +1269,10 @@ adsIssued += item.qty;
 
 coopIssued += item.qty;
                 });
-                wsData.push([idx + 1, r, regIssued, adsIssued, coopIssued]);
+
+                wsData.push([idx + 1, r, issuedQty, receivedQty, adsIssued, 
+
+coopIssued]);
             });
 
             XLSX.utils.book_append_sheet(wb, XLSX.utils.aoa_to_sheet(wsData), 

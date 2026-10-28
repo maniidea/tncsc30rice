@@ -41,7 +41,7 @@
 
 focus:outline-none bg-white">
                         <option value="">-- Choose Region / Head Office --</option>
-                        <option value="HEAD_OFFICE">🏛️ Head Office (Full Access / Master Control)</option>
+                        <option value="HEAD_OFFICE">Head Office (Full Access / Master Control)</option>
                     </select>
                 </div>
                 <button type="submit" class="w-full bg-tncsc-600 hover:bg-tncsc-700 text-white font-semibold py-3 rounded-xl transition shadow-lg text-sm">Login to 
@@ -120,7 +120,7 @@ hover:text-white">
             <h2 id="page-title" class="text-xl font-bold text-slate-800">Dashboard Overview</h2>
             <div class="flex items-center space-x-3">
                 <span id="active-region-badge" class="text-xs bg-tncsc-50 text-tncsc-700 px-3 py-1.5 rounded-full font-semibold border border-tncsc-100">
-                    <i class="fa-solid fa-circle text-[8px] mr-1.5 text-tncsc-600 animate-pulse"></i> Active Region
+                    <i class="fa-solid fa-circle text-[8px] mr-1.5 text-tncsc-600"></i> Active Region
                 </span>
                 <a href="https://docs.google.com/spreadsheets/d/12eGvjLdGlDA_GpNKkrJjRzbxcBnwayOWmRSrnmCazpE/edit" target="_blank" class="text-xs bg-emerald-50 text-
 
@@ -576,12 +576,12 @@ right">On Day Issued</th><th class="p-3 text-right">Upto Day Issued</th><th clas
             if(!selectEl) return;
             selectEl.innerHTML = `
                 <option value="">-- Choose Region / Head Office --</option>
-                <option value="HEAD_OFFICE">🏛️ Head Office (Full Access / Master Control)</option>
+                <option value="HEAD_OFFICE">Head Office (Full Access / Master Control)</option>
             `;
             regions.forEach(r => {
                 let opt = document.createElement('option');
                 opt.value = r;
-                opt.text = "📍 Region: " + r;
+                opt.text = "Region: " + r;
                 selectEl.appendChild(opt);
             });
         }
@@ -597,11 +597,9 @@ right">On Day Issued</th><th class="p-3 text-right">Upto Day Issued</th><th clas
             let today = new Date().toISOString().split('T')[0];
             if(document.getElementById('report-date-filter')) document.getElementById('report-date-filter').value = today;
             
-            // Default date filter inputs to today or empty
             ['MillReceipts', 'RegionIssues', 'PaddyIssues', 'ADS_Issues', 'Coop_Issues'].forEach(t => {
-                let fromEl = document.getElementById('filter-from-' + t);
                 let toEl = document.getElementById('filter-to-' + t);
-                if(fromEl && toEl) {
+                if(toEl) {
                     toEl.value = today;
                 }
             });

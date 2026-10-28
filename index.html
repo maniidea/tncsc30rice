@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TNCSC - Rs.30/- Rice Scheme </title>
+    <title>TNCSC - Rs.30/- Rice Scheme</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- FontAwesome Icons -->
@@ -54,28 +54,22 @@
     <nav class="bg-slate-200 border-b border-slate-300 px-4 flex space-x-1 overflow-visible shrink-0 select-none hidden relative z-20" id="sheet-tabs-container">
         <!-- Transaction Entry Tabs -->
         <button onclick="switchSheet('MillReceipts')" id="tab-MillReceipts" class="sheet-tab px-4 py-2.5 text-xs font-bold text-slate-700 bg-white border-t-2 border-emerald-700 rounded-t-lg transition flex items-center space-x-2 shadow-xs">
-
-  <i class="fa-solid fa-table text-slate-500"></i><span>1. Issued Paddy to Mill Wise</span>
-        </button>
-        <button onclick="switchSheet('ADS_Issues')" id="tab-ADS_Issues" class="sheet-tab px-4 py-2.5 text-xs font-semibold text-slate-600 hover:bg-slate-300/60 rounded-t-lg transition flex items-center space-x-2">
-
-
-            <i class="fa-solid fa-table text-emerald-700"></i><span>2. Receipts Rice Millwise</span>
+            <i class="fa-solid fa-table text-emerald-700"></i><span>1. Receipts Rice Millwise</span>
         </button>
         <button onclick="switchSheet('RegionIssues')" id="tab-RegionIssues" class="sheet-tab px-4 py-2.5 text-xs font-semibold text-slate-600 hover:bg-slate-300/60 rounded-t-lg transition flex items-center space-x-2">
-            <i class="fa-solid fa-table text-slate-500"></i><span>3. Issues Rice to Regions (Hubs)</span>
+            <i class="fa-solid fa-table text-slate-500"></i><span>2. Issues Rice to Regions (Hubs)</span>
         </button>
         <button onclick="switchSheet('PaddyIssues')" id="tab-PaddyIssues" class="sheet-tab px-4 py-2.5 text-xs font-semibold text-slate-600 hover:bg-slate-300/60 rounded-t-lg transition flex items-center space-x-2">
-          
-
-
+            <i class="fa-solid fa-table text-slate-500"></i><span>3. Issued Paddy to Mill Wise</span>
+        </button>
+        <button onclick="switchSheet('ADS_Issues')" id="tab-ADS_Issues" class="sheet-tab px-4 py-2.5 text-xs font-semibold text-slate-600 hover:bg-slate-300/60 rounded-t-lg transition flex items-center space-x-2">
             <i class="fa-solid fa-table text-slate-500"></i><span>4. Issues to ADS</span>
         </button>
         <button onclick="switchSheet('Coop_Issues')" id="tab-Coop_Issues" class="sheet-tab px-4 py-2.5 text-xs font-semibold text-slate-600 hover:bg-slate-300/60 rounded-t-lg transition flex items-center space-x-2">
             <i class="fa-solid fa-table text-slate-500"></i><span>5. Issues to Co-operative</span>
         </button>
 
-        <!-- Unified Reports Click-to-Toggle Dropdown (Guaranteed UI Visibility) -->
+        <!-- Unified Reports Click-to-Toggle Dropdown -->
         <div class="relative inline-block text-left" id="reports-dropdown-wrapper">
             <button type="button" onclick="toggleReportsDropdown(event)" id="tab-ReportsDropdown" class="sheet-tab px-4 py-2.5 text-xs font-bold text-blue-900 bg-blue-50 border-t-2 border-blue-600 rounded-t-lg transition flex items-center space-x-2 shadow-xs cursor-pointer">
                 <i class="fa-solid fa-chart-pie text-blue-600"></i><span>📊 Master Reports Hub <i class="fa-solid fa-caret-down ml-1"></i></span>
@@ -119,7 +113,7 @@
             <p class="text-sm text-slate-500 max-w-md mb-6">To access the master sheets, ledger, and entry forms, please choose your specific Region from the dropdown box located at the top right header.</p>
         </div>
 
-        <!-- Portal Workspace Container (Hidden until Region is Selected) -->
+        <!-- Portal Workspace Container -->
         <div id="portal-workspace-container" class="flex-1 flex flex-col overflow-hidden gap-4 hidden">
             <!-- Action & Entry Toolbar -->
             <div id="toolbar-container" class="bg-white p-3.5 rounded-xl border border-slate-300 shadow-xs flex flex-col lg:flex-row justify-between items-center gap-3 shrink-0">
@@ -130,16 +124,18 @@
                         <input type="date" id="entry-date" required class="px-3 py-1.5 rounded border border-slate-300 text-xs bg-slate-50 font-medium cursor-pointer">
                     </div>
                     
-                    <div id="dynamic-field-container-1" class="flex-1 min-w-[200px]">
+                    <div id="dynamic-field-container-1" class="flex-1 min-w-[220px]">
+                        <label class="block text-[10px] font-bold text-slate-500 mb-0.5">SOURCE HULLING MILL</label>
                         <select id="entry-source-dest" required class="w-full px-3 py-1.5 rounded border border-slate-300 text-xs bg-white font-medium"></select>
                     </div>
 
-                    <div id="dynamic-field-container-2" class="flex-1 min-w-[200px]">
+                    <div id="dynamic-field-container-2" class="flex-1 min-w-[220px]">
+                        <label class="block text-[10px] font-bold text-slate-500 mb-0.5">DESTINATION REGION</label>
                         <select id="entry-extra" required class="w-full px-3 py-1.5 rounded border border-slate-300 text-xs bg-white font-medium"></select>
                     </div>
 
                     <div class="w-28">
-                        <label class="block text-[10px] font-bold text-slate-500 mb-0.5">ONTHE DAY QUANTITY</label>
+                        <label class="block text-[10px] font-bold text-slate-500 mb-0.5">QUANTITY</label>
                         <input type="number" step="0.01" id="entry-qty" required placeholder="Qty (MT)" class="w-full px-3 py-1.5 rounded border border-slate-300 text-xs font-mono">
                     </div>
 
@@ -274,7 +270,6 @@
             MillsMaster: []
         };
 
-        // Close dropdown when clicking outside
         window.addEventListener('click', function(e) {
             let dropdown = document.getElementById('reports-dropdown-menu');
             let wrapper = document.getElementById('reports-dropdown-wrapper');
@@ -458,8 +453,8 @@
             let hubOpts = hubRegions.map(h => `<option value="${h}">${h} (Hub)</option>`).join('');
 
             if (activeSheet === 'MillReceipts') {
-                field1.innerHTML = `<label class="block text-[10px] font-bold text-slate-500 mb-0.5">SOURCE HULLING MILL</label><select id="entry-source-dest" required class="w-full px-3 py-1.5 rounded border border-slate-300 text-xs bg-white">${millOpts}</select>`;
-                field2.innerHTML = `<label class="block text-[10px] font-bold text-slate-500 mb-0.5">DESTINATION REGION</label><select id="entry-extra" required class="w-full px-3 py-1.5 rounded border border-slate-300 text-xs bg-white">${regOpts}</select>`;
+                field1.innerHTML = `<label class="block text-[10px] font-bold text-slate-500 mb-0.5">SOURCE HULLING MILL</label><select id="entry-source-dest" required class="w-full px-3 py-1.5 rounded border border-slate-300 text-xs bg-white font-medium">${millOpts}</select>`;
+                field2.innerHTML = `<label class="block text-[10px] font-bold text-slate-500 mb-0.5">DESTINATION REGION</label><select id="entry-extra" required class="w-full px-3 py-1.5 rounded border border-slate-300 text-xs bg-white font-medium">${regOpts}</select>`;
                 if(currentRegion !== 'HEAD_OFFICE') document.getElementById('entry-extra').value = currentRegion;
             } else if (activeSheet === 'RegionIssues') {
                 field1.innerHTML = `<label class="block text-[10px] font-bold text-slate-500 mb-0.5">SOURCE REGION (HUB ONLY)</label><select id="entry-source-dest" required class="w-full px-3 py-1.5 rounded border border-slate-300 text-xs bg-indigo-50 font-bold">${hubOpts}</select>`;

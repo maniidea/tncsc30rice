@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TNCSC - Rs.30/- Rice Scheme</title>
+    <title>TNCSC - Rs.30/- Rice Scheme </title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- FontAwesome Icons -->
@@ -25,7 +25,7 @@
 <body class="h-full font-sans antialiased text-slate-800 flex flex-col overflow-hidden">
 
     <!-- Top Spreadsheet Header Bar -->
-    <header class="bg-white border-b border-slate-300 px-6 py-3 flex flex-col sm:flex-row justify-between items-center z-20 shadow-xs gap-3">
+    <header class="bg-white border-b border-slate-300 px-6 py-3 flex flex-col sm:flex-row justify-between items-center z-30 shadow-xs gap-3">
         <div class="flex items-center space-x-3">
             <div class="bg-emerald-700 text-white p-2 rounded-lg shadow-xs text-lg">
                 <i class="fa-solid fa-file-excel"></i>
@@ -51,25 +51,56 @@
     </header>
 
     <!-- Spreadsheet Sheet Tabs Bar -->
-    <nav class="bg-slate-200 border-b border-slate-300 px-4 flex space-x-1 overflow-x-auto shrink-0 select-none hidden" id="sheet-tabs-container">
+    <nav class="bg-slate-200 border-b border-slate-300 px-4 flex space-x-1 overflow-visible shrink-0 select-none hidden relative z-20" id="sheet-tabs-container">
+        <!-- Transaction Entry Tabs -->
         <button onclick="switchSheet('MillReceipts')" id="tab-MillReceipts" class="sheet-tab px-4 py-2.5 text-xs font-bold text-slate-700 bg-white border-t-2 border-emerald-700 rounded-t-lg transition flex items-center space-x-2 shadow-xs">
-            <i class="fa-solid fa-table text-emerald-700"></i><span>1. Receipts Rice Millwise</span>
-        </button>
-        <button onclick="switchSheet('RegionIssues')" id="tab-RegionIssues" class="sheet-tab px-4 py-2.5 text-xs font-semibold text-slate-600 hover:bg-slate-300/60 rounded-t-lg transition flex items-center space-x-2">
-            <i class="fa-solid fa-table text-slate-500"></i><span>2. Issues Rice to Regions</span>
-        </button>
-        <button onclick="switchSheet('PaddyIssues')" id="tab-PaddyIssues" class="sheet-tab px-4 py-2.5 text-xs font-semibold text-slate-600 hover:bg-slate-300/60 rounded-t-lg transition flex items-center space-x-2">
-            <i class="fa-solid fa-table text-slate-500"></i><span>3. Issued Paddy to Mill Wise</span>
+
+  <i class="fa-solid fa-table text-slate-500"></i><span>1. Issued Paddy to Mill Wise</span>
         </button>
         <button onclick="switchSheet('ADS_Issues')" id="tab-ADS_Issues" class="sheet-tab px-4 py-2.5 text-xs font-semibold text-slate-600 hover:bg-slate-300/60 rounded-t-lg transition flex items-center space-x-2">
+
+
+            <i class="fa-solid fa-table text-emerald-700"></i><span>2. Receipts Rice Millwise</span>
+        </button>
+        <button onclick="switchSheet('RegionIssues')" id="tab-RegionIssues" class="sheet-tab px-4 py-2.5 text-xs font-semibold text-slate-600 hover:bg-slate-300/60 rounded-t-lg transition flex items-center space-x-2">
+            <i class="fa-solid fa-table text-slate-500"></i><span>3. Issues Rice to Regions (Hubs)</span>
+        </button>
+        <button onclick="switchSheet('PaddyIssues')" id="tab-PaddyIssues" class="sheet-tab px-4 py-2.5 text-xs font-semibold text-slate-600 hover:bg-slate-300/60 rounded-t-lg transition flex items-center space-x-2">
+          
+
+
             <i class="fa-solid fa-table text-slate-500"></i><span>4. Issues to ADS</span>
         </button>
         <button onclick="switchSheet('Coop_Issues')" id="tab-Coop_Issues" class="sheet-tab px-4 py-2.5 text-xs font-semibold text-slate-600 hover:bg-slate-300/60 rounded-t-lg transition flex items-center space-x-2">
             <i class="fa-solid fa-table text-slate-500"></i><span>5. Issues to Co-operative</span>
         </button>
-        <button onclick="switchSheet('ConsolidatedReport')" id="tab-ConsolidatedReport" class="sheet-tab px-4 py-2.5 text-xs font-bold text-blue-800 bg-blue-50 border-t-2 border-blue-600 rounded-t-lg transition flex items-center space-x-2 shadow-xs">
-            <i class="fa-solid fa-chart-pie text-blue-600"></i><span>6. Consolidated Reports</span>
-        </button>
+
+        <!-- Unified Reports Click-to-Toggle Dropdown (Guaranteed UI Visibility) -->
+        <div class="relative inline-block text-left" id="reports-dropdown-wrapper">
+            <button type="button" onclick="toggleReportsDropdown(event)" id="tab-ReportsDropdown" class="sheet-tab px-4 py-2.5 text-xs font-bold text-blue-900 bg-blue-50 border-t-2 border-blue-600 rounded-t-lg transition flex items-center space-x-2 shadow-xs cursor-pointer">
+                <i class="fa-solid fa-chart-pie text-blue-600"></i><span>📊 Master Reports Hub <i class="fa-solid fa-caret-down ml-1"></i></span>
+            </button>
+            <div id="reports-dropdown-menu" class="hidden absolute left-0 mt-0.5 w-72 rounded-lg bg-white shadow-2xl ring-1 ring-black ring-opacity-5 divide-y divide-slate-100 z-50">
+                <div class="py-1">
+                    <button onclick="selectReportTab('ConsolidatedReport')" class="w-full text-left px-4 py-2.5 text-xs font-semibold text-slate-700 hover:bg-blue-50 hover:text-blue-700 flex items-center space-x-3 transition">
+                        <i class="fa-solid fa-chart-bar text-blue-600 w-4 text-center"></i><span>6. Consolidated Reports</span>
+                    </button>
+                    <button onclick="selectReportTab('ConsolidatedReport2')" class="w-full text-left px-4 py-2.5 text-xs font-semibold text-slate-700 hover:bg-indigo-50 hover:text-indigo-700 flex items-center space-x-3 transition">
+                        <i class="fa-solid fa-chart-line text-indigo-600 w-4 text-center"></i><span>7. Hub Rice Issued Report</span>
+                    </button>
+                    <button onclick="selectReportTab('ConsolidatedReport3')" class="w-full text-left px-4 py-2.5 text-xs font-semibold text-slate-700 hover:bg-teal-50 hover:text-teal-700 flex items-center space-x-3 transition">
+                        <i class="fa-solid fa-chart-area text-teal-600 w-4 text-center"></i><span>8. Rice Received Region</span>
+                    </button>
+                    <button onclick="selectReportTab('MillersRiceReport')" class="w-full text-left px-4 py-2.5 text-xs font-semibold text-slate-700 hover:bg-amber-50 hover:text-amber-700 flex items-center space-x-3 transition">
+                        <i class="fa-solid fa-warehouse text-amber-600 w-4 text-center"></i><span>9. Millers Rice Receipt Report</span>
+                    </button>
+                    <button onclick="selectReportTab('MillersPaddyReport')" class="w-full text-left px-4 py-2.5 text-xs font-semibold text-slate-700 hover:bg-purple-50 hover:text-purple-700 flex items-center space-x-3 transition">
+                        <i class="fa-solid fa-wheat-awn text-purple-600 w-4 text-center"></i><span>10. Millers Paddy Issue Report</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
         <!-- HO Master Control Tab -->
         <button onclick="switchSheet('MasterAllotment')" id="tab-MasterAllotment" class="sheet-tab hidden px-4 py-2.5 text-xs font-semibold text-amber-800 hover:bg-amber-100 rounded-t-lg transition flex items-center space-x-2 bg-amber-50 border-t-2 border-amber-600">
             <i class="fa-solid fa-gear text-amber-700"></i><span>HO Master Allotments</span>
@@ -108,7 +139,7 @@
                     </div>
 
                     <div class="w-28">
-                        <label class="block text-[10px] font-bold text-slate-500 mb-0.5">ON THE DAY QUANTITY</label>
+                        <label class="block text-[10px] font-bold text-slate-500 mb-0.5">ONTHE DAY QUANTITY</label>
                         <input type="number" step="0.01" id="entry-qty" required placeholder="Qty (MT)" class="w-full px-3 py-1.5 rounded border border-slate-300 text-xs font-mono">
                     </div>
 
@@ -133,17 +164,45 @@
 
             <!-- Master Control Action Bar -->
             <div id="master-toolbar" class="hidden bg-amber-50 p-3.5 rounded-xl border border-amber-300 shadow-xs flex justify-between items-center shrink-0">
-                <span class="text-xs font-bold text-amber-900"><i class="fa-solid fa-circle-info mr-1.5 text-amber-700"></i> Modify allotment numbers below and click Save Allotments to update the database.</span>
+                <span class="text-xs font-bold text-amber-900"><i class="fa-solid fa-circle-info mr-1.5 text-amber-700"></i> Modify hub, region, and miller allotments below and click Save Allotments to update the database.</span>
                 <button onclick="saveAllMasterAllotments()" class="bg-amber-700 hover:bg-amber-800 text-white px-5 py-2 rounded-lg font-bold text-xs shadow transition inline-flex items-center">
                     <i class="fa-solid fa-floppy-disk mr-1.5"></i> Save Allotments
                 </button>
             </div>
 
-            <!-- Consolidated Report Action Bar -->
+            <!-- Report Toolbars -->
             <div id="report-toolbar" class="hidden bg-blue-50 p-3.5 rounded-xl border border-blue-300 shadow-xs flex justify-between items-center shrink-0">
                 <span class="text-xs font-bold text-blue-900"><i class="fa-solid fa-chart-bar mr-1.5 text-blue-700"></i> Summary of total quantities issued from source and received at destination across all regions.</span>
                 <button onclick="exportConsolidatedExcel()" class="bg-blue-700 hover:bg-blue-800 text-white px-4 py-2 rounded-lg font-bold text-xs shadow transition inline-flex items-center">
                     <i class="fa-solid fa-download mr-1.5"></i> Export Consolidated Report
+                </button>
+            </div>
+
+            <div id="report2-toolbar" class="hidden bg-indigo-50 p-3.5 rounded-xl border border-indigo-300 shadow-xs flex justify-between items-center shrink-0">
+                <span class="text-xs font-bold text-indigo-900"><i class="fa-solid fa-chart-line mr-1.5 text-indigo-700"></i> Hub Rice Issued Report performance with Allotment, Issues, Balance, and %.</span>
+                <button onclick="exportConsolidatedExcel2()" class="bg-indigo-700 hover:bg-indigo-800 text-white px-4 py-2 rounded-lg font-bold text-xs shadow transition inline-flex items-center">
+                    <i class="fa-solid fa-download mr-1.5"></i> Export Hub Report Excel
+                </button>
+            </div>
+
+            <div id="report3-toolbar" class="hidden bg-teal-50 p-3.5 rounded-xl border border-teal-300 shadow-xs flex justify-between items-center shrink-0">
+                <span class="text-xs font-bold text-teal-900"><i class="fa-solid fa-chart-area mr-1.5 text-teal-700"></i> Rice Received Region performance report with Allotment, Receipts, Balance, and %.</span>
+                <button onclick="exportConsolidatedExcel3()" class="bg-teal-700 hover:bg-teal-800 text-white px-4 py-2 rounded-lg font-bold text-xs shadow transition inline-flex items-center">
+                    <i class="fa-solid fa-download mr-1.5"></i> Export Report 3 Excel
+                </button>
+            </div>
+
+            <div id="report4-toolbar" class="hidden bg-amber-50 p-3.5 rounded-xl border border-amber-300 shadow-xs flex justify-between items-center shrink-0">
+                <span class="text-xs font-bold text-amber-900"><i class="fa-solid fa-warehouse mr-1.5 text-amber-700"></i> Millers Rice Receipt & Issue Report with Rice Allotment, On-Day, Upto-Day Receipts, Balance, and %.</span>
+                <button onclick="exportMillersRiceExcel()" class="bg-amber-700 hover:bg-amber-800 text-white px-4 py-2 rounded-lg font-bold text-xs shadow transition inline-flex items-center">
+                    <i class="fa-solid fa-download mr-1.5"></i> Export Millers Rice Report
+                </button>
+            </div>
+
+            <div id="report5-toolbar" class="hidden bg-purple-50 p-3.5 rounded-xl border border-purple-300 shadow-xs flex justify-between items-center shrink-0">
+                <span class="text-xs font-bold text-purple-900"><i class="fa-solid fa-wheat-awn mr-1.5 text-purple-700"></i> Millers Paddy Issue Report with HO Paddy Allotment, On-Day Issues, Upto-Day Issues, Balance, and %.</span>
+                <button onclick="exportMillersPaddyExcel()" class="bg-purple-700 hover:bg-purple-800 text-white px-4 py-2 rounded-lg font-bold text-xs shadow transition inline-flex items-center">
+                    <i class="fa-solid fa-download mr-1.5"></i> Export Millers Paddy Report
                 </button>
             </div>
 
@@ -183,15 +242,25 @@
             "TUTICORIN", "VELLORE", "VILUPPURAM", "VIRUDHUNAGAR"
         ];
 
+        let hubRegions = ["THANJAVUR", "VIRUDHUNAGAR", "KRISHNAGIRI", "THIRUVALLORE", "TIRUPPUR"];
+        let hubAllotmentIds = {};
+        let hubAllotments = {
+            "THANJAVUR": 1020,
+            "VIRUDHUNAGAR": 2245,
+            "KRISHNAGIRI": 2245,
+            "THIRUVALLORE": 2245,
+            "TIRUPPUR": 2245
+        };
+
         let regionAllotments = {};
         regions.forEach(r => regionAllotments[r] = { id: '', general: 100.00, ads: 50.00, coop: 50.00 });
 
         let mills = [
-            { id: "M1", name: "M/s. Annamalaiyar MRM, Thanjavur", capacity: "1000", allotment: 350 },
-            { id: "M2", name: "M/s. Sree Manickarathinam Hi-Tech MRM, Rajapalayam, Virudhunagar", capacity: "500", allotment: 350 },
-            { id: "M3", name: "M/s. Manchunatha MRM, Krishnagiri", capacity: "500", allotment: 350 },
-            { id: "M4", name: "M/s. Integrated Rice & General Mills Private Ltd, Gummidipoondi, Thiruvallur", capacity: "6400", allotment: 350 },
-            { id: "M5", name: "M/s. Sri Balaji MRM, Tiruppur", capacity: "3000", allotment: 350 }
+            { id: "M1", name: "M/s. Annamalaiyar MRM, Thanjavur", capacity: "1000", allotment: 1020, paddyAllotment: 1500 },
+            { id: "M2", name: "M/s. Sree Manickarathinam Hi-Tech MRM, Rajapalayam, Virudhunagar", capacity: "500", allotment: 2245, paddyAllotment: 2500 },
+            { id: "M3", name: "M/s. Manchunatha MRM, Krishnagiri", capacity: "500", allotment: 2245, paddyAllotment: 2500 },
+            { id: "M4", name: "M/s. Integrated Rice & General Mills Private Ltd, Gummidipoondi, Thiruvallur", capacity: "6400", allotment: 2245, paddyAllotment: 3000 },
+            { id: "M5", name: "M/s. Sri Balaji MRM, Tiruppur", capacity: "3000", allotment: 2245, paddyAllotment: 2500 }
         ];
 
         let db = {
@@ -201,8 +270,29 @@
             ADS_Issues: [],
             Coop_Issues: [],
             RegionsMaster: [],
+            HubMaster: [],
             MillsMaster: []
         };
+
+        // Close dropdown when clicking outside
+        window.addEventListener('click', function(e) {
+            let dropdown = document.getElementById('reports-dropdown-menu');
+            let wrapper = document.getElementById('reports-dropdown-wrapper');
+            if (dropdown && wrapper && !wrapper.contains(e.target)) {
+                dropdown.classList.add('hidden');
+            }
+        });
+
+        function toggleReportsDropdown(e) {
+            e.stopPropagation();
+            let menu = document.getElementById('reports-dropdown-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        function selectReportTab(sheetName) {
+            document.getElementById('reports-dropdown-menu').classList.add('hidden');
+            switchSheet(sheetName);
+        }
 
         function formatDateToDDMMYYYY(dateInput) {
             if (!dateInput) return "";
@@ -291,37 +381,64 @@
         }
 
         function switchSheet(sheetName) {
+            if (sheetName === 'RegionIssues' && currentRegion && currentRegion !== 'HEAD_OFFICE' && !hubRegions.includes(currentRegion.toUpperCase())) {
+                alert("Notice: Region '" + currentRegion + "' is not a designated Hub region. You can view the 'Issues Rice to Regions' sheet, but entries can only be made by designated Hub regions.");
+            }
+
             activeSheet = sheetName;
             document.querySelectorAll('.sheet-tab').forEach(btn => {
+                if (btn.id === 'tab-ReportsDropdown') return;
                 btn.className = "sheet-tab px-4 py-2.5 text-xs font-semibold text-slate-600 hover:bg-slate-300/60 rounded-t-lg transition flex items-center space-x-2";
                 let icon = btn.querySelector('i');
-                if(icon && !btn.id.includes('MasterAllotment') && !btn.id.includes('ConsolidatedReport')) icon.className = "fa-solid fa-table text-slate-500";
+                if(icon && !btn.id.includes('MasterAllotment') && !btn.id.includes('Millers')) icon.className = "fa-solid fa-table text-slate-500";
             });
+            
             let activeBtn = document.getElementById('tab-' + sheetName);
-            if(activeBtn) {
-                if (sheetName === 'MasterAllotment') {
-                    activeBtn.className = "sheet-tab px-4 py-2.5 text-xs font-bold text-amber-800 bg-amber-50 border-t-2 border-amber-600 rounded-t-lg transition flex items-center space-x-2 shadow-xs";
-                } else if (sheetName === 'ConsolidatedReport') {
-                    activeBtn.className = "sheet-tab px-4 py-2.5 text-xs font-bold text-blue-800 bg-blue-50 border-t-2 border-blue-600 rounded-t-lg transition flex items-center space-x-2 shadow-xs";
-                } else {
-                    activeBtn.className = "sheet-tab px-4 py-2.5 text-xs font-bold text-slate-700 bg-white border-t-2 border-emerald-700 rounded-t-lg transition flex items-center space-x-2 shadow-xs";
-                    let icon = activeBtn.querySelector('i');
-                    if(icon) icon.className = "fa-solid fa-table text-emerald-700";
+            let reportsDropdownBtn = document.getElementById('tab-ReportsDropdown');
+
+            if (sheetName.includes('Consolidated') || sheetName.includes('Millers')) {
+                reportsDropdownBtn.className = "sheet-tab px-4 py-2.5 text-xs font-bold text-blue-900 bg-blue-100 border-t-2 border-blue-600 rounded-t-lg transition flex items-center space-x-2 shadow-xs";
+            } else {
+                reportsDropdownBtn.className = "sheet-tab px-4 py-2.5 text-xs font-bold text-blue-900 bg-blue-50 border-t-2 border-blue-600 rounded-t-lg transition flex items-center space-x-2 shadow-xs";
+                if(activeBtn) {
+                    if (sheetName === 'MasterAllotment') {
+                        activeBtn.className = "sheet-tab px-4 py-2.5 text-xs font-bold text-amber-800 bg-amber-50 border-t-2 border-amber-600 rounded-t-lg transition flex items-center space-x-2 shadow-xs";
+                    } else {
+                        activeBtn.className = "sheet-tab px-4 py-2.5 text-xs font-bold text-slate-700 bg-white border-t-2 border-emerald-700 rounded-t-lg transition flex items-center space-x-2 shadow-xs";
+                        let icon = activeBtn.querySelector('i');
+                        if(icon) icon.className = "fa-solid fa-table text-emerald-700";
+                    }
                 }
             }
 
             let toolbar = document.getElementById('toolbar-container');
             let masterToolbar = document.getElementById('master-toolbar');
             let reportToolbar = document.getElementById('report-toolbar');
+            let report2Toolbar = document.getElementById('report2-toolbar');
+            let report3Toolbar = document.getElementById('report3-toolbar');
+            let report4Toolbar = document.getElementById('report4-toolbar');
+            let report5Toolbar = document.getElementById('report5-toolbar');
 
             toolbar.style.display = 'none';
             masterToolbar.classList.add('hidden');
             reportToolbar.classList.add('hidden');
+            report2Toolbar.classList.add('hidden');
+            report3Toolbar.classList.add('hidden');
+            report4Toolbar.classList.add('hidden');
+            report5Toolbar.classList.add('hidden');
 
             if (sheetName === 'MasterAllotment') {
                 masterToolbar.classList.remove('hidden');
             } else if (sheetName === 'ConsolidatedReport') {
                 reportToolbar.classList.remove('hidden');
+            } else if (sheetName === 'ConsolidatedReport2') {
+                report2Toolbar.classList.remove('hidden');
+            } else if (sheetName === 'ConsolidatedReport3') {
+                report3Toolbar.classList.remove('hidden');
+            } else if (sheetName === 'MillersRiceReport') {
+                report4Toolbar.classList.remove('hidden');
+            } else if (sheetName === 'MillersPaddyReport') {
+                report5Toolbar.classList.remove('hidden');
             } else {
                 toolbar.style.display = 'flex';
             }
@@ -338,20 +455,28 @@
             
             let millOpts = mills.map(m => `<option value="${m.name}">${m.name}</option>`).join('');
             let regOpts = regions.map(r => `<option value="${r}">${r}</option>`).join('');
+            let hubOpts = hubRegions.map(h => `<option value="${h}">${h} (Hub)</option>`).join('');
 
             if (activeSheet === 'MillReceipts') {
                 field1.innerHTML = `<label class="block text-[10px] font-bold text-slate-500 mb-0.5">SOURCE HULLING MILL</label><select id="entry-source-dest" required class="w-full px-3 py-1.5 rounded border border-slate-300 text-xs bg-white">${millOpts}</select>`;
                 field2.innerHTML = `<label class="block text-[10px] font-bold text-slate-500 mb-0.5">DESTINATION REGION</label><select id="entry-extra" required class="w-full px-3 py-1.5 rounded border border-slate-300 text-xs bg-white">${regOpts}</select>`;
                 if(currentRegion !== 'HEAD_OFFICE') document.getElementById('entry-extra').value = currentRegion;
             } else if (activeSheet === 'RegionIssues') {
-                field1.innerHTML = `<label class="block text-[10px] font-bold text-slate-500 mb-0.5">SOURCE REGION</label><select id="entry-source-dest" required class="w-full px-3 py-1.5 rounded border border-slate-300 text-xs bg-white">${regOpts}</select>`;
+                field1.innerHTML = `<label class="block text-[10px] font-bold text-slate-500 mb-0.5">SOURCE REGION (HUB ONLY)</label><select id="entry-source-dest" required class="w-full px-3 py-1.5 rounded border border-slate-300 text-xs bg-indigo-50 font-bold">${hubOpts}</select>`;
                 field2.innerHTML = `<label class="block text-[10px] font-bold text-slate-500 mb-0.5">DESTINATION REGION</label><select id="entry-extra" required class="w-full px-3 py-1.5 rounded border border-slate-300 text-xs bg-white">${regOpts}</select>`;
-                if(currentRegion !== 'HEAD_OFFICE') document.getElementById('entry-source-dest').value = currentRegion;
+                
+                let sourceSelect = document.getElementById('entry-source-dest');
+                if(currentRegion !== 'HEAD_OFFICE' && hubRegions.includes(currentRegion.toUpperCase())) {
+                    sourceSelect.value = currentRegion;
+                    sourceSelect.disabled = true;
+                } else {
+                    sourceSelect.disabled = false;
+                }
             } else if (activeSheet === 'PaddyIssues') {
                 field1.innerHTML = `<label class="block text-[10px] font-bold text-slate-500 mb-0.5">ISSUING REGION</label><select id="entry-source-dest" required class="w-full px-3 py-1.5 rounded border border-slate-300 text-xs bg-white">${regOpts}</select>`;
                 field2.innerHTML = `<label class="block text-[10px] font-bold text-slate-500 mb-0.5">RECEIVING MILL</label><select id="entry-extra" required class="w-full px-3 py-1.5 rounded border border-slate-300 text-xs bg-white">${millOpts}</select>`;
                 if(currentRegion !== 'HEAD_OFFICE') document.getElementById('entry-source-dest').value = currentRegion;
-            } else if (activeSheet !== 'MasterAllotment' && activeSheet !== 'ConsolidatedReport') {
+            } else if (activeSheet !== 'MasterAllotment' && !activeSheet.includes('Consolidated') && !activeSheet.includes('Millers')) {
                 let labelTitle = activeSheet === 'ADS_Issues' ? 'SELECT ADS DISTRICT' : 'SELECT CO-OP DISTRICT';
                 field1.innerHTML = `<label class="block text-[10px] font-bold text-slate-500 mb-0.5">${labelTitle}</label><select id="entry-source-dest" required class="w-full px-3 py-1.5 rounded border border-slate-300 text-xs bg-white">${regOpts}</select>`;
                 field2.innerHTML = `<input type="hidden" id="entry-extra" value="">`;
@@ -363,7 +488,7 @@
             fetch(SCRIPT_URL + "?action=getData")
             .then(res => res.json())
             .then(data => {
-                ["MillReceipts", "RegionIssues", "PaddyIssues", "ADS_Issues", "Coop_Issues", "RegionsMaster", "MillsMaster"].forEach(key => {
+                ["MillReceipts", "RegionIssues", "PaddyIssues", "ADS_Issues", "Coop_Issues", "RegionsMaster", "HubMaster", "MillsMaster"].forEach(key => {
                     if(data[key]) {
                         if (key === "RegionsMaster" && data[key].length > 1) {
                             db.RegionsMaster = data[key].slice(1);
@@ -380,11 +505,31 @@
                             });
                             populateGlobalRegionDropdown();
                             setupFormFields();
+                        } else if (key === "HubMaster" && data[key].length > 1) {
+                            db.HubMaster = data[key].slice(1);
+                            hubRegions = [];
+                            hubAllotments = {};
+                            hubAllotmentIds = {};
+                            db.HubMaster.forEach(row => {
+                                let hId = row[0];
+                                let hName = (row[1] || "").toUpperCase();
+                                let hQty = parseFloat(row[2]) || 1020;
+                                if (hName) {
+                                    hubRegions.push(hName);
+                                    hubAllotmentIds[hName] = hId;
+                                    hubAllotments[hName] = hQty;
+                                }
+                            });
+                            setupFormFields();
                         } else if (key === "MillsMaster" && data[key].length > 1) {
-                            db.MillsMaster = data[key].slice(1).map(row => ({ id: row[0], name: row[1], capacity: row[2], allotment: parseFloat(row[3]) || 350.00 }));
+                            db.MillsMaster = data[key].slice(1).map(row => ({ 
+                                id: row[0], name: row[1], capacity: row[2], 
+                                allotment: parseFloat(row[3]) || 350.00, 
+                                paddyAllotment: parseFloat(row[4]) || 500.00 
+                            }));
                             mills = db.MillsMaster;
                             setupFormFields();
-                        } else if (key !== "RegionsMaster" && key !== "MillsMaster") {
+                        } else if (!key.includes("Master")) {
                             db[key] = data[key].slice(1).map(row => ({ 
                                 id: row[0], date: formatDateToDDMMYYYY(row[1]), entity: row[2], allotment: parseFloat(row[3])||0, qty: parseFloat(row[4])||0, source: row[5] || "", destination: row[6] || ""
                             }));
@@ -395,22 +540,40 @@
             }).catch(err => console.log('Offline fallback mode'));
         }
 
-        function updateMasterAllotment(targetType, name, val) {
+        function updateMasterAllotment(targetType, name, val, subType) {
             let numericVal = parseFloat(val) || 0;
             if (targetType === 'Region') {
                 if (regionAllotments[name]) regionAllotments[name].general = numericVal;
+            } else if (targetType === 'Hub') {
+                if (hubAllotments[name] !== undefined) hubAllotments[name] = numericVal;
             } else if (targetType === 'ADS') {
                 if (regionAllotments[name]) regionAllotments[name].ads = numericVal;
             } else if (targetType === 'Coop') {
                 if (regionAllotments[name]) regionAllotments[name].coop = numericVal;
             } else if (targetType === 'Miller') {
                 let m = mills.find(x => x.name === name);
-                if (m) m.allotment = numericVal;
+                if (m) {
+                    if (subType === 'rice') m.allotment = numericVal;
+                    else if (subType === 'paddy') m.paddyAllotment = numericVal;
+                }
             }
         }
 
         function saveAllMasterAllotments() {
             let promises = [];
+            
+            hubRegions.forEach(h => {
+                let hQty = hubAllotments[h];
+                let hId = hubAllotmentIds[h] || ('HUB_' + Date.now() + Math.floor(Math.random()*1000));
+                hubAllotmentIds[h] = hId;
+                promises.push(
+                    fetch(SCRIPT_URL, {
+                        method: 'POST',
+                        body: JSON.stringify({ action: "saveMasterHub", type: "HubMaster", id: hId, name: h, allotment: hQty })
+                    })
+                );
+            });
+
             regions.forEach(r => {
                 let data = regionAllotments[r];
                 let recordId = data.id || ('REG_' + Date.now() + Math.floor(Math.random()*1000));
@@ -429,14 +592,14 @@
                 promises.push(
                     fetch(SCRIPT_URL, { 
                         method: 'POST', 
-                        body: JSON.stringify({ action: "saveMasterMill", type: "MillsMaster", id: millId, name: m.name, capacity: m.capacity, allotment: m.allotment }) 
+                        body: JSON.stringify({ action: "saveMasterMill", type: "MillsMaster", id: millId, name: m.name, capacity: m.capacity, allotment: m.allotment, paddyAllotment: m.paddyAllotment || 500 }) 
                     })
                 );
             });
 
             Promise.all(promises)
             .then(() => {
-                alert("Master Allotments successfully saved to Google Sheets!");
+                alert("Master Allotments and Hub Allotments successfully saved to Google Sheets!");
                 fetchAllData();
             })
             .catch(err => alert("Error saving allotments: " + err));
@@ -463,11 +626,24 @@
                 source = field1Val;
                 destination = field2Val;
                 entity = source + " -> " + destination;
-                allotment = regionAllotments[destination]?.general || 100.00;
+                
+                if (!hubRegions.includes(source.toUpperCase())) {
+                    alert("Access Denied: Only designated Hub regions (" + hubRegions.join(", ") + ") are authorized to make entries in the 'Issues Rice to Regions' tab.");
+                    return;
+                }
+
+                if (currentRegion !== 'HEAD_OFFICE' && currentRegion.toUpperCase() !== source.toUpperCase()) {
+                    alert("Permission Error: Your active region (" + currentRegion + ") is not authorized to make issue entries on behalf of Hub region '" + source + "'.");
+                    return;
+                }
+
+                allotment = hubAllotments[source] || 1020;
             } else if (activeSheet === 'PaddyIssues') {
-                source = field1Val;
-                destination = field2Val;
+                source = field1Val; 
+                destination = field2Val; 
                 entity = source + " -> " + destination;
+                let m = mills.find(x => x.name === destination);
+                if (m) allotment = m.paddyAllotment || 500;
             } else if (activeSheet === 'ADS_Issues') {
                 entity = field1Val;
                 allotment = regionAllotments[entity]?.ads || 50.00;
@@ -503,6 +679,12 @@
         function editRecord(id) {
             let item = db[activeSheet].find(x => x.id == id);
             if(!item) return;
+
+            if (activeSheet === 'RegionIssues' && currentRegion !== 'HEAD_OFFICE' && currentRegion.toUpperCase() !== (item.source || "").toUpperCase()) {
+                alert("Permission Denied: You can only edit issue records originating from your own Hub region.");
+                return;
+            }
+
             document.getElementById('edit-record-id').value = item.id;
             document.getElementById('entry-date').value = formatDateToYYYYMMDD(item.date);
             document.getElementById('entry-qty').value = item.qty;
@@ -519,6 +701,12 @@
         }
 
         function deleteRecord(id) {
+            let item = db[activeSheet].find(x => x.id == id);
+            if (activeSheet === 'RegionIssues' && currentRegion !== 'HEAD_OFFICE' && currentRegion.toUpperCase() !== (item?.source || "").toUpperCase()) {
+                alert("Permission Denied: You can only delete issue records originating from your own Hub region.");
+                return;
+            }
+
             if(confirm('Delete this row?')) {
                 db[activeSheet] = db[activeSheet].filter(x => x.id != id);
                 fetch(SCRIPT_URL, { method: 'POST', body: JSON.stringify({ action: "deleteRecord", type: activeSheet, id }) })
@@ -543,16 +731,36 @@
             let thead = document.getElementById('grid-table-head');
             let tbody = document.getElementById('grid-table-body');
             
+            let toolbarContainer = document.getElementById('toolbar-container');
+            if (activeSheet === 'RegionIssues' && currentRegion !== 'HEAD_OFFICE' && !hubRegions.includes(currentRegion.toUpperCase())) {
+                toolbarContainer.style.display = 'none';
+            } else if (activeSheet !== 'MasterAllotment' && !activeSheet.includes('Consolidated') && !activeSheet.includes('Millers')) {
+                toolbarContainer.style.display = 'flex';
+            }
+
             if (activeSheet === 'MasterAllotment') {
                 thead.innerHTML = `<tr>
                     <th class="p-3 border-r border-slate-300 w-16 text-center">S.No</th>
-                    <th class="p-3 border-r border-slate-300">Entity Name (Region / Mill)</th>
+                    <th class="p-3 border-r border-slate-300">Entity Name (Hub / Region / Mill)</th>
                     <th class="p-3 border-r border-slate-300">Category</th>
                     <th class="p-3 text-right">Allotment (MT)</th>
                 </tr>`;
                 
                 let html = "";
                 let count = 1;
+
+                hubRegions.forEach(h => {
+                    let hAllot = hubAllotments[h] !== undefined ? hubAllotments[h] : 1020;
+                    html += `<tr class="hover:bg-slate-50 border-b border-slate-200 bg-indigo-50/40">
+                        <td class="p-3 border-r border-slate-200 text-center font-mono">${count++}</td>
+                        <td class="p-3 border-r border-slate-200 font-bold text-indigo-900">${h} (Issuing Hub)</td>
+                        <td class="p-3 border-r border-slate-200 text-indigo-700 text-xs">Hub Issuing Allotment Pool</td>
+                        <td class="p-3 text-right font-mono">
+                            Allotment: <input type="number" step="0.01" value="${hAllot}" class="w-28 px-2 py-1 border rounded text-right font-mono text-xs font-bold text-indigo-900" onchange="updateMasterAllotment('Hub', '${h}', this.value)">
+                        </td>
+                    </tr>`;
+                });
+
                 regions.forEach(r => {
                     let data = regionAllotments[r] || { general: 100, ads: 50, coop: 50 };
                     html += `<tr class="hover:bg-slate-50 border-b border-slate-200">
@@ -568,12 +776,14 @@
                 });
 
                 mills.forEach(m => {
+                    let pAllot = m.paddyAllotment !== undefined ? m.paddyAllotment : 500;
                     html += `<tr class="hover:bg-slate-50 border-b border-slate-200 bg-amber-50/40">
                         <td class="p-3 border-r border-slate-200 text-center font-mono">${count++}</td>
                         <td class="p-3 border-r border-slate-200 font-medium">${m.name}</td>
-                        <td class="p-3 border-r border-slate-200 text-amber-700 text-xs">Hulling Miller</td>
+                        <td class="p-3 border-r border-slate-200 text-amber-700 text-xs">Hulling Miller (Rice & Paddy)</td>
                         <td class="p-3 text-right font-mono">
-                            Allotment: <input type="number" step="0.01" value="${m.allotment}" class="w-28 px-2 py-1 border rounded text-right font-mono text-xs" onchange="updateMasterAllotment('Miller', '${m.name}', this.value)">
+                            Rice Allot: <input type="number" step="0.01" value="${m.allotment}" class="w-20 px-2 py-1 border rounded text-right font-mono text-xs mr-2" onchange="updateMasterAllotment('Miller', '${m.name}', this.value, 'rice')">
+                            Paddy Allot: <input type="number" step="0.01" value="${pAllot}" class="w-20 px-2 py-1 border rounded text-right font-mono text-xs" onchange="updateMasterAllotment('Miller', '${m.name}', this.value, 'paddy')">
                         </td>
                     </tr>`;
                 });
@@ -581,6 +791,114 @@
                 tbody.innerHTML = html;
                 document.getElementById('grid-row-count').innerText = `${count - 1} Master Entities Configured`;
                 document.getElementById('grid-total-summary').innerText = `HO Allotment Master View Active`;
+                return;
+            }
+
+            if (activeSheet === 'MillersRiceReport') {
+                thead.innerHTML = `<tr>
+                    <th class="p-3 border-r border-slate-300 w-16 text-center">S.No</th>
+                    <th class="p-3 border-r border-slate-300">Hulling Mill Name</th>
+                    <th class="p-3 border-r border-slate-300 text-right">Rice Allotment (MT)</th>
+                    <th class="p-3 border-r border-slate-300 text-right">On-Day Receipts (MT)</th>
+                    <th class="p-3 border-r border-slate-300 text-right">Upto-Day Receipts (MT)</th>
+                    <th class="p-3 border-r border-slate-300 text-right">Balance (MT)</th>
+                    <th class="p-3 text-right">% of Receipts</th>
+                </tr>`;
+
+                let html = "";
+                let totalAllotSum = 0, totalOnDaySum = 0, totalUptoDaySum = 0;
+                let filterDate = document.getElementById('filter-to-date')?.value || "";
+                let filterDateFormatted = filterDate ? formatDateToDDMMYYYY(filterDate) : formatDateToDDMMYYYY(new Date());
+
+                mills.forEach((m, idx) => {
+                    let allotment = m.allotment || 350;
+                    let onDayQty = 0;
+                    let uptoDayQty = 0;
+
+                    db.MillReceipts.forEach(item => {
+                        if ((item.source || "").toUpperCase() === (m.name || "").toUpperCase()) {
+                            uptoDayQty += item.qty;
+                            if (item.date === filterDateFormatted) {
+                                onDayQty += item.qty;
+                            }
+                        }
+                    });
+
+                    let balance = allotment - uptoDayQty;
+                    let pct = allotment > 0 ? (uptoDayQty / allotment) * 100 : 0;
+
+                    totalAllotSum += allotment;
+                    totalOnDaySum += onDayQty;
+                    totalUptoDaySum += uptoDayQty;
+
+                    html += `<tr class="hover:bg-slate-50 border-b border-slate-200">
+                        <td class="p-3 border-r border-slate-200 text-center font-mono">${idx + 1}</td>
+                        <td class="p-3 border-r border-slate-200 font-medium text-slate-800">${m.name}</td>
+                        <td class="p-3 border-r border-slate-200 text-right font-mono">${allotment.toFixed(2)}</td>
+                        <td class="p-3 border-r border-slate-200 text-right font-mono text-blue-700">${onDayQty.toFixed(2)}</td>
+                        <td class="p-3 border-r border-slate-200 text-right font-mono text-amber-700 font-semibold">${uptoDayQty.toFixed(2)}</td>
+                        <td class="p-3 border-r border-slate-200 text-right font-mono ${balance < 0 ? 'text-red-600 font-bold' : 'text-slate-700'}">${balance.toFixed(2)}</td>
+                        <td class="p-3 text-right font-mono font-bold text-amber-700">${pct.toFixed(1)}%</td>
+                    </tr>`;
+                });
+
+                tbody.innerHTML = html;
+                document.getElementById('grid-row-count').innerText = `${mills.length} Millers Listed`;
+                document.getElementById('grid-total-summary').innerText = `Total Rice Allotment: ${totalAllotSum.toFixed(2)} | Upto-Day Receipts: ${totalUptoDaySum.toFixed(2)}`;
+                return;
+            }
+
+            if (activeSheet === 'MillersPaddyReport') {
+                thead.innerHTML = `<tr>
+                    <th class="p-3 border-r border-slate-300 w-16 text-center">S.No</th>
+                    <th class="p-3 border-r border-slate-300">Hulling Mill Name</th>
+                    <th class="p-3 border-r border-slate-300 text-right">HO Paddy Allotment (MT)</th>
+                    <th class="p-3 border-r border-slate-300 text-right">On-Day Paddy Issues (MT)</th>
+                    <th class="p-3 border-r border-slate-300 text-right">Upto-Day Paddy Issues (MT)</th>
+                    <th class="p-3 border-r border-slate-300 text-right">Balance (MT)</th>
+                    <th class="p-3 text-right">% of Issues</th>
+                </tr>`;
+
+                let html = "";
+                let totalAllotSum = 0, totalOnDaySum = 0, totalUptoDaySum = 0;
+                let filterDate = document.getElementById('filter-to-date')?.value || "";
+                let filterDateFormatted = filterDate ? formatDateToDDMMYYYY(filterDate) : formatDateToDDMMYYYY(new Date());
+
+                mills.forEach((m, idx) => {
+                    let allotment = m.paddyAllotment !== undefined ? m.paddyAllotment : 500;
+                    let onDayQty = 0;
+                    let uptoDayQty = 0;
+
+                    db.PaddyIssues.forEach(item => {
+                        if ((item.destination || "").toUpperCase() === (m.name || "").toUpperCase()) {
+                            uptoDayQty += item.qty;
+                            if (item.date === filterDateFormatted) {
+                                onDayQty += item.qty;
+                            }
+                        }
+                    });
+
+                    let balance = allotment - uptoDayQty;
+                    let pct = allotment > 0 ? (uptoDayQty / allotment) * 100 : 0;
+
+                    totalAllotSum += allotment;
+                    totalOnDaySum += onDayQty;
+                    totalUptoDaySum += uptoDayQty;
+
+                    html += `<tr class="hover:bg-slate-50 border-b border-slate-200">
+                        <td class="p-3 border-r border-slate-200 text-center font-mono">${idx + 1}</td>
+                        <td class="p-3 border-r border-slate-200 font-medium text-slate-800">${m.name}</td>
+                        <td class="p-3 border-r border-slate-200 text-right font-mono">${allotment.toFixed(2)}</td>
+                        <td class="p-3 border-r border-slate-200 text-right font-mono text-blue-700">${onDayQty.toFixed(2)}</td>
+                        <td class="p-3 border-r border-slate-200 text-right font-mono text-purple-700 font-semibold">${uptoDayQty.toFixed(2)}</td>
+                        <td class="p-3 border-r border-slate-200 text-right font-mono ${balance < 0 ? 'text-red-600 font-bold' : 'text-slate-700'}">${balance.toFixed(2)}</td>
+                        <td class="p-3 text-right font-mono font-bold text-purple-700">${pct.toFixed(1)}%</td>
+                    </tr>`;
+                });
+
+                tbody.innerHTML = html;
+                document.getElementById('grid-row-count').innerText = `${mills.length} Millers Listed`;
+                document.getElementById('grid-total-summary').innerText = `Total HO Paddy Allotment: ${totalAllotSum.toFixed(2)} | Upto-Day Issues: ${totalUptoDaySum.toFixed(2)}`;
                 return;
             }
 
@@ -601,27 +919,16 @@
                     let issuedQty = 0, receivedQty = 0, adsIssued = 0, coopIssued = 0;
 
                     db.RegionIssues.forEach(item => {
-                        if((item.source || "").toUpperCase() === r.toUpperCase()) {
-                            issuedQty += item.qty;
-                        }
+                        if((item.source || "").toUpperCase() === r.toUpperCase()) issuedQty += item.qty;
                     });
-
                     db.RegionIssues.forEach(item => {
-                        if((item.destination || "").toUpperCase() === r.toUpperCase()) {
-                            receivedQty += item.qty;
-                        }
+                        if((item.destination || "").toUpperCase() === r.toUpperCase()) receivedQty += item.qty;
                     });
-
                     db.ADS_Issues.forEach(item => {
-                        if((item.entity || "").toUpperCase() === r.toUpperCase()) {
-                            adsIssued += item.qty;
-                        }
+                        if((item.entity || "").toUpperCase() === r.toUpperCase()) adsIssued += item.qty;
                     });
-
                     db.Coop_Issues.forEach(item => {
-                        if((item.entity || "").toUpperCase() === r.toUpperCase()) {
-                            coopIssued += item.qty;
-                        }
+                        if((item.entity || "").toUpperCase() === r.toUpperCase()) coopIssued += item.qty;
                     });
 
                     totalIssuedSum += issuedQty;
@@ -645,6 +952,118 @@
                 return;
             }
 
+            if (activeSheet === 'ConsolidatedReport2') {
+                thead.innerHTML = `<tr>
+                    <th class="p-3 border-r border-slate-300 w-16 text-center">S.No</th>
+                    <th class="p-3 border-r border-slate-300">Hub Region Name</th>
+                    <th class="p-3 border-r border-slate-300 text-right">Allotment (MT)</th>
+                    <th class="p-3 border-r border-slate-300 text-right">On-Day Issues (MT)</th>
+                    <th class="p-3 border-r border-slate-300 text-right">Upto-Day Issues (MT)</th>
+                    <th class="p-3 border-r border-slate-300 text-right">Balance (MT)</th>
+                    <th class="p-3 text-right">% of Issues</th>
+                </tr>`;
+
+                let html = "";
+                let totalAllotSum = 0, totalOnDaySum = 0, totalUptoDaySum = 0, totalBalSum = 0;
+
+                let filterDate = document.getElementById('filter-to-date')?.value || "";
+                let filterDateFormatted = filterDate ? formatDateToDDMMYYYY(filterDate) : formatDateToDDMMYYYY(new Date());
+
+                hubRegions.forEach((h, idx) => {
+                    let allotment = hubAllotments[h] !== undefined ? hubAllotments[h] : 1020;
+                    let onDayQty = 0;
+                    let uptoDayQty = 0;
+
+                    db.RegionIssues.forEach(item => {
+                        if ((item.source || "").toUpperCase() === h.toUpperCase()) {
+                            uptoDayQty += item.qty;
+                            if (item.date === filterDateFormatted) {
+                                onDayQty += item.qty;
+                            }
+                        }
+                    });
+
+                    let balance = allotment - uptoDayQty;
+                    let pct = allotment > 0 ? (uptoDayQty / allotment) * 100 : 0;
+
+                    totalAllotSum += allotment;
+                    totalOnDaySum += onDayQty;
+                    totalUptoDaySum += uptoDayQty;
+                    totalBalSum += balance;
+
+                    html += `<tr class="hover:bg-slate-50 border-b border-slate-200 bg-indigo-50/20">
+                        <td class="p-3 border-r border-slate-200 text-center font-mono">${idx + 1}</td>
+                        <td class="p-3 border-r border-slate-200 font-bold text-indigo-900">${h} (Hub)</td>
+                        <td class="p-3 border-r border-slate-200 text-right font-mono">${allotment.toFixed(2)}</td>
+                        <td class="p-3 border-r border-slate-200 text-right font-mono text-blue-700">${onDayQty.toFixed(2)}</td>
+                        <td class="p-3 border-r border-slate-200 text-right font-mono text-emerald-700 font-semibold">${uptoDayQty.toFixed(2)}</td>
+                        <td class="p-3 border-r border-slate-200 text-right font-mono ${balance < 0 ? 'text-red-600 font-bold' : 'text-slate-700'}">${balance.toFixed(2)}</td>
+                        <td class="p-3 text-right font-mono font-bold text-indigo-700">${pct.toFixed(1)}%</td>
+                    </tr>`;
+                });
+
+                tbody.innerHTML = html;
+                document.getElementById('grid-row-count').innerText = `${hubRegions.length} Hub Regions Listed in Report 2`;
+                document.getElementById('grid-total-summary').innerText = `Total Hub Allotment: ${totalAllotSum.toFixed(2)} | Upto-Day Issues: ${totalUptoDaySum.toFixed(2)}`;
+                return;
+            }
+
+            if (activeSheet === 'ConsolidatedReport3') {
+                thead.innerHTML = `<tr>
+                    <th class="p-3 border-r border-slate-300 w-16 text-center">S.No</th>
+                    <th class="p-3 border-r border-slate-300">Region Name (Received)</th>
+                    <th class="p-3 border-r border-slate-300 text-right">Allotment (MT)</th>
+                    <th class="p-3 border-r border-slate-300 text-right">On-Day Receipts (MT)</th>
+                    <th class="p-3 border-r border-slate-300 text-right">Upto-Day Receipts (MT)</th>
+                    <th class="p-3 border-r border-slate-300 text-right">Balance (MT)</th>
+                    <th class="p-3 text-right">% of Receipts</th>
+                </tr>`;
+
+                let html = "";
+                let totalAllotSum = 0, totalOnDaySum = 0, totalUptoDaySum = 0, totalBalSum = 0;
+
+                let filterDate = document.getElementById('filter-to-date')?.value || "";
+                let filterDateFormatted = filterDate ? formatDateToDDMMYYYY(filterDate) : formatDateToDDMMYYYY(new Date());
+
+                regions.forEach((r, idx) => {
+                    let allotment = regionAllotments[r]?.general || 100.00;
+                    let onDayQty = 0;
+                    let uptoDayQty = 0;
+
+                    db.RegionIssues.forEach(item => {
+                        if ((item.destination || "").toUpperCase() === r.toUpperCase()) {
+                            uptoDayQty += item.qty;
+                            if (item.date === filterDateFormatted) {
+                                onDayQty += item.qty;
+                            }
+                        }
+                    });
+
+                    let balance = allotment - uptoDayQty;
+                    let pct = allotment > 0 ? (uptoDayQty / allotment) * 100 : 0;
+
+                    totalAllotSum += allotment;
+                    totalOnDaySum += onDayQty;
+                    totalUptoDaySum += uptoDayQty;
+                    totalBalSum += balance;
+
+                    html += `<tr class="hover:bg-slate-50 border-b border-slate-200">
+                        <td class="p-3 border-r border-slate-200 text-center font-mono">${idx + 1}</td>
+                        <td class="p-3 border-r border-slate-200 font-medium">${r}</td>
+                        <td class="p-3 border-r border-slate-200 text-right font-mono">${allotment.toFixed(2)}</td>
+                        <td class="p-3 border-r border-slate-200 text-right font-mono text-blue-700">${onDayQty.toFixed(2)}</td>
+                        <td class="p-3 border-r border-slate-200 text-right font-mono text-teal-700 font-semibold">${uptoDayQty.toFixed(2)}</td>
+                        <td class="p-3 border-r border-slate-200 text-right font-mono ${balance < 0 ? 'text-red-600 font-bold' : 'text-slate-700'}">${balance.toFixed(2)}</td>
+                        <td class="p-3 text-right font-mono font-bold text-teal-700">${pct.toFixed(1)}%</td>
+                    </tr>`;
+                });
+
+                tbody.innerHTML = html;
+                document.getElementById('grid-row-count').innerText = `${regions.length} Regions Listed in Report 3`;
+                document.getElementById('grid-total-summary').innerText = `Total Allotment: ${totalAllotSum.toFixed(2)} | Upto-Day Receipts: ${totalUptoDaySum.toFixed(2)}`;
+                return;
+            }
+
             let fromDateVal = document.getElementById('filter-from-date')?.value || "";
             let toDateVal = document.getElementById('filter-to-date')?.value || "";
             let fromDateFormatted = fromDateVal ? formatDateToDDMMYYYY(fromDateVal) : "";
@@ -656,7 +1075,11 @@
                     if (activeSheet === 'MillReceipts') {
                         matchRegion = (item.destination || "").toUpperCase() === currentRegion.toUpperCase();
                     } else if (activeSheet === 'RegionIssues') {
-                        matchRegion = (item.source || "").toUpperCase() === currentRegion.toUpperCase();
+                        if (hubRegions.includes(currentRegion.toUpperCase())) {
+                            matchRegion = (item.source || "").toUpperCase() === currentRegion.toUpperCase();
+                        } else {
+                            matchRegion = (item.destination || "").toUpperCase() === currentRegion.toUpperCase();
+                        }
                     } else if (activeSheet === 'PaddyIssues') {
                         matchRegion = (item.source || "").toUpperCase() === currentRegion.toUpperCase();
                     } else {
@@ -673,14 +1096,14 @@
             if (activeSheet === 'MillReceipts') {
                 headers = ['Date', 'Hulling Mill (Source)', 'Destination Region', 'Allotment', 'On Day Qty', 'Upto Day Qty', 'Balance', 'Actions'];
             } else if (activeSheet === 'RegionIssues') {
-                headers = ['Date', 'Source Region', 'Destination Region', 'Allotment', 'On Day Qty', 'Upto Day Qty', 'Balance', 'Actions'];
+                headers = ['Date', 'Source Region (Hub)', 'Destination Region', 'Allotment', 'On Day Qty', 'Upto Day Qty', 'Balance', 'Actions'];
             } else if (activeSheet === 'PaddyIssues') {
-                headers = ['Date', 'Issuing Region', 'Receiving Mill', 'On Day Qty', 'Upto Day Qty', 'Actions'];
+                headers = ['Date', 'Issuing Region', 'Receiving Mill', 'HO Paddy Allotment', 'On Day Qty', 'Upto Day Qty', 'Balance', 'Actions'];
             } else {
                 headers = ['Date', 'District / Shop', 'Allotment', 'On Day Qty', 'Upto Day Qty', 'Balance', 'Actions'];
             }
 
-            thead.innerHTML = `<tr>` + headers.map(h => `<th class="p-3 border-r border-slate-300 last:border-r-0 ${h.includes('Qty') || h.includes('Allotment') || h.includes('Balance') ? 'text-right' : ''} ${h === 'Actions' ? 'text-center w-20' : ''}">${h}</th>`).join('') + `</tr>`;
+            thead.innerHTML = `<tr>` + headers.map(h => `<th class="p-3 border-r border-slate-300 last:border-r-0 ${h.includes('Qty') || h.includes('Allotment') ? 'text-right' : ''} ${h === 'Actions' ? 'text-center w-20' : ''}">${h}</th>`).join('') + `</tr>`;
 
             let cumulative = 0;
             let totalQty = 0;
@@ -692,18 +1115,24 @@
                 totalQty += item.qty;
                 let balance = item.allotment - cumulative;
 
+                let canEditDelete = (currentRegion === 'HEAD_OFFICE' || (activeSheet === 'RegionIssues' && hubRegions.includes(currentRegion.toUpperCase()) && (item.source || "").toUpperCase() === currentRegion.toUpperCase()) || activeSheet !== 'RegionIssues');
+
+                let actionButtons = canEditDelete ? `
+                    <button onclick="editRecord('${item.id}')" class="text-blue-600 hover:text-blue-800"><i class="fa-solid fa-pen"></i></button>
+                    <button onclick="deleteRecord('${item.id}')" class="text-red-500 hover:text-red-700"><i class="fa-solid fa-trash"></i></button>
+                ` : `<span class="text-slate-300 text-[10px]">Read-Only</span>`;
+
                 if (activeSheet === 'PaddyIssues') {
                     return `
                         <tr class="hover:bg-slate-50 transition border-b border-slate-200">
                             <td class="p-3 border-r border-slate-200 text-slate-600 font-mono">${item.date}</td>
                             <td class="p-3 border-r border-slate-200 font-medium text-slate-800">${item.source || '-'}</td>
                             <td class="p-3 border-r border-slate-200 text-slate-700">${item.destination || '-'}</td>
+                            <td class="p-3 border-r border-slate-200 text-right font-mono">${item.allotment.toFixed(2)}</td>
                             <td class="p-3 border-r border-slate-200 text-right font-mono">${item.qty.toFixed(2)}</td>
                             <td class="p-3 border-r border-slate-200 text-right font-mono font-semibold text-emerald-700">${cumulative.toFixed(2)}</td>
-                            <td class="p-3 text-center space-x-2">
-                                <button onclick="editRecord('${item.id}')" class="text-blue-600 hover:text-blue-800"><i class="fa-solid fa-pen"></i></button>
-                                <button onclick="deleteRecord('${item.id}')" class="text-red-500 hover:text-red-700"><i class="fa-solid fa-trash"></i></button>
-                            </td>
+                            <td class="p-3 border-r border-slate-200 text-right font-mono ${balance < 0 ? 'text-red-600 font-bold' : 'text-slate-700'}">${balance.toFixed(2)}</td>
+                            <td class="p-3 text-center space-x-2">${actionButtons}</td>
                         </tr>
                     `;
                 } else if (activeSheet === 'MillReceipts' || activeSheet === 'RegionIssues') {
@@ -716,10 +1145,7 @@
                             <td class="p-3 border-r border-slate-200 text-right font-mono">${item.qty.toFixed(2)}</td>
                             <td class="p-3 border-r border-slate-200 text-right font-mono font-semibold text-emerald-700">${cumulative.toFixed(2)}</td>
                             <td class="p-3 border-r border-slate-200 text-right font-mono ${balance < 0 ? 'text-red-600 font-bold' : 'text-slate-700'}">${balance.toFixed(2)}</td>
-                            <td class="p-3 text-center space-x-2">
-                                <button onclick="editRecord('${item.id}')" class="text-blue-600 hover:text-blue-800"><i class="fa-solid fa-pen"></i></button>
-                                <button onclick="deleteRecord('${item.id}')" class="text-red-500 hover:text-red-700"><i class="fa-solid fa-trash"></i></button>
-                            </td>
+                            <td class="p-3 text-center space-x-2">${actionButtons}</td>
                         </tr>
                     `;
                 } else {
@@ -731,10 +1157,7 @@
                             <td class="p-3 border-r border-slate-200 text-right font-mono">${item.qty.toFixed(2)}</td>
                             <td class="p-3 border-r border-slate-200 text-right font-mono font-semibold text-emerald-700">${cumulative.toFixed(2)}</td>
                             <td class="p-3 border-r border-slate-200 text-right font-mono ${balance < 0 ? 'text-red-600 font-bold' : 'text-slate-700'}">${balance.toFixed(2)}</td>
-                            <td class="p-3 text-center space-x-2">
-                                <button onclick="editRecord('${item.id}')" class="text-blue-600 hover:text-blue-800"><i class="fa-solid fa-pen"></i></button>
-                                <button onclick="deleteRecord('${item.id}')" class="text-red-500 hover:text-red-700"><i class="fa-solid fa-trash"></i></button>
-                            </td>
+                            <td class="p-3 text-center space-x-2">${actionButtons}</td>
                         </tr>
                     `;
                 }
@@ -746,10 +1169,21 @@
 
         function exportCurrentSheetExcel() {
             if (activeSheet === 'MasterAllotment') return;
-            if (activeSheet === 'ConsolidatedReport') {
-                exportConsolidatedExcel();
+            if (activeSheet === 'MillersRiceReport') {
+                exportMillersRiceExcel();
                 return;
             }
+            if (activeSheet === 'MillersPaddyReport') {
+                exportMillersPaddyExcel();
+                return;
+            }
+            if (activeSheet.includes('Consolidated')) {
+                if(activeSheet === 'ConsolidatedReport') exportConsolidatedExcel();
+                else if(activeSheet === 'ConsolidatedReport2') exportConsolidatedExcel2();
+                else if(activeSheet === 'ConsolidatedReport3') exportConsolidatedExcel3();
+                return;
+            }
+
             let wb = XLSX.utils.book_new();
             let wsData = [];
             let fromDateVal = document.getElementById('filter-from-date')?.value || "";
@@ -768,13 +1202,13 @@
                 let cumulative = 0;
                 items.forEach(i => { cumulative += i.qty; wsData.push([i.date, i.source, i.destination, i.allotment, i.qty, cumulative, i.allotment - cumulative]); });
             } else if (activeSheet === 'RegionIssues') {
-                wsData.push(["Date", "Source Region", "Destination Region", "Allotment", "On Day Qty", "Upto Day Qty", "Balance"]);
+                wsData.push(["Date", "Source Region (Hub)", "Destination Region", "Allotment", "On Day Qty", "Upto Day Qty", "Balance"]);
                 let cumulative = 0;
                 items.forEach(i => { cumulative += i.qty; wsData.push([i.date, i.source, i.destination, i.allotment, i.qty, cumulative, i.allotment - cumulative]); });
             } else if (activeSheet === 'PaddyIssues') {
-                wsData.push(["Date", "Issuing Region", "Receiving Mill", "On Day Qty", "Upto Day Qty"]);
+                wsData.push(["Date", "Issuing Region", "Receiving Mill", "HO Paddy Allotment", "On Day Qty", "Upto Day Qty", "Balance"]);
                 let cumulative = 0;
-                items.forEach(i => { cumulative += i.qty; wsData.push([i.date, i.source, i.destination, i.qty, cumulative]); });
+                items.forEach(i => { cumulative += i.qty; wsData.push([i.date, i.source, i.destination, i.allotment, i.qty, cumulative, i.allotment - cumulative]); });
             } else {
                 wsData.push(["Date", "District / Shop", "Allotment", "On Day Qty", "Upto Day Qty", "Balance"]);
                 let cumulative = 0;
@@ -785,31 +1219,111 @@
             XLSX.writeFile(wb, `TNCSC_${activeSheet}_${currentRegion}.xlsx`);
         }
 
+        function exportMillersRiceExcel() {
+            let wb = XLSX.utils.book_new();
+            let wsData = [["S.No", "Hulling Mill Name", "Rice Allotment (MT)", "On-Day Receipts (MT)", "Upto-Day Receipts (MT)", "Balance (MT)", "% of Receipts"]];
+            let filterDate = document.getElementById('filter-to-date')?.value || "";
+            let filterDateFormatted = filterDate ? formatDateToDDMMYYYY(filterDate) : formatDateToDDMMYYYY(new Date());
+
+            mills.forEach((m, idx) => {
+                let allotment = m.allotment || 350;
+                let onDayQty = 0, uptoDayQty = 0;
+                db.MillReceipts.forEach(item => {
+                    if ((item.source || "").toUpperCase() === (m.name || "").toUpperCase()) {
+                        uptoDayQty += item.qty;
+                        if (item.date === filterDateFormatted) onDayQty += item.qty;
+                    }
+                });
+                let balance = allotment - uptoDayQty;
+                let pct = allotment > 0 ? (uptoDayQty / allotment) * 100 : 0;
+                wsData.push([idx + 1, m.name, allotment, onDayQty, uptoDayQty, balance, pct.toFixed(1) + "%"]);
+            });
+            XLSX.utils.book_append_sheet(wb, XLSX.utils.aoa_to_sheet(wsData), "Millers_Rice_Receipt_Report");
+            XLSX.writeFile(wb, `TNCSC_Millers_Rice_Receipt_Report.xlsx`);
+        }
+
+        function exportMillersPaddyExcel() {
+            let wb = XLSX.utils.book_new();
+            let wsData = [["S.No", "Hulling Mill Name", "HO Paddy Allotment (MT)", "On-Day Paddy Issues (MT)", "Upto-Day Paddy Issues (MT)", "Balance (MT)", "% of Issues"]];
+            let filterDate = document.getElementById('filter-to-date')?.value || "";
+            let filterDateFormatted = filterDate ? formatDateToDDMMYYYY(filterDate) : formatDateToDDMMYYYY(new Date());
+
+            mills.forEach((m, idx) => {
+                let allotment = m.paddyAllotment !== undefined ? m.paddyAllotment : 500;
+                let onDayQty = 0, uptoDayQty = 0;
+                db.PaddyIssues.forEach(item => {
+                    if ((item.destination || "").toUpperCase() === (m.name || "").toUpperCase()) {
+                        uptoDayQty += item.qty;
+                        if (item.date === filterDateFormatted) onDayQty += item.qty;
+                    }
+                });
+                let balance = allotment - uptoDayQty;
+                let pct = allotment > 0 ? (uptoDayQty / allotment) * 100 : 0;
+                wsData.push([idx + 1, m.name, allotment, onDayQty, uptoDayQty, balance, pct.toFixed(1) + "%"]);
+            });
+            XLSX.utils.book_append_sheet(wb, XLSX.utils.aoa_to_sheet(wsData), "Millers_Paddy_Issue_Report");
+            XLSX.writeFile(wb, `TNCSC_Millers_Paddy_Issue_Report.xlsx`);
+        }
+
         function exportConsolidatedExcel() {
             let wb = XLSX.utils.book_new();
             let wsData = [["S.No", "Region Name", "Total Qty Issued (Source) (MT)", "Total Qty Received (Destination) (MT)", "Total Issues to ADS (MT)", "Total Co-operative Sales (MT)"]];
-            
             regions.forEach((r, idx) => {
                 let issuedQty = 0, receivedQty = 0, adsIssued = 0, coopIssued = 0;
-                
-                db.RegionIssues.forEach(item => {
-                    if((item.source || "").toUpperCase() === r.toUpperCase()) issuedQty += item.qty;
-                });
-                db.RegionIssues.forEach(item => {
-                    if((item.destination || "").toUpperCase() === r.toUpperCase()) receivedQty += item.qty;
-                });
-                db.ADS_Issues.forEach(item => {
-                    if((item.entity || "").toUpperCase() === r.toUpperCase()) adsIssued += item.qty;
-                });
-                db.Coop_Issues.forEach(item => {
-                    if((item.entity || "").toUpperCase() === r.toUpperCase()) coopIssued += item.qty;
-                });
-
+                db.RegionIssues.forEach(item => { if((item.source || "").toUpperCase() === r.toUpperCase()) issuedQty += item.qty; });
+                db.RegionIssues.forEach(item => { if((item.destination || "").toUpperCase() === r.toUpperCase()) receivedQty += item.qty; });
+                db.ADS_Issues.forEach(item => { if((item.entity || "").toUpperCase() === r.toUpperCase()) adsIssued += item.qty; });
+                db.Coop_Issues.forEach(item => { if((item.entity || "").toUpperCase() === r.toUpperCase()) coopIssued += item.qty; });
                 wsData.push([idx + 1, r, issuedQty, receivedQty, adsIssued, coopIssued]);
             });
-
             XLSX.utils.book_append_sheet(wb, XLSX.utils.aoa_to_sheet(wsData), "Consolidated_Report");
             XLSX.writeFile(wb, `TNCSC_Consolidated_Issues_Report.xlsx`);
+        }
+
+        function exportConsolidatedExcel2() {
+            let wb = XLSX.utils.book_new();
+            let wsData = [["S.No", "Hub Region Name", "Allotment (MT)", "On-Day Issues (MT)", "Upto-Day Issues (MT)", "Balance (MT)", "% of Issues"]];
+            let filterDate = document.getElementById('filter-to-date')?.value || "";
+            let filterDateFormatted = filterDate ? formatDateToDDMMYYYY(filterDate) : formatDateToDDMMYYYY(new Date());
+
+            hubRegions.forEach((h, idx) => {
+                let allotment = hubAllotments[h] !== undefined ? hubAllotments[h] : 1020;
+                let onDayQty = 0, uptoDayQty = 0;
+                db.RegionIssues.forEach(item => {
+                    if ((item.source || "").toUpperCase() === h.toUpperCase()) {
+                        uptoDayQty += item.qty;
+                        if (item.date === filterDateFormatted) onDayQty += item.qty;
+                    }
+                });
+                let balance = allotment - uptoDayQty;
+                let pct = allotment > 0 ? (uptoDayQty / allotment) * 100 : 0;
+                wsData.push([idx + 1, h, allotment, onDayQty, uptoDayQty, balance, pct.toFixed(1) + "%"]);
+            });
+            XLSX.utils.book_append_sheet(wb, XLSX.utils.aoa_to_sheet(wsData), "Hub_Rice_Issued_Report");
+            XLSX.writeFile(wb, `TNCSC_Hub_Rice_Issued_Report.xlsx`);
+        }
+
+        function exportConsolidatedExcel3() {
+            let wb = XLSX.utils.book_new();
+            let wsData = [["S.No", "Region Name (Received)", "Allotment (MT)", "On-Day Receipts (MT)", "Upto-Day Receipts (MT)", "Balance (MT)", "% of Receipts"]];
+            let filterDate = document.getElementById('filter-to-date')?.value || "";
+            let filterDateFormatted = filterDate ? formatDateToDDMMYYYY(filterDate) : formatDateToDDMMYYYY(new Date());
+
+            regions.forEach((r, idx) => {
+                let allotment = regionAllotments[r]?.general || 100.00;
+                let onDayQty = 0, uptoDayQty = 0;
+                db.RegionIssues.forEach(item => {
+                    if ((item.destination || "").toUpperCase() === r.toUpperCase()) {
+                        uptoDayQty += item.qty;
+                        if (item.date === filterDateFormatted) onDayQty += item.qty;
+                    }
+                });
+                let balance = allotment - uptoDayQty;
+                let pct = allotment > 0 ? (uptoDayQty / allotment) * 100 : 0;
+                wsData.push([idx + 1, r, allotment, onDayQty, uptoDayQty, balance, pct.toFixed(1) + "%"]);
+            });
+            XLSX.utils.book_append_sheet(wb, XLSX.utils.aoa_to_sheet(wsData), "Rice_Received_Report");
+            XLSX.writeFile(wb, `TNCSC_Rice_Received_Report.xlsx`);
         }
     </script>
 </body>

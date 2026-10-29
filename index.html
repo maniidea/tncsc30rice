@@ -368,6 +368,13 @@
         }
 
         function changeGlobalRegion(val) {
+            let oldRegion = localStorage.getItem('tncsc_active_region') || "";
+            if (oldRegion && oldRegion !== val && val !== "") {
+                if (!confirm("Are you sure you want to change your region from " + oldRegion + " to " + val + "?")) {
+                    document.getElementById('global-region-select').value = oldRegion;
+                    return;
+                }
+            }
             currentRegion = val;
             localStorage.setItem('tncsc_active_region', val);
             checkRegionSelectionState();
@@ -454,8 +461,14 @@
 
             if (activeSheet === 'MillReceipts') {
                 field1.innerHTML = `<label class="block text-[10px] font-bold text-slate-500 mb-0.5">SOURCE HULLING MILL</label><select id="entry-source-dest" required class="w-full px-3 py-1.5 rounded border border-slate-300 text-xs bg-white font-medium">${millOpts}</select>`;
-                field2.innerHTML = `<label class="block text-[10px] font-bold text-slate-500 mb-0.5">DESTINATION REGION</label><select id="entry-extra" required class="w-full px-3 py-1.5 rounded border border-slate-300 text-xs bg-white font-medium">${regOpts}</select>`;
-                if(currentRegion !== 'HEAD_OFFICE') document.getElementById('entry-extra').value = currentRegion;
+                field2.innerHTML = `<label class="block text-[10px] font-bold text-slate-500 mb-0.5">DESTINATION REGION</label><select id="entry-extra" required class="w-full px-3 py-1.5 rounded border border-slate-300 text-xs bg-slate-100 font-medium"${currentRegion !== 'HEAD_OFFICE' ? ' disabled' : ''}>${regOpts}</select>`;
+                if(currentRegion !== 'HEAD_OFFICE') {
+                    document.getElementById('entry-extra').value = currentRegion;
+                    document.getElementById('entry-extra').onmousedown = function(e) {
+                        e.preventDefault();
+                        alert("To change your region, please use the top menu.");
+                    };
+                }
             } else if (activeSheet === 'RegionIssues') {
                 field1.innerHTML = `<label class="block text-[10px] font-bold text-slate-500 mb-0.5">SOURCE REGION (HUB ONLY)</label><select id="entry-source-dest" required class="w-full px-3 py-1.5 rounded border border-slate-300 text-xs bg-indigo-50 font-bold">${hubOpts}</select>`;
                 field2.innerHTML = `<label class="block text-[10px] font-bold text-slate-500 mb-0.5">DESTINATION REGION</label><select id="entry-extra" required class="w-full px-3 py-1.5 rounded border border-slate-300 text-xs bg-white">${regOpts}</select>`;
@@ -464,18 +477,34 @@
                 if(currentRegion !== 'HEAD_OFFICE' && hubRegions.includes(currentRegion.toUpperCase())) {
                     sourceSelect.value = currentRegion;
                     sourceSelect.disabled = true;
+                    sourceSelect.onmousedown = function(e) {
+                        e.preventDefault();
+                        alert("To change your region, please use the top menu.");
+                    };
                 } else {
                     sourceSelect.disabled = false;
                 }
             } else if (activeSheet === 'PaddyIssues') {
-                field1.innerHTML = `<label class="block text-[10px] font-bold text-slate-500 mb-0.5">ISSUING REGION</label><select id="entry-source-dest" required class="w-full px-3 py-1.5 rounded border border-slate-300 text-xs bg-white">${regOpts}</select>`;
+                field1.innerHTML = `<label class="block text-[10px] font-bold text-slate-500 mb-0.5">ISSUING REGION</label><select id="entry-source-dest" required class="w-full px-3 py-1.5 rounded border border-slate-300 text-xs bg-slate-100 font-medium"${currentRegion !== 'HEAD_OFFICE' ? ' disabled' : ''}>${regOpts}</select>`;
                 field2.innerHTML = `<label class="block text-[10px] font-bold text-slate-500 mb-0.5">RECEIVING MILL</label><select id="entry-extra" required class="w-full px-3 py-1.5 rounded border border-slate-300 text-xs bg-white">${millOpts}</select>`;
-                if(currentRegion !== 'HEAD_OFFICE') document.getElementById('entry-source-dest').value = currentRegion;
+                if(currentRegion !== 'HEAD_OFFICE') {
+                    document.getElementById('entry-source-dest').value = currentRegion;
+                    document.getElementById('entry-source-dest').onmousedown = function(e) {
+                        e.preventDefault();
+                        alert("To change your region, please use the top menu.");
+                    };
+                }
             } else if (activeSheet !== 'MasterAllotment' && !activeSheet.includes('Consolidated') && !activeSheet.includes('Millers')) {
                 let labelTitle = activeSheet === 'ADS_Issues' ? 'SELECT ADS DISTRICT' : 'SELECT CO-OP DISTRICT';
-                field1.innerHTML = `<label class="block text-[10px] font-bold text-slate-500 mb-0.5">${labelTitle}</label><select id="entry-source-dest" required class="w-full px-3 py-1.5 rounded border border-slate-300 text-xs bg-white">${regOpts}</select>`;
+                field1.innerHTML = `<label class="block text-[10px] font-bold text-slate-500 mb-0.5">${labelTitle}</label><select id="entry-source-dest" required class="w-full px-3 py-1.5 rounded border border-slate-300 text-xs bg-slate-100 font-medium"${currentRegion !== 'HEAD_OFFICE' ? ' disabled' : ''}>${regOpts}</select>`;
                 field2.innerHTML = `<input type="hidden" id="entry-extra" value="">`;
-                if(currentRegion !== 'HEAD_OFFICE') document.getElementById('entry-source-dest').value = currentRegion;
+                if(currentRegion !== 'HEAD_OFFICE') {
+                    document.getElementById('entry-source-dest').value = currentRegion;
+                    document.getElementById('entry-source-dest').onmousedown = function(e) {
+                        e.preventDefault();
+                        alert("To change your region, please use the top menu.");
+                    };
+                }
             }
         }
 

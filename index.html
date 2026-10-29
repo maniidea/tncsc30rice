@@ -530,9 +530,16 @@
                     sourceSelect.disabled = false;
                 }
             } else if (activeSheet === 'PaddyIssues') {
-                toolbarContainer.style.display = 'flex';
-                field1.innerHTML = `<label class="block text-[10px] font-bold text-slate-500 mb-0.5">ISSUING REGION</label><select id="entry-source-dest" required class="w-full px-3 py-1.5 rounded border border-slate-300 text-xs bg-slate-100 font-medium"${currentRegion !== 'HEAD_OFFICE' ? ' disabled' : ''}>${regOpts}</select>`;
+                let isHubOrHO = currentRegion === 'HEAD_OFFICE' || (currentRegion && hubRegions.includes(currentRegion.toUpperCase()));
+                if (currentRegion !== 'HEAD_OFFICE' && !isHubOrHO) {
+                    toolbarContainer.style.display = 'none';
+                } else {
+                    toolbarContainer.style.display = 'flex';
+                }
+
+                field1.innerHTML = `<label class="block text-[10px] font-bold text-slate-500 mb-0.5">ISSUING REGION (HUB)</label><select id="entry-source-dest" required class="w-full px-3 py-1.5 rounded border border-slate-300 text-xs ${currentRegion !== 'HEAD_OFFICE' ? 'bg-slate-100 font-bold' : 'bg-white'}"${currentRegion !== 'HEAD_OFFICE' ? ' disabled' : ''}>${hubRegions.map(h => `<option value="${h}">${h} (Hub)</option>`).join('')}</select>`;
                 field2.innerHTML = `<label class="block text-[10px] font-bold text-slate-500 mb-0.5">RECEIVING MILL</label><select id="entry-extra" required class="w-full px-3 py-1.5 rounded border border-slate-300 text-xs bg-white">${millOpts}</select>`;
+                
                 if(currentRegion !== 'HEAD_OFFICE') {
                     document.getElementById('entry-source-dest').value = currentRegion;
                     document.getElementById('entry-source-dest').onmousedown = function(e) {
@@ -805,7 +812,7 @@
 
                 if (currentRegion !== 'HEAD_OFFICE') {
                     if (!hubRegions.includes(currentRegion.toUpperCase())) {
-                        alert("Access Denied: Only designated Hub regions (" + hubRegions.join(", ") + ") are authorized to make entries in this tab.");
+                        alert("Access Denied: Only Hub regions (" + hubRegions.join(", ") + ") are able to make entries in this sheet. Please select a Hub region.");
                         return;
                     }
                     if (destination.toUpperCase() !== currentRegion.toUpperCase()) {
@@ -836,6 +843,18 @@
                 source = field1Val; 
                 destination = field2Val; 
                 entity = source + " -> " + destination;
+
+                if (currentRegion !== 'HEAD_OFFICE') {
+                    if (!hubRegions.includes(currentRegion.toUpperCase())) {
+                        alert("Access Denied: Only Hub regions (" + hubRegions.join(", ") + ") are able to make entries in this sheet. Please select a Hub region.");
+                        return;
+                    }
+                    if (source.toUpperCase() !== currentRegion.toUpperCase()) {
+                        alert("Permission Error: Your active region (" + currentRegion + ") is not authorized to make entries on behalf of issuing region '" + source + "'.");
+                        return;
+                    }
+                }
+
                 let m = mills.find(x => x.name === destination);
                 if (m) allotment = m.paddyAllotment || 500;
             } else if (activeSheet === 'ADS_Issues') {
@@ -912,6 +931,23 @@
         }
 
         function renderActiveGrid() {
+            let noticeBanner = document.getElementById('non-hub-notice-banner');
+            if (!noticeBanner) {
+                noticeBanner = document.createElement('div');
+                noticeBanner.id = 'non-hub-notice-banner';
+                noticeBanner.className = 'bg-amber-50 border border-amber-300 text-amber-900 px-4 py-3 rounded-xl text-xs font-semibold flex items-center justify-between shrink-0 mb-3';
+                let workspaceContainer = document.getElementById('portal-workspace-container');
+                workspaceContainer.insertBefore(noticeBanner, workspaceContainer.firstChild);
+            }
+
+            let isHubOrHO = currentRegion === 'HEAD_OFFICE' || hubRegions.includes(currentRegion.toUpperCase());
+            if ((activeSheet === 'MillReceipts' || activeSheet === 'RegionIssues' || activeSheet === 'PaddyIssues') && !isHubOrHO) {
+                noticeBanner.style.display = 'flex';
+                noticeBanner.innerHTML = `<span class="flex items-center"><i class="fa-solid fa-triangle-exclamation text-amber-600 mr-2 text-sm"></i> Notice: Only Hub regions (<strong>` + hubRegions.join(", ") + `</strong>) are able to make entries in this sheet. Your current region is view-only here.</span>`;
+            } else {
+                noticeBanner.style.display = 'none';
+            }
+
             if (!currentRegion) return;
             let thead = document.getElementById('grid-table-head');
             let tbody = document.getElementById('grid-table-body');
@@ -919,6 +955,13 @@
             let toolbarContainer = document.getElementById('toolbar-container');
             if (activeSheet === 'MillReceipts') {
                 let isHubOrHO = currentRegion === 'HEAD_OFFICE' || hubRegions.includes(currentRegion.toUpperCase());
+                if (!isHubOrHO) {
+                    toolbarContainer.style.display = 'none';
+                } else {
+                    toolbarContainer.style.display = 'flex';
+                }
+            } else if ((activeSheet === 'MillReceipts' || activeSheet === 'PaddyIssues') && currentRegion !== 'HEAD_OFFICE') {
+                let isHubOrHO = hubRegions.includes(currentRegion.toUpperCase());
                 if (!isHubOrHO) {
                     toolbarContainer.style.display = 'none';
                 } else {

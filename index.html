@@ -653,7 +653,7 @@
                 resetForm();
                 fetch(SCRIPT_URL, { method: 'POST', body: JSON.stringify({ action: "updateRecord", type: activeSheet, id: editId, date, entity, allotment, qty, source, destination }) })
                 .then(() => {
-                    alert("Entry successfully updated!");
+                    // alert("Entry successfully updated!");
                     fetchAllData();
                 });
             } else {
@@ -661,7 +661,7 @@
                 db[activeSheet].push(record);
                 fetch(SCRIPT_URL, { method: 'POST', body: JSON.stringify({ action: "saveRecord", ...record }) })
                 .then(() => {
-                    alert("Entry successfully added!");
+                    // alert("Entry successfully added!");
                     fetchAllData();
                 });
             }
@@ -706,7 +706,7 @@
                 db[activeSheet] = db[activeSheet].filter(x => x.id != id);
                 fetch(SCRIPT_URL, { method: 'POST', body: JSON.stringify({ action: "deleteRecord", type: activeSheet, id }) })
                 .then(() => {
-                    alert("Entry successfully deleted!");
+                    // alert("Entry successfully deleted!");
                     fetchAllData();
                 });
                 renderActiveGrid();

@@ -32,7 +32,7 @@
             </div>
             <div>
                 <h1 class="font-bold text-slate-800 text-base leading-tight">TNCSC - Rs.30/- Rice & Paddy Master Sheet</h1>
-                <p class="text-[11px] text-slate-500">Live Ledger & Consolidated Reports Please Regions Any Doubt Call 9865487644, Manikandan,Supdt  </p>
+                <p class="text-[11px] text-slate-500">Please contact any doubts Manikandan, Supdt, 9865487644 Live Ledger & Consolidated Reports</p>
             </div>
         </div>
 
@@ -291,31 +291,42 @@
 
         function formatDateToDDMMYYYY(dateInput) {
             if (!dateInput) return "";
-            let clean = dateInput.split('T')[0];
-            let parts = clean.split('-');
+            let str = String(dateInput);
+            if (str.includes('T') || str.includes('Z')) {
+                let d = new Date(str);
+                if (!isNaN(d.getTime())) {
+                    let day = String(d.getDate()).padStart(2, '0');
+                    let month = String(d.getMonth() + 1).padStart(2, '0');
+                    let year = d.getFullYear();
+                    return `${day}-${month}-${year}`;
+                }
+            }
+            let parts = str.split('T')[0].split('-');
             if (parts.length === 3) {
-                if (parts[0].length === 4) return `${parts[2]}-${parts[1]}-${parts[0]}`; 
-                return clean; 
+                if (parts[0].length === 4) return `${parts[2]}-${parts[1]}-${parts[0]}`;
+                if (parts[2].length === 4) return `${parts[0]}-${parts[1]}-${parts[2]}`;
             }
-            let d = new Date(dateInput);
-            if (!isNaN(d.getTime())) {
-                let day = String(d.getDate()).padStart(2, '0');
-                let month = String(d.getMonth() + 1).padStart(2, '0');
-                let year = d.getFullYear();
-                return `${day}-${month}-${year}`;
-            }
-            return dateInput;
+            return str;
         }
 
         function formatDateToYYYYMMDD(dateInput) {
             if (!dateInput) return "";
-            let clean = dateInput.split('T')[0];
-            let parts = clean.split('-');
-            if (parts.length === 3) {
-                if (parts[0].length === 2) return `${parts[2]}-${parts[1]}-${parts[0]}`; 
-                return clean; 
+            let str = String(dateInput);
+            if (str.includes('T') || str.includes('Z')) {
+                let d = new Date(str);
+                if (!isNaN(d.getTime())) {
+                    let year = d.getFullYear();
+                    let month = String(d.getMonth() + 1).padStart(2, '0');
+                    let day = String(d.getDate()).padStart(2, '0');
+                    return `${year}-${month}-${day}`;
+                }
             }
-            return clean;
+            let parts = str.split('T')[0].split('-');
+            if (parts.length === 3) {
+                if (parts[0].length === 4) return `${parts[0]}-${parts[1]}-${parts[2]}`;
+                if (parts[2].length === 4) return `${parts[2]}-${parts[1]}-${parts[0]}`;
+            }
+            return str;
         }
 
         window.onload = () => {

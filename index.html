@@ -395,6 +395,20 @@
                 guardPrompt.classList.add('hidden');
                 workspaceContainer.classList.remove('hidden');
 
+                
+                let isHubOrHO = currentRegion === 'HEAD_OFFICE' || hubRegions.includes(currentRegion.toUpperCase());
+                let tabMill = document.getElementById('tab-MillReceipts');
+                let tabRegion = document.getElementById('tab-RegionIssues');
+                let tabPaddy = document.getElementById('tab-PaddyIssues');
+
+                if (tabMill) tabMill.style.display = isHubOrHO ? 'flex' : 'none';
+                if (tabRegion) tabRegion.style.display = isHubOrHO ? 'flex' : 'none';
+                if (tabPaddy) tabPaddy.style.display = isHubOrHO ? 'flex' : 'none';
+
+                if (!isHubOrHO && (activeSheet === 'MillReceipts' || activeSheet === 'RegionIssues' || activeSheet === 'PaddyIssues')) {
+                    switchSheet('ADS_Issues');
+                }
+
                 let masterTab = document.getElementById('tab-MasterAllotment');
                 if (currentRegion === 'HEAD_OFFICE') {
                     masterTab.classList.remove('hidden');

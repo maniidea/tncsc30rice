@@ -32,7 +32,7 @@
             </div>
             <div>
                 <h1 class="font-bold text-slate-800 text-base leading-tight">TNCSC - Rs.30/- Rice & Paddy Master Sheet</h1>
-                <p class="text-[11px] text-slate-500">Please contact any doubts Manikandan, Supdt, 9865487644 Live Ledger & Consolidated Reports</p>
+                <p class="text-[11px] text-slate-500">Google Sheets Style Live Ledger & Consolidated Reports</p>
             </div>
         </div>
 
@@ -532,9 +532,9 @@
                             db.RegionsMaster.forEach(row => {
                                 let rId = row[0];
                                 let rName = row[1];
-                                let genAllot = parseFloat(row[2]) || 100.000;
-                                let adsAllot = parseFloat(row[3]) || 50.000;
-                                let coopAllot = parseFloat(row[4]) || 50.000;
+                                let genAllot = parseFloat(row[2]) ?? 100.000;
+                                let adsAllot = parseFloat(row[3]) ?? 50.000;
+                                let coopAllot = parseFloat(row[4]) ?? 50.000;
                                 regions.push(rName);
                                 regionAllotments[rName] = { id: rId, general: genAllot, ads: adsAllot, coop: coopAllot };
                             });
@@ -681,10 +681,10 @@
                 if (m) allotment = m.paddyAllotment || 500;
             } else if (activeSheet === 'ADS_Issues') {
                 entity = field1Val;
-                allotment = regionAllotments[entity]?.ads || 50.000;
+                allotment = regionAllotments[entity]?.ads ?? 50.000;
             } else if (activeSheet === 'Coop_Issues') {
                 entity = field1Val;
-                allotment = regionAllotments[entity]?.coop || 50.000;
+                allotment = regionAllotments[entity]?.coop ?? 50.000;
             }
 
             if(editId) {
@@ -1061,7 +1061,7 @@
                 let filterDateFormatted = filterDate ? formatDateToDDMMYYYY(filterDate) : formatDateToDDMMYYYY(new Date());
 
                 regions.forEach((r, idx) => {
-                    let allotment = regionAllotments[r]?.general || 100.000;
+                    let allotment = regionAllotments[r]?.general ?? 100.000;
                     let onDayQty = 0;
                     let uptoDayQty = 0;
 
@@ -1345,7 +1345,7 @@
             let filterDateFormatted = filterDate ? formatDateToDDMMYYYY(filterDate) : formatDateToDDMMYYYY(new Date());
 
             regions.forEach((r, idx) => {
-                let allotment = regionAllotments[r]?.general || 100.000;
+                let allotment = regionAllotments[r]?.general ?? 100.000;
                 let onDayQty = 0, uptoDayQty = 0;
                 db.RegionIssues.forEach(item => {
                     if ((item.destination || "").toUpperCase() === r.toUpperCase()) {

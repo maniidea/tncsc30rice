@@ -7,221 +7,489 @@
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- FontAwesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-
+
+awesome/6.4.0/css/all.min.css">
     <!-- SheetJS for Excel Export -->
-    <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+    <script 
+
+src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        gsheet: { 50: '#f6f8fc', 100: '#e8f0fe', 600: '#1a73e8', 700: '#1557b0', green: '#107c41' }
+                        gsheet: { 50: '#f6f8fc', 100: '#e8f0fe', 600: '#1a73e8', 700: 
+
+'#1557b0', green: '#107c41' }
                     }
                 }
             }
         }
     </script>
 </head>
-<body class="h-full font-sans antialiased text-slate-800 flex flex-col overflow-hidden">
+<body class="h-full font-sans antialiased text-slate-800 flex flex-col overflow-
+
+hidden">
 
     <!-- Top Spreadsheet Header Bar -->
-    <header class="bg-white border-b border-slate-300 px-6 py-3 flex flex-col sm:flex-row justify-between items-center z-30 shadow-xs gap-3">
+    <header class="bg-white border-b border-slate-300 px-6 py-3 flex flex-col 
+
+sm:flex-row justify-between items-center z-30 shadow-xs gap-3">
         <div class="flex items-center space-x-3">
             <div class="bg-emerald-700 text-white p-2 rounded-lg shadow-xs text-lg">
                 <i class="fa-solid fa-file-excel"></i>
             </div>
             <div>
-                <h1 class="font-bold text-slate-800 text-base leading-tight">TNCSC - Rs.30/- Rice & Paddy Master Sheet</h1>
-                <p class="text-[11px] text-slate-500">Pls contact any doubt Manikandan, Supdt 9865487644 Live Ledger & Consolidated Reports</p>
+                <h1 class="font-bold text-slate-800 text-base leading-tight">TNCSC - 
+
+Rs.30/- Rice & Paddy Master Sheet</h1>
+                <p class="text-[11px] text-slate-500">Pls contact any doubt 
+
+Manikandan, Supdt 9865487644 Live Ledger & Consolidated Reports</p>
             </div>
         </div>
 
         <div class="flex items-center space-x-3 flex-wrap">
-            <div class="flex items-center bg-emerald-50 px-3 py-1.5 rounded-lg border border-emerald-300">
-                <label class="text-xs font-bold text-emerald-800 mr-2"><i class="fa-solid fa-location-dot text-emerald-700 mr-1"></i> SELECT REGION FIRST:</label>
-                <select id="global-region-select" onchange="changeGlobalRegion(this.value)" class="bg-white text-slate-800 px-2.5 py-1 rounded border border-emerald-400 text-xs focus:ring-2 focus:ring-emerald-600 focus:outline-none font-bold">
+            <div class="flex items-center bg-emerald-50 px-3 py-1.5 rounded-lg border 
+
+border-emerald-300">
+                <label class="text-xs font-bold text-emerald-800 mr-2"><i class="fa-
+
+solid fa-location-dot text-emerald-700 mr-1"></i> SELECT REGION FIRST:</label>
+                <select id="global-region-select" onchange="changeGlobalRegion
+
+(this.value)" class="bg-white text-slate-800 px-2.5 py-1 rounded border border-
+
+emerald-400 text-xs focus:ring-2 focus:ring-emerald-600 focus:outline-none font-bold">
                     <option value="">-- Choose Your Region --</option>
-                    <option value="HEAD_OFFICE">Head Office (Full Access / Master Control)</option>
+                    <option value="HEAD_OFFICE">Head Office (Full Access / Master 
+
+Control)</option>
                 </select>
             </div>
-            <a href="https://docs.google.com/spreadsheets/d/12eGvjLdGlDA_GpNKkrJjRzbxcBnwayOWmRSrnmCazpE/edit" target="_blank" class="text-xs bg-emerald-700 text-white hover:bg-emerald-800 px-3.5 py-2 rounded-lg font-semibold transition inline-flex items-center shadow-xs">
+            <a 
+
+href="https://docs.google.com/spreadsheets/d/12eGvjLdGlDA_GpNKkrJjRzbxcBnwayOWmRSrnmCa
+
+zpE/edit" target="_blank" class="text-xs bg-emerald-700 text-white hover:bg-emerald-
+
+800 px-3.5 py-2 rounded-lg font-semibold transition inline-flex items-center shadow-
+
+xs">
                 <i class="fa-solid fa-cloud-arrow-up mr-1.5"></i> Open in Google Drive
             </a>
         </div>
     </header>
 
     <!-- Spreadsheet Sheet Tabs Bar -->
-    <nav class="bg-slate-200 border-b border-slate-300 px-4 flex space-x-1 overflow-visible shrink-0 select-none hidden relative z-20" id="sheet-tabs-container">
+    <nav class="bg-slate-200 border-b border-slate-300 px-4 flex space-x-1 overflow-
+
+visible shrink-0 select-none hidden relative z-20" id="sheet-tabs-container">
         <!-- Transaction Entry Tabs -->
-        <button onclick="switchSheet('MillReceipts')" id="tab-MillReceipts" class="sheet-tab px-4 py-2.5 text-xs font-bold text-slate-700 bg-white border-t-2 border-emerald-700 rounded-t-lg transition flex items-center space-x-2 shadow-xs">
-            <i class="fa-solid fa-table text-emerald-700"></i><span>1. Receipts Rice Millwise</span>
+        <button onclick="switchSheet('MillReceipts')" id="tab-MillReceipts" 
+
+class="sheet-tab px-4 py-2.5 text-xs font-bold text-slate-700 bg-white border-t-2 
+
+border-emerald-700 rounded-t-lg transition flex items-center space-x-2 shadow-xs">
+            <i class="fa-solid fa-table text-emerald-700"></i><span>1. Receipts Rice 
+
+Millwise</span>
         </button>
-        <button onclick="switchSheet('RegionIssues')" id="tab-RegionIssues" class="sheet-tab px-4 py-2.5 text-xs font-semibold text-slate-600 hover:bg-slate-300/60 rounded-t-lg transition flex items-center space-x-2">
-            <i class="fa-solid fa-table text-slate-500"></i><span>2. Issues Rice to Regions (Hubs)</span>
+        <button onclick="switchSheet('RegionIssues')" id="tab-RegionIssues" 
+
+class="sheet-tab px-4 py-2.5 text-xs font-semibold text-slate-600 hover:bg-slate-
+
+300/60 rounded-t-lg transition flex items-center space-x-2">
+            <i class="fa-solid fa-table text-slate-500"></i><span>2. Issues Rice to 
+
+Regions (Hubs)</span>
         </button>
-        <button onclick="switchSheet('PaddyIssues')" id="tab-PaddyIssues" class="sheet-tab px-4 py-2.5 text-xs font-semibold text-slate-600 hover:bg-slate-300/60 rounded-t-lg transition flex items-center space-x-2">
-            <i class="fa-solid fa-table text-slate-500"></i><span>3. Issued Paddy to Mill Wise</span>
+        <button onclick="switchSheet('PaddyIssues')" id="tab-PaddyIssues" 
+
+class="sheet-tab px-4 py-2.5 text-xs font-semibold text-slate-600 hover:bg-slate-
+
+300/60 rounded-t-lg transition flex items-center space-x-2">
+            <i class="fa-solid fa-table text-slate-500"></i><span>3. Issued Paddy to 
+
+Mill Wise</span>
         </button>
-        <button onclick="switchSheet('ADS_Issues')" id="tab-ADS_Issues" class="sheet-tab px-4 py-2.5 text-xs font-semibold text-slate-600 hover:bg-slate-300/60 rounded-t-lg transition flex items-center space-x-2">
-            <i class="fa-solid fa-table text-slate-500"></i><span>4. Issues Godown to ADS</span>
+        <button onclick="switchSheet('ADS_Issues')" id="tab-ADS_Issues" class="sheet-
+
+tab px-4 py-2.5 text-xs font-semibold text-slate-600 hover:bg-slate-300/60 rounded-t-
+
+lg transition flex items-center space-x-2">
+            <i class="fa-solid fa-table text-slate-500"></i><span>4. Issues Godown to 
+
+ADS</span>
         </button>
-        <button onclick="switchSheet('Coop_Issues')" id="tab-Coop_Issues" class="sheet-tab px-4 py-2.5 text-xs font-semibold text-slate-600 hover:bg-slate-300/60 rounded-t-lg transition flex items-center space-x-2">
-            <i class="fa-solid fa-table text-slate-500"></i><span>5. Issues Godown to Co-operative</span>
+        <button onclick="switchSheet('Coop_Issues')" id="tab-Coop_Issues" 
+
+class="sheet-tab px-4 py-2.5 text-xs font-semibold text-slate-600 hover:bg-slate-
+
+300/60 rounded-t-lg transition flex items-center space-x-2">
+            <i class="fa-solid fa-table text-slate-500"></i><span>5. Issues Godown to 
+
+Co-operative</span>
         </button>
 
         <!-- Unified Reports Click-to-Toggle Dropdown -->
         <div class="relative inline-block text-left" id="reports-dropdown-wrapper">
-            <button type="button" onclick="toggleReportsDropdown(event)" id="tab-ReportsDropdown" class="sheet-tab px-4 py-2.5 text-xs font-bold text-blue-900 bg-blue-50 border-t-2 border-blue-600 rounded-t-lg transition flex items-center space-x-2 shadow-xs cursor-pointer">
-                <i class="fa-solid fa-chart-pie text-blue-600"></i><span>📊 Master Reports Hub <i class="fa-solid fa-caret-down ml-1"></i></span>
+            <button type="button" onclick="toggleReportsDropdown(event)" id="tab-
+
+ReportsDropdown" class="sheet-tab px-4 py-2.5 text-xs font-bold text-blue-900 bg-
+
+blue-50 border-t-2 border-blue-600 rounded-t-lg transition flex items-center space-x-2 
+
+shadow-xs cursor-pointer">
+                <i class="fa-solid fa-chart-pie text-blue-600"></i><span>📊 Master 
+
+Reports Hub <i class="fa-solid fa-caret-down ml-1"></i></span>
             </button>
-            <div id="reports-dropdown-menu" class="hidden absolute left-0 mt-0.5 w-72 rounded-lg bg-white shadow-2xl ring-1 ring-black ring-opacity-5 divide-y divide-slate-100 z-50">
+            <div id="reports-dropdown-menu" class="hidden absolute left-0 mt-0.5 w-72 
+
+rounded-lg bg-white shadow-2xl ring-1 ring-black ring-opacity-5 divide-y divide-
+
+slate-100 z-50">
                 <div class="py-1">
-                    <button onclick="selectReportTab('ConsolidatedReport')" class="w-full text-left px-4 py-2.5 text-xs font-semibold text-slate-700 hover:bg-blue-50 hover:text-blue-700 flex items-center space-x-3 transition">
-                        <i class="fa-solid fa-chart-bar text-blue-600 w-4 text-center"></i><span>6. Consolidated Reports</span>
+                    <button onclick="selectReportTab('ConsolidatedReport')" class="w-
+
+full text-left px-4 py-2.5 text-xs font-semibold text-slate-700 hover:bg-blue-50 
+
+hover:text-blue-700 flex items-center space-x-3 transition">
+                        <i class="fa-solid fa-chart-bar text-blue-600 w-4 text-
+
+center"></i><span>6. Consolidated Reports</span>
                     </button>
-                    <button onclick="selectReportTab('ConsolidatedReport2')" class="w-full text-left px-4 py-2.5 text-xs font-semibold text-slate-700 hover:bg-indigo-50 hover:text-indigo-700 flex items-center space-x-3 transition">
-                        <i class="fa-solid fa-chart-line text-indigo-600 w-4 text-center"></i><span>7. Hub Rice Issued Report</span>
+                    <button onclick="selectReportTab('ConsolidatedReport2')" 
+
+class="w-full text-left px-4 py-2.5 text-xs font-semibold text-slate-700 hover:bg-
+
+indigo-50 hover:text-indigo-700 flex items-center space-x-3 transition">
+                        <i class="fa-solid fa-chart-line text-indigo-600 w-4 text-
+
+center"></i><span>7. Hub Rice Issued Report</span>
                     </button>
-                    <button onclick="selectReportTab('ConsolidatedReport3')" class="w-full text-left px-4 py-2.5 text-xs font-semibold text-slate-700 hover:bg-teal-50 hover:text-teal-700 flex items-center space-x-3 transition">
-                        <i class="fa-solid fa-chart-area text-teal-600 w-4 text-center"></i><span>8. Rice Received Region</span>
+                    <button onclick="selectReportTab('ConsolidatedReport3')" 
+
+class="w-full text-left px-4 py-2.5 text-xs font-semibold text-slate-700 hover:bg-
+
+teal-50 hover:text-teal-700 flex items-center space-x-3 transition">
+                        <i class="fa-solid fa-chart-area text-teal-600 w-4 text-
+
+center"></i><span>8. Rice Received Region</span>
                     </button>
-                    <button onclick="selectReportTab('MillersRiceReport')" class="w-full text-left px-4 py-2.5 text-xs font-semibold text-slate-700 hover:bg-amber-50 hover:text-amber-700 flex items-center space-x-3 transition">
-                        <i class="fa-solid fa-warehouse text-amber-600 w-4 text-center"></i><span>9. Millers Rice Receipt Report</span>
+                    <button onclick="selectReportTab('MillersRiceReport')" class="w-
+
+full text-left px-4 py-2.5 text-xs font-semibold text-slate-700 hover:bg-amber-50 
+
+hover:text-amber-700 flex items-center space-x-3 transition">
+                        <i class="fa-solid fa-warehouse text-amber-600 w-4 text-
+
+center"></i><span>9. Millers Rice Receipt Report</span>
                     </button>
-                    <button onclick="selectReportTab('MillersPaddyReport')" class="w-full text-left px-4 py-2.5 text-xs font-semibold text-slate-700 hover:bg-purple-50 hover:text-purple-700 flex items-center space-x-3 transition">
-                        <i class="fa-solid fa-wheat-awn text-purple-600 w-4 text-center"></i><span>10. Millers Paddy Issue Report</span>
+                    <button onclick="selectReportTab('MillersPaddyReport')" class="w-
+
+full text-left px-4 py-2.5 text-xs font-semibold text-slate-700 hover:bg-purple-50 
+
+hover:text-purple-700 flex items-center space-x-3 transition">
+                        <i class="fa-solid fa-wheat-awn text-purple-600 w-4 text-
+
+center"></i><span>10. Millers Paddy Issue Report</span>
                     </button>
                 </div>
             </div>
         </div>
 
         <!-- HO Master Control Tab -->
-        <button onclick="switchSheet('MasterAllotment')" id="tab-MasterAllotment" class="sheet-tab hidden px-4 py-2.5 text-xs font-semibold text-amber-800 hover:bg-amber-100 rounded-t-lg transition flex items-center space-x-2 bg-amber-50 border-t-2 border-amber-600">
-            <i class="fa-solid fa-gear text-amber-700"></i><span>HO Master Allotments</span>
+        <button onclick="switchSheet('MasterAllotment')" id="tab-MasterAllotment" 
+
+class="sheet-tab hidden px-4 py-2.5 text-xs font-semibold text-amber-800 hover:bg-
+
+amber-100 rounded-t-lg transition flex items-center space-x-2 bg-amber-50 border-t-2 
+
+border-amber-600">
+            <i class="fa-solid fa-gear text-amber-700"></i><span>HO Master 
+
+Allotments</span>
         </button>
     </nav>
 
     <!-- Main Spreadsheet Grid Workspace -->
-    <main class="flex-1 flex flex-col p-4 max-w-[1400px] w-full mx-auto overflow-hidden gap-4">
+    <main class="flex-1 flex flex-col p-4 max-w-[1400px] w-full mx-auto overflow-
+
+hidden gap-4">
 
         <!-- Initial Region Selection Guard Prompt -->
-        <div id="region-guard-prompt" class="flex-1 flex flex-col items-center justify-center bg-white border-2 border-dashed border-emerald-400 rounded-2xl p-10 shadow-sm text-center">
-            <div class="bg-emerald-100 text-emerald-800 p-4 rounded-full text-3xl mb-4">
+        <div id="region-guard-prompt" class="flex-1 flex flex-col items-center 
+
+justify-center bg-white border-2 border-dashed border-emerald-400 rounded-2xl p-10 
+
+shadow-sm text-center">
+            <div class="bg-emerald-100 text-emerald-800 p-4 rounded-full text-3xl mb-
+
+4">
                 <i class="fa-solid fa-hand-point-up animate-bounce"></i>
             </div>
-            <h2 class="text-xl font-bold text-slate-800 mb-2">Please Select Your Region First</h2>
-            <p class="text-sm text-slate-500 max-w-md mb-6">To access the master sheets, ledger, and entry forms, please choose your specific Region from the dropdown box located at the top right header.</p>
+            <h2 class="text-xl font-bold text-slate-800 mb-2">Please Select Your 
+
+Region First</h2>
+            <p class="text-sm text-slate-500 max-w-md mb-6">To access the master 
+
+sheets, ledger, and entry forms, please choose your specific Region from the dropdown 
+
+box located at the top right header.</p>
         </div>
 
         <!-- Portal Workspace Container -->
-        <div id="portal-workspace-container" class="flex-1 flex flex-col overflow-hidden gap-4 hidden">
+        <div id="portal-workspace-container" class="flex-1 flex flex-col overflow-
+
+hidden gap-4 hidden">
             <!-- Action & Entry Toolbar -->
-            <div id="toolbar-container" class="bg-white p-3.5 rounded-xl border border-slate-300 shadow-xs flex flex-col lg:flex-row justify-between items-center gap-3 shrink-0">
-                <form id="active-entry-form" onsubmit="handleFormSubmit(event)" class="flex flex-wrap items-center gap-2.5 w-full lg:w-auto flex-1">
+            <div id="toolbar-container" class="bg-white p-3.5 rounded-xl border 
+
+border-slate-300 shadow-xs flex flex-col lg:flex-row justify-between items-center 
+
+gap-3 shrink-0">
+                <form id="active-entry-form" onsubmit="handleFormSubmit(event)" 
+
+class="flex flex-wrap items-center gap-2.5 w-full lg:w-auto flex-1">
                     <input type="hidden" id="edit-record-id">
                     <div class="flex flex-col">
-                        <label class="text-[10px] font-bold text-slate-500 mb-0.5">DATE (DD-MM-YYYY)</label>
-                        <input type="date" id="entry-date" required class="px-3 py-1.5 rounded border border-slate-300 text-xs bg-slate-50 font-medium cursor-pointer">
+                        <label class="text-[10px] font-bold text-slate-500 mb-
+
+0.5">DATE (DD-MM-YYYY)</label>
+                        <input type="date" id="entry-date" required class="px-3 py-1.5 
+
+rounded border border-slate-300 text-xs bg-slate-50 font-medium cursor-pointer">
                     </div>
                     
                     <div id="dynamic-field-container-1" class="flex-1 min-w-[220px]">
-                        <label class="block text-[10px] font-bold text-slate-500 mb-0.5">SOURCE HULLING MILL</label>
-                        <select id="entry-source-dest" required class="w-full px-3 py-1.5 rounded border border-slate-300 text-xs bg-white font-medium"></select>
+                        <label class="block text-[10px] font-bold text-slate-500 mb-
+
+0.5">SOURCE HULLING MILL</label>
+                        <select id="entry-source-dest" required class="w-full px-3 
+
+py-1.5 rounded border border-slate-300 text-xs bg-white font-medium"></select>
                     </div>
 
                     <div id="dynamic-field-container-2" class="flex-1 min-w-[220px]">
-                        <label class="block text-[10px] font-bold text-slate-500 mb-0.5">DESTINATION REGION</label>
-                        <select id="entry-extra" required class="w-full px-3 py-1.5 rounded border border-slate-300 text-xs bg-white font-medium"></select>
+                        <label class="block text-[10px] font-bold text-slate-500 mb-
+
+0.5">DESTINATION REGION</label>
+                        <select id="entry-extra" required class="w-full px-3 py-1.5 
+
+rounded border border-slate-300 text-xs bg-white font-medium"></select>
                     </div>
 
                     <div class="w-28">
-                        <label class="block text-[10px] font-bold text-slate-500 mb-0.5">ONTHE DAY QUANTITY</label>
-                        <input type="number" step="0.001" id="entry-qty" required placeholder="Qty (MT)" class="w-full px-3 py-1.5 rounded border border-slate-300 text-xs font-mono">
+                        <label class="block text-[10px] font-bold text-slate-500 mb-
+
+0.5">ONTHE DAY QUANTITY</label>
+                        <input type="number" step="0.001" id="entry-qty" required 
+
+placeholder="Qty (MT)" class="w-full px-3 py-1.5 rounded border border-slate-300 
+
+text-xs font-mono">
                     </div>
 
                     <div class="flex items-end gap-1.5 mt-4 lg:mt-0">
-                        <button type="submit" id="btn-submit-record" class="bg-emerald-700 hover:bg-emerald-800 text-white px-4 py-1.5 rounded font-semibold text-xs shadow-xs transition">
+                        <button type="submit" id="btn-submit-record" class="bg-
+
+emerald-700 hover:bg-emerald-800 text-white px-4 py-1.5 rounded font-semibold text-xs 
+
+shadow-xs transition">
                             <i class="fa-solid fa-plus mr-1"></i> Add Entry
                         </button>
-                        <button type="button" onclick="resetForm()" class="bg-slate-200 hover:bg-slate-300 text-slate-700 px-3 py-1.5 rounded font-semibold text-xs transition">Cancel</button>
+                        <button type="button" onclick="resetForm()" class="bg-slate-
+
+200 hover:bg-slate-300 text-slate-700 px-3 py-1.5 rounded font-semibold text-xs 
+
+transition">Cancel</button>
                     </div>
                 </form>
 
-                <div class="flex items-center space-x-2 shrink-0" id="filter-export-group">
+                <div class="flex items-center space-x-2 shrink-0" id="filter-export-
+
+group">
                     <span class="text-xs text-slate-500 font-medium">Filter:</span>
-                    <input type="date" id="filter-from-date" class="px-2 py-1 rounded border border-slate-300 text-xs cursor-pointer" onchange="renderActiveGrid()">
+                    <input type="date" id="filter-from-date" class="px-2 py-1 rounded 
+
+border border-slate-300 text-xs cursor-pointer" onchange="renderActiveGrid()">
                     <span class="text-xs text-slate-400">-</span>
-                    <input type="date" id="filter-to-date" class="px-2 py-1 rounded border border-slate-300 text-xs cursor-pointer" onchange="renderActiveGrid()">
-                    <button onclick="exportCurrentSheetExcel()" class="bg-slate-800 hover:bg-slate-900 text-white px-3 py-1.5 rounded font-semibold text-xs transition inline-flex items-center">
+                    <input type="date" id="filter-to-date" class="px-2 py-1 rounded 
+
+border border-slate-300 text-xs cursor-pointer" onchange="renderActiveGrid()">
+                    <button onclick="exportCurrentSheetExcel()" class="bg-slate-800 
+
+hover:bg-slate-900 text-white px-3 py-1.5 rounded font-semibold text-xs transition 
+
+inline-flex items-center">
                         <i class="fa-solid fa-download mr-1"></i> Export Excel
                     </button>
                 </div>
             </div>
 
             <!-- Master Control Action Bar -->
-            <div id="master-toolbar" class="hidden bg-amber-50 p-3.5 rounded-xl border border-amber-300 shadow-xs flex flex-col md:flex-row justify-between items-center gap-3 shrink-0">
+            <div id="master-toolbar" class="hidden bg-amber-50 p-3.5 rounded-xl border 
+
+border-amber-300 shadow-xs flex flex-col md:flex-row justify-between items-center 
+
+gap-3 shrink-0">
                 <div class="flex items-center space-x-2 flex-wrap w-full md:w-auto">
-                    <span class="text-xs font-bold text-amber-900 mr-2"><i class="fa-solid fa-warehouse text-amber-700 mr-1"></i> Add New Miller:</span>
-                    <input type="text" id="new-mill-name" placeholder="Enter Miller Name..." class="px-2.5 py-1 rounded border border-amber-300 text-xs bg-white font-medium min-w-[220px]">
-                    <input type="number" step="0.001" id="new-mill-rice" placeholder="Rice Allot (MT)" class="px-2.5 py-1 rounded border border-amber-300 text-xs bg-white font-mono w-28">
-                    <input type="number" step="0.001" id="new-mill-paddy" placeholder="Paddy Allot (MT)" class="px-2.5 py-1 rounded border border-amber-300 text-xs bg-white font-mono w-28">
-                    <button type="button" onclick="addNewMiller()" class="bg-emerald-700 hover:bg-emerald-800 text-white px-3 py-1.5 rounded font-semibold text-xs transition inline-flex items-center shadow-xs">
+                    <span class="text-xs font-bold text-amber-900 mr-2"><i class="fa-
+
+solid fa-warehouse text-amber-700 mr-1"></i> Add New Miller:</span>
+                    <input type="text" id="new-mill-name" placeholder="Enter Miller 
+
+Name..." class="px-2.5 py-1 rounded border border-amber-300 text-xs bg-white font-
+
+medium min-w-[220px]">
+                    <input type="number" step="0.001" id="new-mill-rice" 
+
+placeholder="Rice Allot (MT)" class="px-2.5 py-1 rounded border border-amber-300 
+
+text-xs bg-white font-mono w-28">
+                    <input type="number" step="0.001" id="new-mill-paddy" 
+
+placeholder="Paddy Allot (MT)" class="px-2.5 py-1 rounded border border-amber-300 
+
+text-xs bg-white font-mono w-28">
+                    <button type="button" onclick="addNewMiller()" class="bg-emerald-
+
+700 hover:bg-emerald-800 text-white px-3 py-1.5 rounded font-semibold text-xs 
+
+transition inline-flex items-center shadow-xs">
                         <i class="fa-solid fa-plus mr-1"></i> Add Miller
                     </button>
                 </div>
-                <button onclick="saveAllMasterAllotments()" class="bg-amber-700 hover:bg-amber-800 text-white px-5 py-2 rounded-lg font-bold text-xs shadow transition inline-flex items-center shrink-0">
+                <button onclick="saveAllMasterAllotments()" class="bg-amber-700 
+
+hover:bg-amber-800 text-white px-5 py-2 rounded-lg font-bold text-xs shadow transition 
+
+inline-flex items-center shrink-0">
                     <i class="fa-solid fa-floppy-disk mr-1.5"></i> Save Allotments
                 </button>
             </div>
 
             <!-- Report Toolbars -->
-            <div id="report-toolbar" class="hidden bg-blue-50 p-3.5 rounded-xl border border-blue-300 shadow-xs flex justify-between items-center shrink-0">
-                <span class="text-xs font-bold text-blue-900"><i class="fa-solid fa-chart-bar mr-1.5 text-blue-700"></i> Summary of total quantities issued from source and received at destination across all regions.</span>
-                <button onclick="exportConsolidatedExcel()" class="bg-blue-700 hover:bg-blue-800 text-white px-4 py-2 rounded-lg font-bold text-xs shadow transition inline-flex items-center">
-                    <i class="fa-solid fa-download mr-1.5"></i> Export Consolidated Report
+            <div id="report-toolbar" class="hidden bg-blue-50 p-3.5 rounded-xl border 
+
+border-blue-300 shadow-xs flex justify-between items-center shrink-0">
+                <span class="text-xs font-bold text-blue-900"><i class="fa-solid fa-
+
+chart-bar mr-1.5 text-blue-700"></i> Summary of total quantities issued from source 
+
+and received at destination across all regions.</span>
+                <button onclick="exportConsolidatedExcel()" class="bg-blue-700 
+
+hover:bg-blue-800 text-white px-4 py-2 rounded-lg font-bold text-xs shadow transition 
+
+inline-flex items-center">
+                    <i class="fa-solid fa-download mr-1.5"></i> Export Consolidated 
+
+Report
                 </button>
             </div>
 
-            <div id="report2-toolbar" class="hidden bg-indigo-50 p-3.5 rounded-xl border border-indigo-300 shadow-xs flex justify-between items-center shrink-0">
-                <span class="text-xs font-bold text-indigo-900"><i class="fa-solid fa-chart-line mr-1.5 text-indigo-700"></i> Hub Rice Issued Report performance with Allotment, Issues, Balance, and %.</span>
-                <button onclick="exportConsolidatedExcel2()" class="bg-indigo-700 hover:bg-indigo-800 text-white px-4 py-2 rounded-lg font-bold text-xs shadow transition inline-flex items-center">
-                    <i class="fa-solid fa-download mr-1.5"></i> Export Hub Report Excel
+            <div id="report2-toolbar" class="hidden bg-indigo-50 p-3.5 rounded-xl 
+
+border border-indigo-300 shadow-xs flex justify-between items-center shrink-0">
+                <span class="text-xs font-bold text-indigo-900"><i class="fa-solid 
+
+fa-chart-line mr-1.5 text-indigo-700"></i> Hub Rice Issued Report performance with 
+
+Allotment, Issues, Balance, and %.</span>
+                <button onclick="exportConsolidatedExcel2()" class="bg-indigo-700 
+
+hover:bg-indigo-800 text-white px-4 py-2 rounded-lg font-bold text-xs shadow 
+
+transition inline-flex items-center">
+                    <i class="fa-solid fa-download mr-1.5"></i> Export Hub Report 
+
+Excel
                 </button>
             </div>
 
-            <div id="report3-toolbar" class="hidden bg-teal-50 p-3.5 rounded-xl border border-teal-300 shadow-xs flex justify-between items-center shrink-0">
-                <span class="text-xs font-bold text-teal-900"><i class="fa-solid fa-chart-area mr-1.5 text-teal-700"></i> Rice Received Region performance report with Allotment, Receipts, Balance, and %.</span>
-                <button onclick="exportConsolidatedExcel3()" class="bg-teal-700 hover:bg-teal-800 text-white px-4 py-2 rounded-lg font-bold text-xs shadow transition inline-flex items-center">
+            <div id="report3-toolbar" class="hidden bg-teal-50 p-3.5 rounded-xl border 
+
+border-teal-300 shadow-xs flex justify-between items-center shrink-0">
+                <span class="text-xs font-bold text-teal-900"><i class="fa-solid fa-
+
+chart-area mr-1.5 text-teal-700"></i> Rice Received Region performance report with 
+
+Allotment, Receipts, Balance, and %.</span>
+                <button onclick="exportConsolidatedExcel3()" class="bg-teal-700 
+
+hover:bg-teal-800 text-white px-4 py-2 rounded-lg font-bold text-xs shadow transition 
+
+inline-flex items-center">
                     <i class="fa-solid fa-download mr-1.5"></i> Export Report 3 Excel
                 </button>
             </div>
 
-            <div id="report4-toolbar" class="hidden bg-amber-50 p-3.5 rounded-xl border border-amber-300 shadow-xs flex justify-between items-center shrink-0">
-                <span class="text-xs font-bold text-amber-900"><i class="fa-solid fa-warehouse mr-1.5 text-amber-700"></i> Millers Rice Receipt & Issue Report with Rice Allotment, On-Day, Upto-Day Receipts, Balance, and %.</span>
-                <button onclick="exportMillersRiceExcel()" class="bg-amber-700 hover:bg-amber-800 text-white px-4 py-2 rounded-lg font-bold text-xs shadow transition inline-flex items-center">
-                    <i class="fa-solid fa-download mr-1.5"></i> Export Millers Rice Report
+            <div id="report4-toolbar" class="hidden bg-amber-50 p-3.5 rounded-xl 
+
+border border-amber-300 shadow-xs flex justify-between items-center shrink-0">
+                <span class="text-xs font-bold text-amber-900"><i class="fa-solid fa-
+
+warehouse mr-1.5 text-amber-700"></i> Millers Rice Receipt & Issue Report with Rice 
+
+Allotment, On-Day, Upto-Day Receipts, Balance, and %.</span>
+                <button onclick="exportMillersRiceExcel()" class="bg-amber-700 
+
+hover:bg-amber-800 text-white px-4 py-2 rounded-lg font-bold text-xs shadow transition 
+
+inline-flex items-center">
+                    <i class="fa-solid fa-download mr-1.5"></i> Export Millers Rice 
+
+Report
                 </button>
             </div>
 
-            <div id="report5-toolbar" class="hidden bg-purple-50 p-3.5 rounded-xl border border-purple-300 shadow-xs flex justify-between items-center shrink-0">
-                <span class="text-xs font-bold text-purple-900"><i class="fa-solid fa-wheat-awn mr-1.5 text-purple-700"></i> Millers Paddy Issue Report with HO Paddy Allotment, On-Day Issues, Upto-Day Issues, Balance, and %.</span>
-                <button onclick="exportMillersPaddyExcel()" class="bg-purple-700 hover:bg-purple-800 text-white px-4 py-2 rounded-lg font-bold text-xs shadow transition inline-flex items-center">
-                    <i class="fa-solid fa-download mr-1.5"></i> Export Millers Paddy Report
+            <div id="report5-toolbar" class="hidden bg-purple-50 p-3.5 rounded-xl 
+
+border border-purple-300 shadow-xs flex justify-between items-center shrink-0">
+                <span class="text-xs font-bold text-purple-900"><i class="fa-solid 
+
+fa-wheat-awn mr-1.5 text-purple-700"></i> Millers Paddy Issue Report with HO Paddy 
+
+Allotment, On-Day Issues, Upto-Day Issues, Balance, and %.</span>
+                <button onclick="exportMillersPaddyExcel()" class="bg-purple-700 
+
+hover:bg-purple-800 text-white px-4 py-2 rounded-lg font-bold text-xs shadow 
+
+transition inline-flex items-center">
+                    <i class="fa-solid fa-download mr-1.5"></i> Export Millers Paddy 
+
+Report
                 </button>
             </div>
 
             <!-- Google Sheets Style Table Grid Container -->
-            <div class="flex-1 bg-white border border-slate-300 rounded-xl shadow-xs overflow-hidden flex flex-col">
+            <div class="flex-1 bg-white border border-slate-300 rounded-xl shadow-xs 
+
+overflow-hidden flex flex-col">
                 <div class="overflow-auto flex-1">
-                    <table class="w-full border-collapse text-left text-xs select-text">
-                        <thead id="grid-table-head" class="bg-slate-100 text-slate-700 font-bold sticky top-0 z-10 border-b border-slate-300"></thead>
-                        <tbody id="grid-table-body" class="divide-y divide-slate-200 font-normal"></tbody>
+                    <table class="w-full border-collapse text-left text-xs select-
+
+text">
+                        <thead id="grid-table-head" class="bg-slate-100 text-slate-700 
+
+font-bold sticky top-0 z-10 border-b border-slate-300"></thead>
+                        <tbody id="grid-table-body" class="divide-y divide-slate-200 
+
+font-normal"></tbody>
                     </table>
                 </div>
                 <!-- Bottom Spreadsheet Status Bar -->
-                <div class="bg-slate-50 border-t border-slate-300 px-4 py-2 text-xs text-slate-500 flex justify-between items-center shrink-0">
+                <div class="bg-slate-50 border-t border-slate-300 px-4 py-2 text-xs 
+
+text-slate-500 flex justify-between items-center shrink-0">
                     <span id="grid-row-count">0 rows loaded</span>
-                    <span id="grid-total-summary" class="font-mono font-semibold text-slate-700">Ready</span>
+                    <span id="grid-total-summary" class="font-mono font-semibold 
+
+text-slate-700">Ready</span>
                 </div>
             </div>
         </div>
@@ -230,13 +498,19 @@
 
     <!-- Spreadsheet Script Logic -->
     <script>
-        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxYWN7i_hU_TYEwS88j4y7Dls6xHbinLgDKXYF3iVeX4hTLNs161GvmLq-p3LtKFCtR/exec";
+        const SCRIPT_URL = 
+
+"https://script.google.com/macros/s/AKfycbxYWN7i_hU_TYEwS88j4y7Dls6xHbinLgDKXYF3iVeX4h
+
+TLNs161GvmLq-p3LtKFCtR/exec";
 
         let currentRegion = localStorage.getItem('tncsc_active_region') || "";
         let activeSheet = "MillReceipts";
 
         let regions = [
-            "ARIYALUR", "CHENGALPATTU", "CHENNAI NORTH", "CHENNAI SOUTH", "COIMBATORE", 
+            "ARIYALUR", "CHENGALPATTU", "CHENNAI NORTH", "CHENNAI SOUTH", 
+
+"COIMBATORE", 
             "CUDDALORE", "DHARMAPURI", "DINDIGUL", "ERODE", "KALLAKURICHI", 
             "KANCHIPURAM", "KANNIYAKUMARI", "KARUR", "KRISHNAGIRI", "MADURAI", 
             "MAYILADUDHURAI", "NAGAPATTINAM", "NAMAKKAL", "NILGIRIS", "PERAMBALUR", 
@@ -246,7 +520,9 @@
             "TUTICORIN", "VELLORE", "VILUPPURAM", "VIRUDHUNAGAR"
         ];
 
-        let hubRegions = ["THANJAVUR", "VIRUDHUNAGAR", "KRISHNAGIRI", "THIRUVALLORE", "TIRUPPUR"];
+        let hubRegions = ["THANJAVUR", "VIRUDHUNAGAR", "KRISHNAGIRI", "THIRUVALLORE", 
+
+"TIRUPPUR"];
         let hubAllotmentIds = {};
         let hubAllotments = {
             "THANJAVUR": 1020,
@@ -257,14 +533,28 @@
         };
 
         let regionAllotments = {};
-        regions.forEach(r => regionAllotments[r] = { id: '', general: 100.000, ads: 50.000, coop: 50.000 });
+        regions.forEach(r => regionAllotments[r] = { id: '', general: 100.000, ads: 
+
+50.000, coop: 50.000 });
 
         let mills = [
-            { id: "M1", name: "M/s. Annamalaiyar MRM, Thanjavur", capacity: "1000", allotment: 1020, paddyAllotment: 1500 },
-            { id: "M2", name: "M/s. Sree Manickarathinam Hi-Tech MRM, Rajapalayam, Virudhunagar", capacity: "500", allotment: 2245, paddyAllotment: 2500 },
-            { id: "M3", name: "M/s. Manchunatha MRM, Krishnagiri", capacity: "500", allotment: 2245, paddyAllotment: 2500 },
-            { id: "M4", name: "M/s. Integrated Rice & General Mills Private Ltd, Gummidipoondi, Thiruvallur", capacity: "6400", allotment: 2245, paddyAllotment: 3000 },
-            { id: "M5", name: "M/s. Sri Balaji MRM, Tiruppur", capacity: "3000", allotment: 2245, paddyAllotment: 2500 }
+            { id: "M1", name: "M/s. Annamalaiyar MRM, Thanjavur", capacity: "1000", 
+
+allotment: 1020, paddyAllotment: 1500 },
+            { id: "M2", name: "M/s. Sree Manickarathinam Hi-Tech MRM, Rajapalayam, 
+
+Virudhunagar", capacity: "500", allotment: 2245, paddyAllotment: 2500 },
+            { id: "M3", name: "M/s. Manchunatha MRM, Krishnagiri", capacity: "500", 
+
+allotment: 2245, paddyAllotment: 2500 },
+            { id: "M4", name: "M/s. Integrated Rice & General Mills Private Ltd, 
+
+Gummidipoondi, Thiruvallur", capacity: "6400", allotment: 2245, paddyAllotment: 3000 
+
+},
+            { id: "M5", name: "M/s. Sri Balaji MRM, Tiruppur", capacity: "3000", 
+
+allotment: 2245, paddyAllotment: 2500 }
         ];
 
         let db = {
@@ -311,8 +601,12 @@
             }
             let parts = str.split('T')[0].split('-');
             if (parts.length === 3) {
-                if (parts[0].length === 4) return `${parts[2]}-${parts[1]}-${parts[0]}`;
-                if (parts[2].length === 4) return `${parts[0]}-${parts[1]}-${parts[2]}`;
+                if (parts[0].length === 4) return `${parts[2]}-${parts[1]}-${parts
+
+[0]}`;
+                if (parts[2].length === 4) return `${parts[0]}-${parts[1]}-${parts
+
+[2]}`;
             }
             return str;
         }
@@ -331,8 +625,12 @@
             }
             let parts = str.split('T')[0].split('-');
             if (parts.length === 3) {
-                if (parts[0].length === 4) return `${parts[0]}-${parts[1]}-${parts[2]}`;
-                if (parts[2].length === 4) return `${parts[2]}-${parts[1]}-${parts[0]}`;
+                if (parts[0].length === 4) return `${parts[0]}-${parts[1]}-${parts
+
+[2]}`;
+                if (parts[2].length === 4) return `${parts[2]}-${parts[1]}-${parts
+
+[0]}`;
             }
             return str;
         }
@@ -350,7 +648,11 @@
         function populateGlobalRegionDropdown() {
             let selectEl = document.getElementById('global-region-select');
             if(!selectEl) return;
-            selectEl.innerHTML = `<option value="">-- Choose Your Region --</option><option value="HEAD_OFFICE">Head Office (Full Access / Master Control)</option>`;
+            selectEl.innerHTML = `<option value="">-- Choose Your Region --
+
+</option><option value="HEAD_OFFICE">Head Office (Full Access / Master Control)
+
+</option>`;
             regions.forEach(r => {
                 let opt = document.createElement('option');
                 opt.value = r;
@@ -365,7 +667,9 @@
         function checkRegionSelectionState() {
             let tabsContainer = document.getElementById('sheet-tabs-container');
             let guardPrompt = document.getElementById('region-guard-prompt');
-            let workspaceContainer = document.getElementById('portal-workspace-container');
+            let workspaceContainer = document.getElementById('portal-workspace-
+
+container');
 
             if (!currentRegion) {
                 tabsContainer.classList.add('hidden');
@@ -381,7 +685,9 @@
                     masterTab.classList.remove('hidden');
                 } else {
                     masterTab.classList.add('hidden');
-                    if (activeSheet === 'MasterAllotment') switchSheet('MillReceipts');
+                    if (activeSheet === 'MasterAllotment') switchSheet
+
+('MillReceipts');
                 }
             }
         }
@@ -389,7 +695,9 @@
         function changeGlobalRegion(val) {
             let oldRegion = localStorage.getItem('tncsc_active_region') || "";
             if (oldRegion && oldRegion !== val && val !== "") {
-                if (!confirm("Are you sure you want to change your region from " + oldRegion + " to " + val + "?")) {
+                if (!confirm("Are you sure you want to change your region from " + 
+
+oldRegion + " to " + val + "?")) {
                     document.getElementById('global-region-select').value = oldRegion;
                     return;
                 }
@@ -407,25 +715,47 @@
             activeSheet = sheetName;
             document.querySelectorAll('.sheet-tab').forEach(btn => {
                 if (btn.id === 'tab-ReportsDropdown') return;
-                btn.className = "sheet-tab px-4 py-2.5 text-xs font-semibold text-slate-600 hover:bg-slate-300/60 rounded-t-lg transition flex items-center space-x-2";
+                btn.className = "sheet-tab px-4 py-2.5 text-xs font-semibold text-
+
+slate-600 hover:bg-slate-300/60 rounded-t-lg transition flex items-center space-x-2";
                 let icon = btn.querySelector('i');
-                if(icon && !btn.id.includes('MasterAllotment') && !btn.id.includes('Millers')) icon.className = "fa-solid fa-table text-slate-500";
+                if(icon && !btn.id.includes('MasterAllotment') && !btn.id.includes
+
+('Millers')) icon.className = "fa-solid fa-table text-slate-500";
             });
             
             let activeBtn = document.getElementById('tab-' + sheetName);
             let reportsDropdownBtn = document.getElementById('tab-ReportsDropdown');
 
             if (sheetName.includes('Consolidated') || sheetName.includes('Millers')) {
-                reportsDropdownBtn.className = "sheet-tab px-4 py-2.5 text-xs font-bold text-blue-900 bg-blue-100 border-t-2 border-blue-600 rounded-t-lg transition flex items-center space-x-2 shadow-xs";
+                reportsDropdownBtn.className = "sheet-tab px-4 py-2.5 text-xs font-
+
+bold text-blue-900 bg-blue-100 border-t-2 border-blue-600 rounded-t-lg transition flex 
+
+items-center space-x-2 shadow-xs";
             } else {
-                reportsDropdownBtn.className = "sheet-tab px-4 py-2.5 text-xs font-bold text-blue-900 bg-blue-50 border-t-2 border-blue-600 rounded-t-lg transition flex items-center space-x-2 shadow-xs";
+                reportsDropdownBtn.className = "sheet-tab px-4 py-2.5 text-xs font-
+
+bold text-blue-900 bg-blue-50 border-t-2 border-blue-600 rounded-t-lg transition flex 
+
+items-center space-x-2 shadow-xs";
                 if(activeBtn) {
                     if (sheetName === 'MasterAllotment') {
-                        activeBtn.className = "sheet-tab px-4 py-2.5 text-xs font-bold text-amber-800 bg-amber-50 border-t-2 border-amber-600 rounded-t-lg transition flex items-center space-x-2 shadow-xs";
+                        activeBtn.className = "sheet-tab px-4 py-2.5 text-xs font-bold 
+
+text-amber-800 bg-amber-50 border-t-2 border-amber-600 rounded-t-lg transition flex 
+
+items-center space-x-2 shadow-xs";
                     } else {
-                        activeBtn.className = "sheet-tab px-4 py-2.5 text-xs font-bold text-slate-700 bg-white border-t-2 border-emerald-700 rounded-t-lg transition flex items-center space-x-2 shadow-xs";
+                        activeBtn.className = "sheet-tab px-4 py-2.5 text-xs font-bold 
+
+text-slate-700 bg-white border-t-2 border-emerald-700 rounded-t-lg transition flex 
+
+items-center space-x-2 shadow-xs";
                         let icon = activeBtn.querySelector('i');
-                        if(icon) icon.className = "fa-solid fa-table text-emerald-700";
+                        if(icon) icon.className = "fa-solid fa-table text-emerald-
+
+700";
                     }
                 }
             }
@@ -472,14 +802,36 @@
             let field2 = document.getElementById('dynamic-field-container-2');
             if(!field1 || !field2) return;
             
-            let millOpts = mills.map(m => `<option value="${m.name}">${m.name}</option>`).join('');
-            let regOpts = regions.map(r => `<option value="${r}">${r}</option>`).join('');
-            let hubOpts = hubRegions.map(h => `<option value="${h}">${h} (Hub)</option>`).join('');
+            let millOpts = mills.map(m => `<option value="${m.name}">${m.name}
+
+</option>`).join('');
+            let regOpts = regions.map(r => `<option value="${r}">${r}</option>`).join
+
+('');
+            let hubOpts = hubRegions.map(h => `<option value="${h}">${h} (Hub)
+
+</option>`).join('');
 
             if (activeSheet === 'MillReceipts') {
-                field1.innerHTML = `<label class="block text-[10px] font-bold text-slate-500 mb-0.5">SOURCE HULLING MILL</label><select id="entry-source-dest" required class="w-full px-3 py-1.5 rounded border border-slate-300 text-xs bg-white font-medium">${millOpts}</select>`;
-                let isHub = currentRegion === 'HEAD_OFFICE' || (currentRegion && hubRegions.includes(currentRegion.toUpperCase()));
-                field2.innerHTML = `<label class="block text-[10px] font-bold text-slate-500 mb-0.5">DESTINATION REGION</label><select id="entry-extra" required class="w-full px-3 py-1.5 rounded border border-slate-300 text-xs ${currentRegion !== 'HEAD_OFFICE' ? 'bg-slate-100 font-bold' : 'bg-white'}"${currentRegion !== 'HEAD_OFFICE' ? ' disabled' : ''}>${regOpts}</select>`;
+                field1.innerHTML = `<label class="block text-[10px] font-bold text-
+
+slate-500 mb-0.5">SOURCE HULLING MILL</label><select id="entry-source-dest" required 
+
+class="w-full px-3 py-1.5 rounded border border-slate-300 text-xs bg-white font-
+
+medium">${millOpts}</select>`;
+                let isHub = currentRegion === 'HEAD_OFFICE' || (currentRegion && 
+
+hubRegions.includes(currentRegion.toUpperCase()));
+                field2.innerHTML = `<label class="block text-[10px] font-bold text-
+
+slate-500 mb-0.5">DESTINATION REGION</label><select id="entry-extra" required 
+
+class="w-full px-3 py-1.5 rounded border border-slate-300 text-xs ${currentRegion !== 
+
+'HEAD_OFFICE' ? 'bg-slate-100 font-bold' : 'bg-white'}"${currentRegion !== 
+
+'HEAD_OFFICE' ? ' disabled' : ''}>${regOpts}</select>`;
                 if(currentRegion !== 'HEAD_OFFICE') {
                     document.getElementById('entry-extra').value = currentRegion;
                     document.getElementById('entry-extra').onmousedown = function(e) {
@@ -488,11 +840,25 @@
                     };
                 }
             } else if (activeSheet === 'RegionIssues') {
-                field1.innerHTML = `<label class="block text-[10px] font-bold text-slate-500 mb-0.5">SOURCE REGION (HUB ONLY)</label><select id="entry-source-dest" required class="w-full px-3 py-1.5 rounded border border-slate-300 text-xs bg-indigo-50 font-bold">${hubOpts}</select>`;
-                field2.innerHTML = `<label class="block text-[10px] font-bold text-slate-500 mb-0.5">DESTINATION REGION</label><select id="entry-extra" required class="w-full px-3 py-1.5 rounded border border-slate-300 text-xs bg-white">${regOpts}</select>`;
+                field1.innerHTML = `<label class="block text-[10px] font-bold text-
+
+slate-500 mb-0.5">SOURCE REGION (HUB ONLY)</label><select id="entry-source-dest" 
+
+required class="w-full px-3 py-1.5 rounded border border-slate-300 text-xs bg-indigo-
+
+50 font-bold">${hubOpts}</select>`;
+                field2.innerHTML = `<label class="block text-[10px] font-bold text-
+
+slate-500 mb-0.5">DESTINATION REGION</label><select id="entry-extra" required 
+
+class="w-full px-3 py-1.5 rounded border border-slate-300 text-xs bg-white">
+
+${regOpts}</select>`;
                 
                 let sourceSelect = document.getElementById('entry-source-dest');
-                if(currentRegion !== 'HEAD_OFFICE' && hubRegions.includes(currentRegion.toUpperCase())) {
+                if(currentRegion !== 'HEAD_OFFICE' && hubRegions.includes
+
+(currentRegion.toUpperCase())) {
                     sourceSelect.value = currentRegion;
                     sourceSelect.disabled = true;
                     sourceSelect.onmousedown = function(e) {
@@ -503,22 +869,52 @@
                     sourceSelect.disabled = false;
                 }
             } else if (activeSheet === 'PaddyIssues') {
-                field1.innerHTML = `<label class="block text-[10px] font-bold text-slate-500 mb-0.5">ISSUING REGION</label><select id="entry-source-dest" required class="w-full px-3 py-1.5 rounded border border-slate-300 text-xs bg-slate-100 font-medium"${currentRegion !== 'HEAD_OFFICE' ? ' disabled' : ''}>${regOpts}</select>`;
-                field2.innerHTML = `<label class="block text-[10px] font-bold text-slate-500 mb-0.5">RECEIVING MILL</label><select id="entry-extra" required class="w-full px-3 py-1.5 rounded border border-slate-300 text-xs bg-white">${millOpts}</select>`;
+                field1.innerHTML = `<label class="block text-[10px] font-bold text-
+
+slate-500 mb-0.5">ISSUING REGION</label><select id="entry-source-dest" required 
+
+class="w-full px-3 py-1.5 rounded border border-slate-300 text-xs bg-slate-100 font-
+
+medium"${currentRegion !== 'HEAD_OFFICE' ? ' disabled' : ''}>${regOpts}</select>`;
+                field2.innerHTML = `<label class="block text-[10px] font-bold text-
+
+slate-500 mb-0.5">RECEIVING MILL</label><select id="entry-extra" required class="w-
+
+full px-3 py-1.5 rounded border border-slate-300 text-xs bg-white">${millOpts}
+
+</select>`;
                 if(currentRegion !== 'HEAD_OFFICE') {
-                    document.getElementById('entry-source-dest').value = currentRegion;
-                    document.getElementById('entry-source-dest').onmousedown = function(e) {
+                    document.getElementById('entry-source-dest').value = 
+
+currentRegion;
+                    document.getElementById('entry-source-dest').onmousedown = 
+
+function(e) {
                         e.preventDefault();
                         alert("To change your region, please use the top menu.");
                     };
                 }
-            } else if (activeSheet !== 'MasterAllotment' && !activeSheet.includes('Consolidated') && !activeSheet.includes('Millers')) {
-                let labelTitle = activeSheet === 'ADS_Issues' ? 'SELECT ADS DISTRICT' : 'SELECT CO-OP DISTRICT';
-                field1.innerHTML = `<label class="block text-[10px] font-bold text-slate-500 mb-0.5">${labelTitle}</label><select id="entry-source-dest" required class="w-full px-3 py-1.5 rounded border border-slate-300 text-xs bg-slate-100 font-medium"${currentRegion !== 'HEAD_OFFICE' ? ' disabled' : ''}>${regOpts}</select>`;
+            } else if (activeSheet !== 'MasterAllotment' && !activeSheet.includes
+
+('Consolidated') && !activeSheet.includes('Millers')) {
+                let labelTitle = activeSheet === 'ADS_Issues' ? 'SELECT ADS DISTRICT' 
+
+: 'SELECT CO-OP DISTRICT';
+                field1.innerHTML = `<label class="block text-[10px] font-bold text-
+
+slate-500 mb-0.5">${labelTitle}</label><select id="entry-source-dest" required 
+
+class="w-full px-3 py-1.5 rounded border border-slate-300 text-xs bg-slate-100 font-
+
+medium"${currentRegion !== 'HEAD_OFFICE' ? ' disabled' : ''}>${regOpts}</select>`;
                 field2.innerHTML = `<input type="hidden" id="entry-extra" value="">`;
                 if(currentRegion !== 'HEAD_OFFICE') {
-                    document.getElementById('entry-source-dest').value = currentRegion;
-                    document.getElementById('entry-source-dest').onmousedown = function(e) {
+                    document.getElementById('entry-source-dest').value = 
+
+currentRegion;
+                    document.getElementById('entry-source-dest').onmousedown = 
+
+function(e) {
                         e.preventDefault();
                         alert("To change your region, please use the top menu.");
                     };
@@ -530,7 +926,9 @@
             fetch(SCRIPT_URL + "?action=getData")
             .then(res => res.json())
             .then(data => {
-                ["MillReceipts", "RegionIssues", "PaddyIssues", "ADS_Issues", "Coop_Issues", "RegionsMaster", "HubMaster", "MillsMaster"].forEach(key => {
+                ["MillReceipts", "RegionIssues", "PaddyIssues", "ADS_Issues", 
+
+"Coop_Issues", "RegionsMaster", "HubMaster", "MillsMaster"].forEach(key => {
                     if(data[key]) {
                         if (key === "RegionsMaster" && data[key].length > 1) {
                             db.RegionsMaster = data[key].slice(1);
@@ -543,7 +941,9 @@
                                 let adsAllot = parseFloat(row[3]) ?? 50.000;
                                 let coopAllot = parseFloat(row[4]) ?? 50.000;
                                 regions.push(rName);
-                                regionAllotments[rName] = { id: rId, general: genAllot, ads: adsAllot, coop: coopAllot };
+                                regionAllotments[rName] = { id: rId, general: 
+
+genAllot, ads: adsAllot, coop: coopAllot };
                             });
                             populateGlobalRegionDropdown();
                             setupFormFields();
@@ -573,7 +973,11 @@
                             setupFormFields();
                         } else if (!key.includes("Master")) {
                             db[key] = data[key].slice(1).map(row => ({ 
-                                id: row[0], date: formatDateToDDMMYYYY(row[1]), entity: row[2], allotment: parseFloat(row[3])||0, qty: parseFloat(row[4])||0, source: row[5] || "", destination: row[6] || ""
+                                id: row[0], date: formatDateToDDMMYYYY(row[1]), 
+
+entity: row[2], allotment: parseFloat(row[3])||0, qty: parseFloat(row[4])||0, source: 
+
+row[5] || "", destination: row[6] || ""
                             }));
                         }
                     }
@@ -585,9 +989,13 @@
         function updateMasterAllotment(targetType, name, val, subType) {
             let numericVal = parseFloat(val) || 0;
             if (targetType === 'Region') {
-                if (regionAllotments[name]) regionAllotments[name].general = numericVal;
+                if (regionAllotments[name]) regionAllotments[name].general = 
+
+numericVal;
             } else if (targetType === 'Hub') {
-                if (hubAllotments[name] !== undefined) hubAllotments[name] = numericVal;
+                if (hubAllotments[name] !== undefined) hubAllotments[name] = 
+
+numericVal;
             } else if (targetType === 'ADS') {
                 if (regionAllotments[name]) regionAllotments[name].ads = numericVal;
             } else if (targetType === 'Coop') {
@@ -617,14 +1025,18 @@
                 return;
             }
 
-            let existing = mills.find(m => m.name.toLowerCase() === name.toLowerCase());
+            let existing = mills.find(m => m.name.toLowerCase() === name.toLowerCase
+
+());
             if (existing) {
                 alert("Miller with this name already exists!");
                 return;
             }
 
             let newId = 'MILL_' + Date.now();
-            let newMiller = { id: newId, name: name, capacity: "1000", allotment: riceAllot, paddyAllotment: paddyAllot };
+            let newMiller = { id: newId, name: name, capacity: "1000", allotment: 
+
+riceAllot, paddyAllotment: paddyAllot };
             mills.push(newMiller);
 
             nameInput.value = "";
@@ -637,7 +1049,11 @@
             // Immediately save to Google Sheets backend
             fetch(SCRIPT_URL, { 
                 method: 'POST', 
-                body: JSON.stringify({ action: "saveMasterMill", type: "MillsMaster", id: newId, name: newMiller.name, capacity: newMiller.capacity, allotment: newMiller.allotment, paddyAllotment: newMiller.paddyAllotment }) 
+                body: JSON.stringify({ action: "saveMasterMill", type: "MillsMaster", 
+
+id: newId, name: newMiller.name, capacity: newMiller.capacity, allotment: 
+
+newMiller.allotment, paddyAllotment: newMiller.paddyAllotment }) 
             })
             .then(res => res.json())
             .then(res => {
@@ -654,42 +1070,60 @@
             
             hubRegions.forEach(h => {
                 let hQty = hubAllotments[h];
-                let hId = hubAllotmentIds[h] || ('HUB_' + Date.now() + Math.floor(Math.random()*1000));
+                let hId = hubAllotmentIds[h] || ('HUB_' + Date.now() + Math.floor
+
+(Math.random()*1000));
                 hubAllotmentIds[h] = hId;
                 promises.push(
                     fetch(SCRIPT_URL, {
                         method: 'POST',
-                        body: JSON.stringify({ action: "saveMasterHub", type: "HubMaster", id: hId, name: h, allotment: hQty })
+                        body: JSON.stringify({ action: "saveMasterHub", type: 
+
+"HubMaster", id: hId, name: h, allotment: hQty })
                     })
                 );
             });
 
             regions.forEach(r => {
                 let data = regionAllotments[r];
-                let recordId = data.id || ('REG_' + Date.now() + Math.floor(Math.random()*1000));
+                let recordId = data.id || ('REG_' + Date.now() + Math.floor
+
+(Math.random()*1000));
                 data.id = recordId;
                 promises.push(
                     fetch(SCRIPT_URL, { 
                         method: 'POST', 
-                        body: JSON.stringify({ action: "saveMasterRegion", type: "RegionsMaster", id: recordId, name: r, gen_qty: data.general, ads_qty: data.ads, coop_qty: data.coop }) 
+                        body: JSON.stringify({ action: "saveMasterRegion", type: 
+
+"RegionsMaster", id: recordId, name: r, gen_qty: data.general, ads_qty: data.ads, 
+
+coop_qty: data.coop }) 
                     })
                 );
             });
 
             mills.forEach(m => {
-                let millId = m.id || ('MILL_' + Date.now() + Math.floor(Math.random()*1000));
+                let millId = m.id || ('MILL_' + Date.now() + Math.floor(Math.random()
+
+*1000));
                 m.id = millId;
                 promises.push(
                     fetch(SCRIPT_URL, { 
                         method: 'POST', 
-                        body: JSON.stringify({ action: "saveMasterMill", type: "MillsMaster", id: millId, name: m.name, capacity: m.capacity, allotment: m.allotment, paddyAllotment: m.paddyAllotment || 500 }) 
+                        body: JSON.stringify({ action: "saveMasterMill", type: 
+
+"MillsMaster", id: millId, name: m.name, capacity: m.capacity, allotment: m.allotment, 
+
+paddyAllotment: m.paddyAllotment || 500 }) 
                     })
                 );
             });
 
             Promise.all(promises)
             .then(() => {
-                alert("Master Allotments and Hub Allotments successfully saved to Google Sheets!");
+                alert("Master Allotments and Hub Allotments successfully saved to 
+
+Google Sheets!");
                 fetchAllData();
             })
             .catch(err => alert("Error saving allotments: " + err));
@@ -713,11 +1147,17 @@
 
                 if (currentRegion !== 'HEAD_OFFICE') {
                     if (!hubRegions.includes(currentRegion.toUpperCase())) {
-                        alert("Access Denied: Only designated Hub regions (" + hubRegions.join(", ") + ") are authorized to make entries in this tab.");
+                        alert("Access Denied: Only designated Hub regions (" + 
+
+hubRegions.join(", ") + ") are authorized to make entries in this tab.");
                         return;
                     }
                     if (destination.toUpperCase() !== currentRegion.toUpperCase()) {
-                        alert("Permission Error: Your active region (" + currentRegion + ") is not authorized to make entries on behalf of destination region '" + destination + "'.");
+                        alert("Permission Error: Your active region (" + currentRegion 
+
++ ") is not authorized to make entries on behalf of destination region '" + 
+
+destination + "'.");
                         return;
                     }
                 }
@@ -730,12 +1170,22 @@
                 entity = source + " -> " + destination;
                 
                 if (!hubRegions.includes(source.toUpperCase())) {
-                    alert("Access Denied: Only designated Hub regions (" + hubRegions.join(", ") + ") are authorized to make entries in the 'Issues Rice to Regions' tab.");
+                    alert("Access Denied: Only designated Hub regions (" + 
+
+hubRegions.join(", ") + ") are authorized to make entries in the 'Issues Rice to 
+
+Regions' tab.");
                     return;
                 }
 
-                if (currentRegion !== 'HEAD_OFFICE' && currentRegion.toUpperCase() !== source.toUpperCase()) {
-                    alert("Permission Error: Your active region (" + currentRegion + ") is not authorized to make issue entries on behalf of Hub region '" + source + "'.");
+                if (currentRegion !== 'HEAD_OFFICE' && currentRegion.toUpperCase() !== 
+
+source.toUpperCase()) {
+                    alert("Permission Error: Your active region (" + currentRegion + 
+
+") is not authorized to make issue entries on behalf of Hub region '" + source + 
+
+"'.");
                     return;
                 }
 
@@ -756,24 +1206,36 @@
 
             if(editId) {
                 let item = db[activeSheet].find(x => x.id == editId);
-                if(item) { item.date = date; item.entity = entity; item.allotment = allotment; item.qty = qty; item.source = source; item.destination = destination; }
+                if(item) { item.date = date; item.entity = entity; item.allotment = 
+
+allotment; item.qty = qty; item.source = source; item.destination = destination; }
                 resetForm();
-                fetch(SCRIPT_URL, { method: 'POST', body: JSON.stringify({ action: "updateRecord", type: activeSheet, id: editId, date, entity, allotment, qty, source, destination }) })
+                fetch(SCRIPT_URL, { method: 'POST', body: JSON.stringify({ action: 
+
+"updateRecord", type: activeSheet, id: editId, date, entity, allotment, qty, source, 
+
+destination }) })
                 .then(() => {
                     // alert("Entry successfully updated!");
                     fetchAllData();
                 });
             } else {
-                let record = { id: 'ID_' + Date.now(), type: activeSheet, date, entity, allotment, qty, source, destination };
+                let record = { id: 'ID_' + Date.now(), type: activeSheet, date, 
+
+entity, allotment, qty, source, destination };
                 db[activeSheet].push(record);
-                fetch(SCRIPT_URL, { method: 'POST', body: JSON.stringify({ action: "saveRecord", ...record }) })
+                fetch(SCRIPT_URL, { method: 'POST', body: JSON.stringify({ action: 
+
+"saveRecord", ...record }) })
                 .then(() => {
                     // alert("Entry successfully added!");
                     fetchAllData();
                 });
             }
             e.target.reset();
-            document.getElementById('entry-date').value = new Date().toISOString().split('T')[0];
+            document.getElementById('entry-date').value = new Date().toISOString
+
+().split('T')[0];
             setupFormFields();
             renderActiveGrid();
         }
@@ -782,36 +1244,56 @@
             let item = db[activeSheet].find(x => x.id == id);
             if(!item) return;
 
-            if (activeSheet === 'RegionIssues' && currentRegion !== 'HEAD_OFFICE' && currentRegion.toUpperCase() !== (item.source || "").toUpperCase()) {
-                alert("Permission Denied: You can only edit issue records originating from your own Hub region.");
+            if (activeSheet === 'RegionIssues' && currentRegion !== 'HEAD_OFFICE' && 
+
+currentRegion.toUpperCase() !== (item.source || "").toUpperCase()) {
+                alert("Permission Denied: You can only edit issue records originating 
+
+from your own Hub region.");
                 return;
             }
 
             document.getElementById('edit-record-id').value = item.id;
-            document.getElementById('entry-date').value = formatDateToYYYYMMDD(item.date);
+            document.getElementById('entry-date').value = formatDateToYYYYMMDD
+
+(item.date);
             document.getElementById('entry-qty').value = item.qty;
 
-            if (activeSheet === 'MillReceipts' || activeSheet === 'RegionIssues' || activeSheet === 'PaddyIssues') {
-                document.getElementById('entry-source-dest').value = item.source || "";
+            if (activeSheet === 'MillReceipts' || activeSheet === 'RegionIssues' || 
+
+activeSheet === 'PaddyIssues') {
+                document.getElementById('entry-source-dest').value = item.source || 
+
+"";
                 document.getElementById('entry-extra').value = item.destination || "";
             } else {
-                document.getElementById('entry-source-dest').value = item.entity || "";
+                document.getElementById('entry-source-dest').value = item.entity || 
+
+"";
             }
 
-            document.getElementById('btn-submit-record').innerHTML = '<i class="fa-solid fa-check mr-1"></i> Update';
+            document.getElementById('btn-submit-record').innerHTML = '<i class="fa-
+
+solid fa-check mr-1"></i> Update';
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
         function deleteRecord(id) {
             let item = db[activeSheet].find(x => x.id == id);
-            if (activeSheet === 'RegionIssues' && currentRegion !== 'HEAD_OFFICE' && currentRegion.toUpperCase() !== (item?.source || "").toUpperCase()) {
-                alert("Permission Denied: You can only delete issue records originating from your own Hub region.");
+            if (activeSheet === 'RegionIssues' && currentRegion !== 'HEAD_OFFICE' && 
+
+currentRegion.toUpperCase() !== (item?.source || "").toUpperCase()) {
+                alert("Permission Denied: You can only delete issue records 
+
+originating from your own Hub region.");
                 return;
             }
 
             if(confirm('Delete this row?')) {
                 db[activeSheet] = db[activeSheet].filter(x => x.id != id);
-                fetch(SCRIPT_URL, { method: 'POST', body: JSON.stringify({ action: "deleteRecord", type: activeSheet, id }) })
+                fetch(SCRIPT_URL, { method: 'POST', body: JSON.stringify({ action: 
+
+"deleteRecord", type: activeSheet, id }) })
                 .then(() => {
                     // alert("Entry successfully deleted!");
                     fetchAllData();
@@ -822,9 +1304,15 @@
 
         function resetForm() {
             document.getElementById('edit-record-id').value = '';
-            document.getElementById('btn-submit-record').innerHTML = '<i class="fa-solid fa-plus mr-1"></i> Add Entry';
-            document.getElementById('entry-date').value = new Date().toISOString().split('T')[0];
-            if(document.getElementById('entry-qty')) document.getElementById('entry-qty').value = '';
+            document.getElementById('btn-submit-record').innerHTML = '<i class="fa-
+
+solid fa-plus mr-1"></i> Add Entry';
+            document.getElementById('entry-date').value = new Date().toISOString
+
+().split('T')[0];
+            if(document.getElementById('entry-qty')) document.getElementById('entry-
+
+qty').value = '';
             setupFormFields();
         }
 
@@ -834,16 +1322,24 @@
             let tbody = document.getElementById('grid-table-body');
             
             let toolbarContainer = document.getElementById('toolbar-container');
-            if (activeSheet === 'RegionIssues' && currentRegion !== 'HEAD_OFFICE' && !hubRegions.includes(currentRegion.toUpperCase())) {
+            if (activeSheet === 'RegionIssues' && currentRegion !== 'HEAD_OFFICE' && 
+
+!hubRegions.includes(currentRegion.toUpperCase())) {
                 toolbarContainer.style.display = 'none';
-            } else if (activeSheet !== 'MasterAllotment' && !activeSheet.includes('Consolidated') && !activeSheet.includes('Millers')) {
+            } else if (activeSheet !== 'MasterAllotment' && !activeSheet.includes
+
+('Consolidated') && !activeSheet.includes('Millers')) {
                 toolbarContainer.style.display = 'flex';
             }
 
             if (activeSheet === 'MasterAllotment') {
                 thead.innerHTML = `<tr>
-                    <th class="p-3 border-r border-slate-300 w-16 text-center">S.No</th>
-                    <th class="p-3 border-r border-slate-300">Entity Name (Hub / Region / Mill)</th>
+                    <th class="p-3 border-r border-slate-300 w-16 text-
+
+center">S.No</th>
+                    <th class="p-3 border-r border-slate-300">Entity Name (Hub / 
+
+Region / Mill)</th>
                     <th class="p-3 border-r border-slate-300">Category</th>
                     <th class="p-3 text-right">Allotment (MT)</th>
                 </tr>`;
@@ -852,65 +1348,139 @@
                 let count = 1;
 
                 hubRegions.forEach(h => {
-                    let hAllot = hubAllotments[h] !== undefined ? hubAllotments[h] : 1020;
-                    html += `<tr class="hover:bg-slate-50 border-b border-slate-200 bg-indigo-50/40">
-                        <td class="p-3 border-r border-slate-200 text-center font-mono">${count++}</td>
-                        <td class="p-3 border-r border-slate-200 font-bold text-indigo-900">${h} (Issuing Hub)</td>
-                        <td class="p-3 border-r border-slate-200 text-indigo-700 text-xs">Hub Issuing Allotment Pool</td>
+                    let hAllot = hubAllotments[h] !== undefined ? hubAllotments[h] : 
+
+1020;
+                    html += `<tr class="hover:bg-slate-50 border-b border-slate-200 
+
+bg-indigo-50/40">
+                        <td class="p-3 border-r border-slate-200 text-center font-
+
+mono">${count++}</td>
+                        <td class="p-3 border-r border-slate-200 font-bold text-
+
+indigo-900">${h} (Issuing Hub)</td>
+                        <td class="p-3 border-r border-slate-200 text-indigo-700 
+
+text-xs">Hub Issuing Allotment Pool</td>
                         <td class="p-3 text-right font-mono">
-                            Allotment: <input type="number" step="0.001" value="${hAllot}" class="w-28 px-2 py-1 border rounded text-right font-mono text-xs font-bold text-indigo-900" onchange="updateMasterAllotment('Hub', '${h}', this.value)">
+                            Allotment: <input type="number" step="0.001" 
+
+value="${hAllot}" class="w-28 px-2 py-1 border rounded text-right font-mono text-xs 
+
+font-bold text-indigo-900" onchange="updateMasterAllotment('Hub', '${h}', 
+
+this.value)">
                         </td>
                     </tr>`;
                 });
 
                 regions.forEach(r => {
-                    let data = regionAllotments[r] || { general: 100, ads: 50, coop: 50 };
+                    let data = regionAllotments[r] || { general: 100, ads: 50, coop: 
+
+50 };
                     html += `<tr class="hover:bg-slate-50 border-b border-slate-200">
-                        <td class="p-3 border-r border-slate-200 text-center font-mono">${count++}</td>
-                        <td class="p-3 border-r border-slate-200 font-medium">${r}</td>
-                        <td class="p-3 border-r border-slate-200 text-slate-500 text-xs">Region General / ADS / Co-op</td>
+                        <td class="p-3 border-r border-slate-200 text-center font-
+
+mono">${count++}</td>
+                        <td class="p-3 border-r border-slate-200 font-medium">${r}
+
+</td>
+                        <td class="p-3 border-r border-slate-200 text-slate-500 text-
+
+xs">Region General / ADS / Co-op</td>
                         <td class="p-3 text-right font-mono">
-                            Gen: <input type="number" step="0.001" value="${data.general}" class="w-20 px-2 py-1 border rounded text-right font-mono text-xs mr-2" onchange="updateMasterAllotment('Region', '${r}', this.value)">
-                            ADS: <input type="number" step="0.001" value="${data.ads}" class="w-20 px-2 py-1 border rounded text-right font-mono text-xs mr-2" onchange="updateMasterAllotment('ADS', '${r}', this.value)">
-                            Coop: <input type="number" step="0.001" value="${data.coop}" class="w-20 px-2 py-1 border rounded text-right font-mono text-xs" onchange="updateMasterAllotment('Coop', '${r}', this.value)">
+                            Gen: <input type="number" step="0.001" 
+
+value="${data.general}" class="w-20 px-2 py-1 border rounded text-right font-mono 
+
+text-xs mr-2" onchange="updateMasterAllotment('Region', '${r}', this.value)">
+                            ADS: <input type="number" step="0.001" value="${data.ads}" 
+
+class="w-20 px-2 py-1 border rounded text-right font-mono text-xs mr-2" 
+
+onchange="updateMasterAllotment('ADS', '${r}', this.value)">
+                            Coop: <input type="number" step="0.001" 
+
+value="${data.coop}" class="w-20 px-2 py-1 border rounded text-right font-mono text-
+
+xs" onchange="updateMasterAllotment('Coop', '${r}', this.value)">
                         </td>
                     </tr>`;
                 });
 
                 mills.forEach(m => {
-                    let pAllot = m.paddyAllotment !== undefined ? m.paddyAllotment : 500;
-                    html += `<tr class="hover:bg-slate-50 border-b border-slate-200 bg-amber-50/40">
-                        <td class="p-3 border-r border-slate-200 text-center font-mono">${count++}</td>
-                        <td class="p-3 border-r border-slate-200 font-medium">${m.name}</td>
-                        <td class="p-3 border-r border-slate-200 text-amber-700 text-xs">Hulling Miller (Rice & Paddy)</td>
+                    let pAllot = m.paddyAllotment !== undefined ? m.paddyAllotment : 
+
+500;
+                    html += `<tr class="hover:bg-slate-50 border-b border-slate-200 
+
+bg-amber-50/40">
+                        <td class="p-3 border-r border-slate-200 text-center font-
+
+mono">${count++}</td>
+                        <td class="p-3 border-r border-slate-200 font-medium">
+
+${m.name}</td>
+                        <td class="p-3 border-r border-slate-200 text-amber-700 text-
+
+xs">Hulling Miller (Rice & Paddy)</td>
                         <td class="p-3 text-right font-mono">
-                            Rice Allot: <input type="number" step="0.001" value="${m.allotment}" class="w-20 px-2 py-1 border rounded text-right font-mono text-xs mr-2" onchange="updateMasterAllotment('Miller', '${m.name}', this.value, 'rice')">
-                            Paddy Allot: <input type="number" step="0.001" value="${pAllot}" class="w-20 px-2 py-1 border rounded text-right font-mono text-xs" onchange="updateMasterAllotment('Miller', '${m.name}', this.value, 'paddy')">
+                            Rice Allot: <input type="number" step="0.001" 
+
+value="${m.allotment}" class="w-20 px-2 py-1 border rounded text-right font-mono 
+
+text-xs mr-2" onchange="updateMasterAllotment('Miller', '${m.name}', this.value, 
+
+'rice')">
+                            Paddy Allot: <input type="number" step="0.001" 
+
+value="${pAllot}" class="w-20 px-2 py-1 border rounded text-right font-mono text-xs" 
+
+onchange="updateMasterAllotment('Miller', '${m.name}', this.value, 'paddy')">
                         </td>
                     </tr>`;
                 });
 
                 tbody.innerHTML = html;
-                document.getElementById('grid-row-count').innerText = `${count - 1} Master Entities Configured`;
-                document.getElementById('grid-total-summary').innerText = `HO Allotment Master View Active`;
+                document.getElementById('grid-row-count').innerText = `${count - 1} 
+
+Master Entities Configured`;
+                document.getElementById('grid-total-summary').innerText = `HO 
+
+Allotment Master View Active`;
                 return;
             }
 
             if (activeSheet === 'MillersRiceReport') {
                 thead.innerHTML = `<tr>
-                    <th class="p-3 border-r border-slate-300 w-16 text-center">S.No</th>
+                    <th class="p-3 border-r border-slate-300 w-16 text-
+
+center">S.No</th>
                     <th class="p-3 border-r border-slate-300">Hulling Mill Name</th>
-                    <th class="p-3 border-r border-slate-300 text-right">Rice Allotment (MT)</th>
-                    <th class="p-3 border-r border-slate-300 text-right">On-Day Receipts (MT)</th>
-                    <th class="p-3 border-r border-slate-300 text-right">Upto-Day Receipts (MT)</th>
-                    <th class="p-3 border-r border-slate-300 text-right">Balance (MT)</th>
+                    <th class="p-3 border-r border-slate-300 text-right">Rice 
+
+Allotment (MT)</th>
+                    <th class="p-3 border-r border-slate-300 text-right">On-Day 
+
+Receipts (MT)</th>
+                    <th class="p-3 border-r border-slate-300 text-right">Upto-Day 
+
+Receipts (MT)</th>
+                    <th class="p-3 border-r border-slate-300 text-right">Balance (MT)
+
+</th>
                     <th class="p-3 text-right">% of Receipts</th>
                 </tr>`;
 
                 let html = "";
                 let totalAllotSum = 0, totalOnDaySum = 0, totalUptoDaySum = 0;
-                let filterDate = document.getElementById('filter-to-date')?.value || "";
-                let filterDateFormatted = filterDate ? formatDateToDDMMYYYY(filterDate) : formatDateToDDMMYYYY(new Date());
+                let filterDate = document.getElementById('filter-to-date')?.value || 
+
+"";
+                let filterDateFormatted = filterDate ? formatDateToDDMMYYYY
+
+(filterDate) : formatDateToDDMMYYYY(new Date());
 
                 mills.forEach((m, idx) => {
                     let allotment = m.allotment || 350;
@@ -918,7 +1488,9 @@
                     let uptoDayQty = 0;
 
                     db.MillReceipts.forEach(item => {
-                        if ((item.source || "").toUpperCase() === (m.name || "").toUpperCase()) {
+                        if ((item.source || "").toUpperCase() === (m.name || 
+
+"").toUpperCase()) {
                             uptoDayQty += item.qty;
                             if (item.date === filterDateFormatted) {
                                 onDayQty += item.qty;
@@ -934,45 +1506,85 @@
                     totalUptoDaySum += uptoDayQty;
 
                     html += `<tr class="hover:bg-slate-50 border-b border-slate-200">
-                        <td class="p-3 border-r border-slate-200 text-center font-mono">${idx + 1}</td>
-                        <td class="p-3 border-r border-slate-200 font-medium text-slate-800">${m.name}</td>
-                        <td class="p-3 border-r border-slate-200 text-right font-mono">${allotment.toFixed(3)}</td>
-                        <td class="p-3 border-r border-slate-200 text-right font-mono text-blue-700">${onDayQty.toFixed(3)}</td>
-                        <td class="p-3 border-r border-slate-200 text-right font-mono text-amber-700 font-semibold">${uptoDayQty.toFixed(3)}</td>
-                        <td class="p-3 border-r border-slate-200 text-right font-mono ${balance < 0 ? 'text-red-600 font-bold' : 'text-slate-700'}">${balance.toFixed(3)}</td>
-                        <td class="p-3 text-right font-mono font-bold text-amber-700">${pct.toFixed(1)}%</td>
+                        <td class="p-3 border-r border-slate-200 text-center font-
+
+mono">${idx + 1}</td>
+                        <td class="p-3 border-r border-slate-200 font-medium text-
+
+slate-800">${m.name}</td>
+                        <td class="p-3 border-r border-slate-200 text-right font-
+
+mono">${allotment.toFixed(3)}</td>
+                        <td class="p-3 border-r border-slate-200 text-right font-mono 
+
+text-blue-700">${onDayQty.toFixed(3)}</td>
+                        <td class="p-3 border-r border-slate-200 text-right font-mono 
+
+text-amber-700 font-semibold">${uptoDayQty.toFixed(3)}</td>
+                        <td class="p-3 border-r border-slate-200 text-right font-mono 
+
+${balance < 0 ? 'text-red-600 font-bold' : 'text-slate-700'}">${balance.toFixed(3)}
+
+</td>
+                        <td class="p-3 text-right font-mono font-bold text-amber-
+
+700">${pct.toFixed(1)}%</td>
                     </tr>`;
                 });
 
                 tbody.innerHTML = html;
-                document.getElementById('grid-row-count').innerText = `${mills.length} Millers Listed`;
-                document.getElementById('grid-total-summary').innerText = `Total Rice Allotment: ${totalAllotSum.toFixed(3)} | Upto-Day Receipts: ${totalUptoDaySum.toFixed(3)}`;
+                document.getElementById('grid-row-count').innerText = `${mills.length} 
+
+Millers Listed`;
+                document.getElementById('grid-total-summary').innerText = `Total Rice 
+
+Allotment: ${totalAllotSum.toFixed(3)} | Upto-Day Receipts: ${totalUptoDaySum.toFixed
+
+(3)}`;
                 return;
             }
 
             if (activeSheet === 'MillersPaddyReport') {
                 thead.innerHTML = `<tr>
-                    <th class="p-3 border-r border-slate-300 w-16 text-center">S.No</th>
+                    <th class="p-3 border-r border-slate-300 w-16 text-
+
+center">S.No</th>
                     <th class="p-3 border-r border-slate-300">Hulling Mill Name</th>
-                    <th class="p-3 border-r border-slate-300 text-right">HO Paddy Allotment (MT)</th>
-                    <th class="p-3 border-r border-slate-300 text-right">On-Day Paddy Issues (MT)</th>
-                    <th class="p-3 border-r border-slate-300 text-right">Upto-Day Paddy Issues (MT)</th>
-                    <th class="p-3 border-r border-slate-300 text-right">Balance (MT)</th>
+                    <th class="p-3 border-r border-slate-300 text-right">HO Paddy 
+
+Allotment (MT)</th>
+                    <th class="p-3 border-r border-slate-300 text-right">On-Day Paddy 
+
+Issues (MT)</th>
+                    <th class="p-3 border-r border-slate-300 text-right">Upto-Day 
+
+Paddy Issues (MT)</th>
+                    <th class="p-3 border-r border-slate-300 text-right">Balance (MT)
+
+</th>
                     <th class="p-3 text-right">% of Issues</th>
                 </tr>`;
 
                 let html = "";
                 let totalAllotSum = 0, totalOnDaySum = 0, totalUptoDaySum = 0;
-                let filterDate = document.getElementById('filter-to-date')?.value || "";
-                let filterDateFormatted = filterDate ? formatDateToDDMMYYYY(filterDate) : formatDateToDDMMYYYY(new Date());
+                let filterDate = document.getElementById('filter-to-date')?.value || 
+
+"";
+                let filterDateFormatted = filterDate ? formatDateToDDMMYYYY
+
+(filterDate) : formatDateToDDMMYYYY(new Date());
 
                 mills.forEach((m, idx) => {
-                    let allotment = m.paddyAllotment !== undefined ? m.paddyAllotment : 500;
+                    let allotment = m.paddyAllotment !== undefined ? m.paddyAllotment 
+
+: 500;
                     let onDayQty = 0;
                     let uptoDayQty = 0;
 
                     db.PaddyIssues.forEach(item => {
-                        if ((item.destination || "").toUpperCase() === (m.name || "").toUpperCase()) {
+                        if ((item.destination || "").toUpperCase() === (m.name || 
+
+"").toUpperCase()) {
                             uptoDayQty += item.qty;
                             if (item.date === filterDateFormatted) {
                                 onDayQty += item.qty;
@@ -988,49 +1600,89 @@
                     totalUptoDaySum += uptoDayQty;
 
                     html += `<tr class="hover:bg-slate-50 border-b border-slate-200">
-                        <td class="p-3 border-r border-slate-200 text-center font-mono">${idx + 1}</td>
-                        <td class="p-3 border-r border-slate-200 font-medium text-slate-800">${m.name}</td>
-                        <td class="p-3 border-r border-slate-200 text-right font-mono">${allotment.toFixed(3)}</td>
-                        <td class="p-3 border-r border-slate-200 text-right font-mono text-blue-700">${onDayQty.toFixed(3)}</td>
-                        <td class="p-3 border-r border-slate-200 text-right font-mono text-purple-700 font-semibold">${uptoDayQty.toFixed(3)}</td>
-                        <td class="p-3 border-r border-slate-200 text-right font-mono ${balance < 0 ? 'text-red-600 font-bold' : 'text-slate-700'}">${balance.toFixed(3)}</td>
-                        <td class="p-3 text-right font-mono font-bold text-purple-700">${pct.toFixed(1)}%</td>
+                        <td class="p-3 border-r border-slate-200 text-center font-
+
+mono">${idx + 1}</td>
+                        <td class="p-3 border-r border-slate-200 font-medium text-
+
+slate-800">${m.name}</td>
+                        <td class="p-3 border-r border-slate-200 text-right font-
+
+mono">${allotment.toFixed(3)}</td>
+                        <td class="p-3 border-r border-slate-200 text-right font-mono 
+
+text-blue-700">${onDayQty.toFixed(3)}</td>
+                        <td class="p-3 border-r border-slate-200 text-right font-mono 
+
+text-purple-700 font-semibold">${uptoDayQty.toFixed(3)}</td>
+                        <td class="p-3 border-r border-slate-200 text-right font-mono 
+
+${balance < 0 ? 'text-red-600 font-bold' : 'text-slate-700'}">${balance.toFixed(3)}
+
+</td>
+                        <td class="p-3 text-right font-mono font-bold text-purple-
+
+700">${pct.toFixed(1)}%</td>
                     </tr>`;
                 });
 
                 tbody.innerHTML = html;
-                document.getElementById('grid-row-count').innerText = `${mills.length} Millers Listed`;
-                document.getElementById('grid-total-summary').innerText = `Total HO Paddy Allotment: ${totalAllotSum.toFixed(3)} | Upto-Day Issues: ${totalUptoDaySum.toFixed(3)}`;
+                document.getElementById('grid-row-count').innerText = `${mills.length} 
+
+Millers Listed`;
+                document.getElementById('grid-total-summary').innerText = `Total HO 
+
+Paddy Allotment: ${totalAllotSum.toFixed(3)} | Upto-Day Issues: 
+
+${totalUptoDaySum.toFixed(3)}`;
                 return;
             }
 
             if (activeSheet === 'ConsolidatedReport') {
                 thead.innerHTML = `<tr>
-                    <th class="p-3 border-r border-slate-300 w-16 text-center">S.No</th>
+                    <th class="p-3 border-r border-slate-300 w-16 text-
+
+center">S.No</th>
                     <th class="p-3 border-r border-slate-300">Region Name</th>
-                    <th class="p-3 border-r border-slate-300 text-right">Total Qty Issued (Source) (MT)</th>
-                    <th class="p-3 border-r border-slate-300 text-right">Total Qty Received (Destination) (MT)</th>
-                    <th class="p-3 border-r border-slate-300 text-right">Total Issues to ADS (MT)</th>
+                    <th class="p-3 border-r border-slate-300 text-right">Total Qty 
+
+Issued (Source) (MT)</th>
+                    <th class="p-3 border-r border-slate-300 text-right">Total Qty 
+
+Received (Destination) (MT)</th>
+                    <th class="p-3 border-r border-slate-300 text-right">Total Issues 
+
+to ADS (MT)</th>
                     <th class="p-3 text-right">Total Issues to Co-operative (MT)</th>
                 </tr>`;
 
                 let html = "";
-                let totalIssuedSum = 0, totalReceivedSum = 0, totalAdsSum = 0, totalCoopSum = 0;
+                let totalIssuedSum = 0, totalReceivedSum = 0, totalAdsSum = 0, 
+
+totalCoopSum = 0;
 
                 regions.forEach((r, idx) => {
                     let issuedQty = 0, receivedQty = 0, adsIssued = 0, coopIssued = 0;
 
                     db.RegionIssues.forEach(item => {
-                        if((item.source || "").toUpperCase() === r.toUpperCase()) issuedQty += item.qty;
+                        if((item.source || "").toUpperCase() === r.toUpperCase()) 
+
+issuedQty += item.qty;
                     });
                     db.RegionIssues.forEach(item => {
-                        if((item.destination || "").toUpperCase() === r.toUpperCase()) receivedQty += item.qty;
+                        if((item.destination || "").toUpperCase() === r.toUpperCase()) 
+
+receivedQty += item.qty;
                     });
                     db.ADS_Issues.forEach(item => {
-                        if((item.entity || "").toUpperCase() === r.toUpperCase()) adsIssued += item.qty;
+                        if((item.entity || "").toUpperCase() === r.toUpperCase()) 
+
+adsIssued += item.qty;
                     });
                     db.Coop_Issues.forEach(item => {
-                        if((item.entity || "").toUpperCase() === r.toUpperCase()) coopIssued += item.qty;
+                        if((item.entity || "").toUpperCase() === r.toUpperCase()) 
+
+coopIssued += item.qty;
                     });
 
                     totalIssuedSum += issuedQty;
@@ -1039,40 +1691,76 @@
                     totalCoopSum += coopIssued;
 
                     html += `<tr class="hover:bg-slate-50 border-b border-slate-200">
-                        <td class="p-3 border-r border-slate-200 text-center font-mono">${idx + 1}</td>
-                        <td class="p-3 border-r border-slate-200 font-medium">${r}</td>
-                        <td class="p-3 border-r border-slate-200 text-right font-mono text-amber-700 font-semibold">${issuedQty.toFixed(3)}</td>
-                        <td class="p-3 border-r border-slate-200 text-right font-mono text-emerald-700 font-semibold">${receivedQty.toFixed(3)}</td>
-                        <td class="p-3 border-r border-slate-200 text-right font-mono">${adsIssued.toFixed(3)}</td>
-                        <td class="p-3 text-right font-mono">${coopIssued.toFixed(3)}</td>
+                        <td class="p-3 border-r border-slate-200 text-center font-
+
+mono">${idx + 1}</td>
+                        <td class="p-3 border-r border-slate-200 font-medium">${r}
+
+</td>
+                        <td class="p-3 border-r border-slate-200 text-right font-mono 
+
+text-amber-700 font-semibold">${issuedQty.toFixed(3)}</td>
+                        <td class="p-3 border-r border-slate-200 text-right font-mono 
+
+text-emerald-700 font-semibold">${receivedQty.toFixed(3)}</td>
+                        <td class="p-3 border-r border-slate-200 text-right font-
+
+mono">${adsIssued.toFixed(3)}</td>
+                        <td class="p-3 text-right font-mono">${coopIssued.toFixed(3)}
+
+</td>
                     </tr>`;
                 });
 
                 tbody.innerHTML = html;
-                document.getElementById('grid-row-count').innerText = `${regions.length} Regions Consolidated`;
-                document.getElementById('grid-total-summary').innerText = `Issued: ${totalIssuedSum.toFixed(3)} | Received: ${totalReceivedSum.toFixed(3)} | ADS: ${totalAdsSum.toFixed(3)} | Coop: ${totalCoopSum.toFixed(3)}`;
+                document.getElementById('grid-row-count').innerText = `
+
+${regions.length} Regions Consolidated`;
+                document.getElementById('grid-total-summary').innerText = `Issued: 
+
+${totalIssuedSum.toFixed(3)} | Received: ${totalReceivedSum.toFixed(3)} | ADS: 
+
+${totalAdsSum.toFixed(3)} | Coop: ${totalCoopSum.toFixed(3)}`;
                 return;
             }
 
             if (activeSheet === 'ConsolidatedReport2') {
                 thead.innerHTML = `<tr>
-                    <th class="p-3 border-r border-slate-300 w-16 text-center">S.No</th>
+                    <th class="p-3 border-r border-slate-300 w-16 text-
+
+center">S.No</th>
                     <th class="p-3 border-r border-slate-300">Hub Region Name</th>
-                    <th class="p-3 border-r border-slate-300 text-right">Allotment (MT)</th>
-                    <th class="p-3 border-r border-slate-300 text-right">On-Day Issues (MT)</th>
-                    <th class="p-3 border-r border-slate-300 text-right">Upto-Day Issues (MT)</th>
-                    <th class="p-3 border-r border-slate-300 text-right">Balance (MT)</th>
+                    <th class="p-3 border-r border-slate-300 text-right">Allotment 
+
+(MT)</th>
+                    <th class="p-3 border-r border-slate-300 text-right">On-Day Issues 
+
+(MT)</th>
+                    <th class="p-3 border-r border-slate-300 text-right">Upto-Day 
+
+Issues (MT)</th>
+                    <th class="p-3 border-r border-slate-300 text-right">Balance (MT)
+
+</th>
                     <th class="p-3 text-right">% of Issues</th>
                 </tr>`;
 
                 let html = "";
-                let totalAllotSum = 0, totalOnDaySum = 0, totalUptoDaySum = 0, totalBalSum = 0;
+                let totalAllotSum = 0, totalOnDaySum = 0, totalUptoDaySum = 0, 
 
-                let filterDate = document.getElementById('filter-to-date')?.value || "";
-                let filterDateFormatted = filterDate ? formatDateToDDMMYYYY(filterDate) : formatDateToDDMMYYYY(new Date());
+totalBalSum = 0;
+
+                let filterDate = document.getElementById('filter-to-date')?.value || 
+
+"";
+                let filterDateFormatted = filterDate ? formatDateToDDMMYYYY
+
+(filterDate) : formatDateToDDMMYYYY(new Date());
 
                 hubRegions.forEach((h, idx) => {
-                    let allotment = hubAllotments[h] !== undefined ? hubAllotments[h] : 1020;
+                    let allotment = hubAllotments[h] !== undefined ? hubAllotments[h] 
+
+: 1020;
                     let onDayQty = 0;
                     let uptoDayQty = 0;
 
@@ -1093,39 +1781,81 @@
                     totalUptoDaySum += uptoDayQty;
                     totalBalSum += balance;
 
-                    html += `<tr class="hover:bg-slate-50 border-b border-slate-200 bg-indigo-50/20">
-                        <td class="p-3 border-r border-slate-200 text-center font-mono">${idx + 1}</td>
-                        <td class="p-3 border-r border-slate-200 font-bold text-indigo-900">${h} (Hub)</td>
-                        <td class="p-3 border-r border-slate-200 text-right font-mono">${allotment.toFixed(3)}</td>
-                        <td class="p-3 border-r border-slate-200 text-right font-mono text-blue-700">${onDayQty.toFixed(3)}</td>
-                        <td class="p-3 border-r border-slate-200 text-right font-mono text-emerald-700 font-semibold">${uptoDayQty.toFixed(3)}</td>
-                        <td class="p-3 border-r border-slate-200 text-right font-mono ${balance < 0 ? 'text-red-600 font-bold' : 'text-slate-700'}">${balance.toFixed(3)}</td>
-                        <td class="p-3 text-right font-mono font-bold text-indigo-700">${pct.toFixed(1)}%</td>
+                    html += `<tr class="hover:bg-slate-50 border-b border-slate-200 
+
+bg-indigo-50/20">
+                        <td class="p-3 border-r border-slate-200 text-center font-
+
+mono">${idx + 1}</td>
+                        <td class="p-3 border-r border-slate-200 font-bold text-
+
+indigo-900">${h} (Hub)</td>
+                        <td class="p-3 border-r border-slate-200 text-right font-
+
+mono">${allotment.toFixed(3)}</td>
+                        <td class="p-3 border-r border-slate-200 text-right font-mono 
+
+text-blue-700">${onDayQty.toFixed(3)}</td>
+                        <td class="p-3 border-r border-slate-200 text-right font-mono 
+
+text-emerald-700 font-semibold">${uptoDayQty.toFixed(3)}</td>
+                        <td class="p-3 border-r border-slate-200 text-right font-mono 
+
+${balance < 0 ? 'text-red-600 font-bold' : 'text-slate-700'}">${balance.toFixed(3)}
+
+</td>
+                        <td class="p-3 text-right font-mono font-bold text-indigo-
+
+700">${pct.toFixed(1)}%</td>
                     </tr>`;
                 });
 
                 tbody.innerHTML = html;
-                document.getElementById('grid-row-count').innerText = `${hubRegions.length} Hub Regions Listed in Report 2`;
-                document.getElementById('grid-total-summary').innerText = `Total Hub Allotment: ${totalAllotSum.toFixed(3)} | Upto-Day Issues: ${totalUptoDaySum.toFixed(3)}`;
+                document.getElementById('grid-row-count').innerText = `
+
+${hubRegions.length} Hub Regions Listed in Report 2`;
+                document.getElementById('grid-total-summary').innerText = `Total Hub 
+
+Allotment: ${totalAllotSum.toFixed(3)} | Upto-Day Issues: ${totalUptoDaySum.toFixed
+
+(3)}`;
                 return;
             }
 
             if (activeSheet === 'ConsolidatedReport3') {
                 thead.innerHTML = `<tr>
-                    <th class="p-3 border-r border-slate-300 w-16 text-center">S.No</th>
-                    <th class="p-3 border-r border-slate-300">Region Name (Received)</th>
-                    <th class="p-3 border-r border-slate-300 text-right">Allotment (MT)</th>
-                    <th class="p-3 border-r border-slate-300 text-right">On-Day Receipts (MT)</th>
-                    <th class="p-3 border-r border-slate-300 text-right">Upto-Day Receipts (MT)</th>
-                    <th class="p-3 border-r border-slate-300 text-right">Balance (MT)</th>
+                    <th class="p-3 border-r border-slate-300 w-16 text-
+
+center">S.No</th>
+                    <th class="p-3 border-r border-slate-300">Region Name (Received)
+
+</th>
+                    <th class="p-3 border-r border-slate-300 text-right">Allotment 
+
+(MT)</th>
+                    <th class="p-3 border-r border-slate-300 text-right">On-Day 
+
+Receipts (MT)</th>
+                    <th class="p-3 border-r border-slate-300 text-right">Upto-Day 
+
+Receipts (MT)</th>
+                    <th class="p-3 border-r border-slate-300 text-right">Balance (MT)
+
+</th>
                     <th class="p-3 text-right">% of Receipts</th>
                 </tr>`;
 
                 let html = "";
-                let totalAllotSum = 0, totalOnDaySum = 0, totalUptoDaySum = 0, totalBalSum = 0;
+                let totalAllotSum = 0, totalOnDaySum = 0, totalUptoDaySum = 0, 
 
-                let filterDate = document.getElementById('filter-to-date')?.value || "";
-                let filterDateFormatted = filterDate ? formatDateToDDMMYYYY(filterDate) : formatDateToDDMMYYYY(new Date());
+totalBalSum = 0;
+
+                let filterDate = document.getElementById('filter-to-date')?.value || 
+
+"";
+                let filterDateFormatted = filterDate ? formatDateToDDMMYYYY
+
+(filterDate) : formatDateToDDMMYYYY(new Date());
 
                 regions.forEach((r, idx) => {
                     let allotment = regionAllotments[r]?.general ?? 100.000;
@@ -1133,7 +1863,9 @@
                     let uptoDayQty = 0;
 
                     db.RegionIssues.forEach(item => {
-                        if ((item.destination || "").toUpperCase() === r.toUpperCase()) {
+                        if ((item.destination || "").toUpperCase() === r.toUpperCase
+
+()) {
                             uptoDayQty += item.qty;
                             if (item.date === filterDateFormatted) {
                                 onDayQty += item.qty;
@@ -1150,42 +1882,78 @@
                     totalBalSum += balance;
 
                     html += `<tr class="hover:bg-slate-50 border-b border-slate-200">
-                        <td class="p-3 border-r border-slate-200 text-center font-mono">${idx + 1}</td>
-                        <td class="p-3 border-r border-slate-200 font-medium">${r}</td>
-                        <td class="p-3 border-r border-slate-200 text-right font-mono">${allotment.toFixed(3)}</td>
-                        <td class="p-3 border-r border-slate-200 text-right font-mono text-blue-700">${onDayQty.toFixed(3)}</td>
-                        <td class="p-3 border-r border-slate-200 text-right font-mono text-teal-700 font-semibold">${uptoDayQty.toFixed(3)}</td>
-                        <td class="p-3 border-r border-slate-200 text-right font-mono ${balance < 0 ? 'text-red-600 font-bold' : 'text-slate-700'}">${balance.toFixed(3)}</td>
-                        <td class="p-3 text-right font-mono font-bold text-teal-700">${pct.toFixed(1)}%</td>
+                        <td class="p-3 border-r border-slate-200 text-center font-
+
+mono">${idx + 1}</td>
+                        <td class="p-3 border-r border-slate-200 font-medium">${r}
+
+</td>
+                        <td class="p-3 border-r border-slate-200 text-right font-
+
+mono">${allotment.toFixed(3)}</td>
+                        <td class="p-3 border-r border-slate-200 text-right font-mono 
+
+text-blue-700">${onDayQty.toFixed(3)}</td>
+                        <td class="p-3 border-r border-slate-200 text-right font-mono 
+
+text-teal-700 font-semibold">${uptoDayQty.toFixed(3)}</td>
+                        <td class="p-3 border-r border-slate-200 text-right font-mono 
+
+${balance < 0 ? 'text-red-600 font-bold' : 'text-slate-700'}">${balance.toFixed(3)}
+
+</td>
+                        <td class="p-3 text-right font-mono font-bold text-teal-700">
+
+${pct.toFixed(1)}%</td>
                     </tr>`;
                 });
 
                 tbody.innerHTML = html;
-                document.getElementById('grid-row-count').innerText = `${regions.length} Regions Listed in Report 3`;
-                document.getElementById('grid-total-summary').innerText = `Total Allotment: ${totalAllotSum.toFixed(3)} | Upto-Day Receipts: ${totalUptoDaySum.toFixed(3)}`;
+                document.getElementById('grid-row-count').innerText = `
+
+${regions.length} Regions Listed in Report 3`;
+                document.getElementById('grid-total-summary').innerText = `Total 
+
+Allotment: ${totalAllotSum.toFixed(3)} | Upto-Day Receipts: ${totalUptoDaySum.toFixed
+
+(3)}`;
                 return;
             }
 
-            let fromDateVal = document.getElementById('filter-from-date')?.value || "";
+            let fromDateVal = document.getElementById('filter-from-date')?.value || 
+
+"";
             let toDateVal = document.getElementById('filter-to-date')?.value || "";
-            let fromDateFormatted = fromDateVal ? formatDateToDDMMYYYY(fromDateVal) : "";
+            let fromDateFormatted = fromDateVal ? formatDateToDDMMYYYY(fromDateVal) : 
+
+"";
             let toDateFormatted = toDateVal ? formatDateToDDMMYYYY(toDateVal) : "";
 
             let items = db[activeSheet].filter(item => {
                 let matchRegion = true;
                 if (currentRegion !== 'HEAD_OFFICE') {
                     if (activeSheet === 'MillReceipts') {
-                        matchRegion = (item.destination || "").toUpperCase() === currentRegion.toUpperCase();
+                        matchRegion = (item.destination || "").toUpperCase() === 
+
+currentRegion.toUpperCase();
                     } else if (activeSheet === 'RegionIssues') {
                         if (hubRegions.includes(currentRegion.toUpperCase())) {
-                            matchRegion = (item.source || "").toUpperCase() === currentRegion.toUpperCase();
+                            matchRegion = (item.source || "").toUpperCase() === 
+
+currentRegion.toUpperCase();
                         } else {
-                            matchRegion = (item.destination || "").toUpperCase() === currentRegion.toUpperCase();
+                            matchRegion = (item.destination || "").toUpperCase() === 
+
+currentRegion.toUpperCase();
                         }
                     } else if (activeSheet === 'PaddyIssues') {
-                        matchRegion = (item.source || "").toUpperCase() === currentRegion.toUpperCase();
+                        matchRegion = (item.source || "").toUpperCase() === 
+
+currentRegion.toUpperCase();
                     } else {
-                        matchRegion = (item.entity || "").toUpperCase() === currentRegion.toUpperCase();
+                        matchRegion = (item.entity || "").toUpperCase() === 
+
+currentRegion.toUpperCase();
                     }
                 }
                 if (!matchRegion) return false;
@@ -1196,25 +1964,45 @@
 
             let headers = [];
             if (activeSheet === 'MillReceipts') {
-                headers = ['Date', 'Hulling Mill (Source)', 'Destination Region', 'Allotment', 'On Day Qty', 'Upto Day Qty', 'Balance', 'Actions'];
+                headers = ['Date', 'Hulling Mill (Source)', 'Destination Region', 
+
+'Allotment', 'On Day Qty', 'Upto Day Qty', 'Balance', 'Actions'];
             } else if (activeSheet === 'RegionIssues') {
-                headers = ['Date', 'Source Region (Hub)', 'Destination Region', 'Allotment', 'On Day Qty', 'Upto Day Qty', 'Balance', 'Actions'];
+                headers = ['Date', 'Source Region (Hub)', 'Destination Region', 
+
+'Allotment', 'On Day Qty', 'Upto Day Qty', 'Balance', 'Actions'];
             } else if (activeSheet === 'PaddyIssues') {
-                headers = ['Date', 'Issuing Region', 'Receiving Mill', 'HO Paddy Allotment', 'On Day Qty', 'Upto Day Qty', 'Balance', 'Actions'];
+                headers = ['Date', 'Issuing Region', 'Receiving Mill', 'HO Paddy 
+
+Allotment', 'On Day Qty', 'Upto Day Qty', 'Balance', 'Actions'];
             } else {
-                headers = ['Date', 'District / Shop', 'Allotment', 'On Day Qty', 'Upto Day Qty', 'Balance', 'Actions'];
+                headers = ['Date', 'District / Shop', 'Allotment', 'On Day Qty', 'Upto 
+
+Day Qty', 'Balance', 'Actions'];
             }
 
-            thead.innerHTML = `<tr>` + headers.map(h => `<th class="p-3 border-r border-slate-300 last:border-r-0 ${h.includes('Qty') || h.includes('Allotment') ? 'text-right' : ''} ${h === 'Actions' ? 'text-center w-20' : ''}">${h}</th>`).join('') + `</tr>`;
+            thead.innerHTML = `<tr>` + headers.map(h => `<th class="p-3 border-r 
+
+border-slate-300 last:border-r-0 ${h.includes('Qty') || h.includes('Allotment') ? 
+
+'text-right' : ''} ${h === 'Actions' ? 'text-center w-20' : ''}">${h}</th>`).join('') 
+
++ `</tr>`;
 
             let totalQty = 0;
             let entityCumulative = {};
 
             tbody.innerHTML = items.length === 0 ? `
-                <tr><td colspan="${headers.length}" class="text-center py-10 text-slate-400">No rows found in this sheet.</td></tr>
+                <tr><td colspan="${headers.length}" class="text-center py-10 text-
+
+slate-400">No rows found in this sheet.</td></tr>
             ` : items.map((item, index) => {
                 totalQty += item.qty;
-                let groupKey = (activeSheet === 'PaddyIssues') ? (item.destination || "") : (activeSheet === 'MillReceipts' || activeSheet === 'RegionIssues') ? (item.source || "") : (item.entity || "");
+                let groupKey = (activeSheet === 'PaddyIssues') ? (item.destination || 
+
+"") : (activeSheet === 'MillReceipts' || activeSheet === 'RegionIssues') ? 
+
+(item.source || "") : (item.entity || "");
                 if (!entityCumulative[groupKey]) {
                     entityCumulative[groupKey] = 0;
                 }
@@ -1222,56 +2010,130 @@
                 let cumulative = entityCumulative[groupKey];
                 let balance = item.allotment - cumulative;
 
-                let canEditDelete = (currentRegion === 'HEAD_OFFICE' || (activeSheet === 'RegionIssues' && hubRegions.includes(currentRegion.toUpperCase()) && (item.source || "").toUpperCase() === currentRegion.toUpperCase()) || activeSheet !== 'RegionIssues');
+                let canEditDelete = (currentRegion === 'HEAD_OFFICE' || (activeSheet 
+
+=== 'RegionIssues' && hubRegions.includes(currentRegion.toUpperCase()) && (item.source 
+
+|| "").toUpperCase() === currentRegion.toUpperCase()) || activeSheet !== 
+
+'RegionIssues');
 
                 let actionButtons = canEditDelete ? `
-                    <button onclick="editRecord('${item.id}')" class="text-blue-600 hover:text-blue-800"><i class="fa-solid fa-pen"></i></button>
-                    <button onclick="deleteRecord('${item.id}')" class="text-red-500 hover:text-red-700"><i class="fa-solid fa-trash"></i></button>
+                    <button onclick="editRecord('${item.id}')" class="text-blue-600 
+
+hover:text-blue-800"><i class="fa-solid fa-pen"></i></button>
+                    <button onclick="deleteRecord('${item.id}')" class="text-red-500 
+
+hover:text-red-700"><i class="fa-solid fa-trash"></i></button>
                 ` : `<span class="text-slate-300 text-[10px]">Read-Only</span>`;
 
                 if (activeSheet === 'PaddyIssues') {
                     return `
-                        <tr class="hover:bg-slate-50 transition border-b border-slate-200">
-                            <td class="p-3 border-r border-slate-200 text-slate-600 font-mono">${item.date}</td>
-                            <td class="p-3 border-r border-slate-200 font-medium text-slate-800">${item.source || '-'}</td>
-                            <td class="p-3 border-r border-slate-200 text-slate-700">${item.destination || '-'}</td>
-                            <td class="p-3 border-r border-slate-200 text-right font-mono">${item.allotment.toFixed(3)}</td>
-                            <td class="p-3 border-r border-slate-200 text-right font-mono">${item.qty.toFixed(3)}</td>
-                            <td class="p-3 border-r border-slate-200 text-right font-mono font-semibold text-emerald-700">${cumulative.toFixed(3)}</td>
-                            <td class="p-3 border-r border-slate-200 text-right font-mono ${balance < 0 ? 'text-red-600 font-bold' : 'text-slate-700'}">${balance.toFixed(3)}</td>
-                            <td class="p-3 text-center space-x-2">${actionButtons}</td>
+                        <tr class="hover:bg-slate-50 transition border-b border-
+
+slate-200">
+                            <td class="p-3 border-r border-slate-200 text-slate-600 
+
+font-mono">${item.date}</td>
+                            <td class="p-3 border-r border-slate-200 font-medium 
+
+text-slate-800">${item.source || '-'}</td>
+                            <td class="p-3 border-r border-slate-200 text-slate-700">
+
+${item.destination || '-'}</td>
+                            <td class="p-3 border-r border-slate-200 text-right font-
+
+mono">${item.allotment.toFixed(3)}</td>
+                            <td class="p-3 border-r border-slate-200 text-right font-
+
+mono">${item.qty.toFixed(3)}</td>
+                            <td class="p-3 border-r border-slate-200 text-right font-
+
+mono font-semibold text-emerald-700">${cumulative.toFixed(3)}</td>
+                            <td class="p-3 border-r border-slate-200 text-right font-
+
+mono ${balance < 0 ? 'text-red-600 font-bold' : 'text-slate-700'}">${balance.toFixed
+
+(3)}</td>
+                            <td class="p-3 text-center space-x-2">${actionButtons}
+
+</td>
                         </tr>
                     `;
-                } else if (activeSheet === 'MillReceipts' || activeSheet === 'RegionIssues') {
+                } else if (activeSheet === 'MillReceipts' || activeSheet === 
+
+'RegionIssues') {
                     return `
-                        <tr class="hover:bg-slate-50 transition border-b border-slate-200">
-                            <td class="p-3 border-r border-slate-200 text-slate-600 font-mono">${item.date}</td>
-                            <td class="p-3 border-r border-slate-200 font-medium text-slate-800">${item.source}</td>
-                            <td class="p-3 border-r border-slate-200 text-slate-700">${item.destination}</td>
-                            <td class="p-3 border-r border-slate-200 text-right font-mono">${item.allotment.toFixed(3)}</td>
-                            <td class="p-3 border-r border-slate-200 text-right font-mono">${item.qty.toFixed(3)}</td>
-                            <td class="p-3 border-r border-slate-200 text-right font-mono font-semibold text-emerald-700">${cumulative.toFixed(3)}</td>
-                            <td class="p-3 border-r border-slate-200 text-right font-mono ${balance < 0 ? 'text-red-600 font-bold' : 'text-slate-700'}">${balance.toFixed(3)}</td>
-                            <td class="p-3 text-center space-x-2">${actionButtons}</td>
+                        <tr class="hover:bg-slate-50 transition border-b border-
+
+slate-200">
+                            <td class="p-3 border-r border-slate-200 text-slate-600 
+
+font-mono">${item.date}</td>
+                            <td class="p-3 border-r border-slate-200 font-medium 
+
+text-slate-800">${item.source}</td>
+                            <td class="p-3 border-r border-slate-200 text-slate-700">
+
+${item.destination}</td>
+                            <td class="p-3 border-r border-slate-200 text-right font-
+
+mono">${item.allotment.toFixed(3)}</td>
+                            <td class="p-3 border-r border-slate-200 text-right font-
+
+mono">${item.qty.toFixed(3)}</td>
+                            <td class="p-3 border-r border-slate-200 text-right font-
+
+mono font-semibold text-emerald-700">${cumulative.toFixed(3)}</td>
+                            <td class="p-3 border-r border-slate-200 text-right font-
+
+mono ${balance < 0 ? 'text-red-600 font-bold' : 'text-slate-700'}">${balance.toFixed
+
+(3)}</td>
+                            <td class="p-3 text-center space-x-2">${actionButtons}
+
+</td>
                         </tr>
                     `;
                 } else {
                     return `
-                        <tr class="hover:bg-slate-50 transition border-b border-slate-200">
-                            <td class="p-3 border-r border-slate-200 text-slate-600 font-mono">${item.date}</td>
-                            <td class="p-3 border-r border-slate-200 font-medium text-slate-800">${item.entity}</td>
-                            <td class="p-3 border-r border-slate-200 text-right font-mono">${item.allotment.toFixed(3)}</td>
-                            <td class="p-3 border-r border-slate-200 text-right font-mono">${item.qty.toFixed(3)}</td>
-                            <td class="p-3 border-r border-slate-200 text-right font-mono font-semibold text-emerald-700">${cumulative.toFixed(3)}</td>
-                            <td class="p-3 border-r border-slate-200 text-right font-mono ${balance < 0 ? 'text-red-600 font-bold' : 'text-slate-700'}">${balance.toFixed(3)}</td>
-                            <td class="p-3 text-center space-x-2">${actionButtons}</td>
+                        <tr class="hover:bg-slate-50 transition border-b border-
+
+slate-200">
+                            <td class="p-3 border-r border-slate-200 text-slate-600 
+
+font-mono">${item.date}</td>
+                            <td class="p-3 border-r border-slate-200 font-medium 
+
+text-slate-800">${item.entity}</td>
+                            <td class="p-3 border-r border-slate-200 text-right font-
+
+mono">${item.allotment.toFixed(3)}</td>
+                            <td class="p-3 border-r border-slate-200 text-right font-
+
+mono">${item.qty.toFixed(3)}</td>
+                            <td class="p-3 border-r border-slate-200 text-right font-
+
+mono font-semibold text-emerald-700">${cumulative.toFixed(3)}</td>
+                            <td class="p-3 border-r border-slate-200 text-right font-
+
+mono ${balance < 0 ? 'text-red-600 font-bold' : 'text-slate-700'}">${balance.toFixed
+
+(3)}</td>
+                            <td class="p-3 text-center space-x-2">${actionButtons}
+
+</td>
                         </tr>
                     `;
                 }
             }).join('');
 
-            document.getElementById('grid-row-count').innerText = `${items.length} row(s) loaded`;
-            document.getElementById('grid-total-summary').innerText = `Total Qty: ${totalQty.toFixed(3)} MT`;
+            document.getElementById('grid-row-count').innerText = `${items.length} 
+
+row(s) loaded`;
+            document.getElementById('grid-total-summary').innerText = `Total Qty: 
+
+${totalQty.toFixed(3)} MT`;
         }
 
         function exportCurrentSheetExcel() {
@@ -1286,33 +2148,51 @@
             }
             if (activeSheet.includes('Consolidated')) {
                 if(activeSheet === 'ConsolidatedReport') exportConsolidatedExcel();
-                else if(activeSheet === 'ConsolidatedReport2') exportConsolidatedExcel2();
-                else if(activeSheet === 'ConsolidatedReport3') exportConsolidatedExcel3();
+                else if(activeSheet === 'ConsolidatedReport2') 
+
+exportConsolidatedExcel2();
+                else if(activeSheet === 'ConsolidatedReport3') 
+
+exportConsolidatedExcel3();
                 return;
             }
 
             let wb = XLSX.utils.book_new();
             let wsData = [];
-            let fromDateVal = document.getElementById('filter-from-date')?.value || "";
+            let fromDateVal = document.getElementById('filter-from-date')?.value || 
+
+"";
             let toDateVal = document.getElementById('filter-to-date')?.value || "";
-            let fromDateFormatted = fromDateVal ? formatDateToDDMMYYYY(fromDateVal) : "";
+            let fromDateFormatted = fromDateVal ? formatDateToDDMMYYYY(fromDateVal) : 
+
+"";
             let toDateFormatted = toDateVal ? formatDateToDDMMYYYY(toDateVal) : "";
 
             let items = db[activeSheet].filter(item => {
                 let matchRegion = true;
                 if (currentRegion !== 'HEAD_OFFICE') {
                     if (activeSheet === 'MillReceipts') {
-                        matchRegion = (item.destination || "").toUpperCase() === currentRegion.toUpperCase();
+                        matchRegion = (item.destination || "").toUpperCase() === 
+
+currentRegion.toUpperCase();
                     } else if (activeSheet === 'RegionIssues') {
                         if (hubRegions.includes(currentRegion.toUpperCase())) {
-                            matchRegion = (item.source || "").toUpperCase() === currentRegion.toUpperCase();
+                            matchRegion = (item.source || "").toUpperCase() === 
+
+currentRegion.toUpperCase();
                         } else {
-                            matchRegion = (item.destination || "").toUpperCase() === currentRegion.toUpperCase();
+                            matchRegion = (item.destination || "").toUpperCase() === 
+
+currentRegion.toUpperCase();
                         }
                     } else if (activeSheet === 'PaddyIssues') {
-                        matchRegion = (item.source || "").toUpperCase() === currentRegion.toUpperCase();
+                        matchRegion = (item.source || "").toUpperCase() === 
+
+currentRegion.toUpperCase();
                     } else {
-                        matchRegion = (item.entity || "").toUpperCase() === currentRegion.toUpperCase();
+                        matchRegion = (item.entity || "").toUpperCase() === 
+
+currentRegion.toUpperCase();
                     }
                 }
                 if (!matchRegion) return false;
@@ -1324,116 +2204,180 @@
             let entityCumulative = {};
 
             if (activeSheet === 'MillReceipts') {
-                wsData.push(["Date", "Hulling Mill", "Destination", "Allotment", "On Day Qty", "Upto Day Qty", "Balance"]);
+                wsData.push(["Date", "Hulling Mill", "Destination", "Allotment", "On 
+
+Day Qty", "Upto Day Qty", "Balance"]);
                 items.forEach(i => {
                     let groupKey = i.source || "";
                     if (!entityCumulative[groupKey]) entityCumulative[groupKey] = 0;
                     entityCumulative[groupKey] += i.qty;
                     let cumulative = entityCumulative[groupKey];
-                    wsData.push([i.date, i.source, i.destination, i.allotment, i.qty, cumulative, i.allotment - cumulative]);
+                    wsData.push([i.date, i.source, i.destination, i.allotment, i.qty, 
+
+cumulative, i.allotment - cumulative]);
                 });
             } else if (activeSheet === 'RegionIssues') {
-                wsData.push(["Date", "Source Region (Hub)", "Destination Region", "Allotment", "On Day Qty", "Upto Day Qty", "Balance"]);
+                wsData.push(["Date", "Source Region (Hub)", "Destination Region", 
+
+"Allotment", "On Day Qty", "Upto Day Qty", "Balance"]);
                 items.forEach(i => {
                     let groupKey = i.source || "";
                     if (!entityCumulative[groupKey]) entityCumulative[groupKey] = 0;
                     entityCumulative[groupKey] += i.qty;
                     let cumulative = entityCumulative[groupKey];
-                    wsData.push([i.date, i.source, i.destination, i.allotment, i.qty, cumulative, i.allotment - cumulative]);
+                    wsData.push([i.date, i.source, i.destination, i.allotment, i.qty, 
+
+cumulative, i.allotment - cumulative]);
                 });
             } else if (activeSheet === 'PaddyIssues') {
-                wsData.push(["Date", "Issuing Region", "Receiving Mill", "HO Paddy Allotment", "On Day Qty", "Upto Day Qty", "Balance"]);
+                wsData.push(["Date", "Issuing Region", "Receiving Mill", "HO Paddy 
+
+Allotment", "On Day Qty", "Upto Day Qty", "Balance"]);
                 items.forEach(i => {
                     let groupKey = i.destination || "";
                     if (!entityCumulative[groupKey]) entityCumulative[groupKey] = 0;
                     entityCumulative[groupKey] += i.qty;
                     let cumulative = entityCumulative[groupKey];
-                    wsData.push([i.date, i.source, i.destination, i.allotment, i.qty, cumulative, i.allotment - cumulative]);
+                    wsData.push([i.date, i.source, i.destination, i.allotment, i.qty, 
+
+cumulative, i.allotment - cumulative]);
                 });
             } else {
-                wsData.push(["Date", "District / Shop", "Allotment", "On Day Qty", "Upto Day Qty", "Balance"]);
+                wsData.push(["Date", "District / Shop", "Allotment", "On Day Qty", 
+
+"Upto Day Qty", "Balance"]);
                 items.forEach(i => {
                     let groupKey = i.entity || "";
                     if (!entityCumulative[groupKey]) entityCumulative[groupKey] = 0;
                     entityCumulative[groupKey] += i.qty;
                     let cumulative = entityCumulative[groupKey];
-                    wsData.push([i.date, i.entity, i.allotment, i.qty, cumulative, i.allotment - cumulative]);
+                    wsData.push([i.date, i.entity, i.allotment, i.qty, cumulative, 
+
+i.allotment - cumulative]);
                 });
             }
 
-            XLSX.utils.book_append_sheet(wb, XLSX.utils.aoa_to_sheet(wsData), activeSheet);
+            XLSX.utils.book_append_sheet(wb, XLSX.utils.aoa_to_sheet(wsData), 
+
+activeSheet);
             XLSX.writeFile(wb, `TNCSC_${activeSheet}_${currentRegion}.xlsx`);
         }
 
         function exportMillersRiceExcel() {
             let wb = XLSX.utils.book_new();
-            let wsData = [["S.No", "Hulling Mill Name", "Rice Allotment (MT)", "On-Day Receipts (MT)", "Upto-Day Receipts (MT)", "Balance (MT)", "% of Receipts"]];
+            let wsData = [["S.No", "Hulling Mill Name", "Rice Allotment (MT)", "On-Day 
+
+Receipts (MT)", "Upto-Day Receipts (MT)", "Balance (MT)", "% of Receipts"]];
             let filterDate = document.getElementById('filter-to-date')?.value || "";
-            let filterDateFormatted = filterDate ? formatDateToDDMMYYYY(filterDate) : formatDateToDDMMYYYY(new Date());
+            let filterDateFormatted = filterDate ? formatDateToDDMMYYYY(filterDate) : 
+
+formatDateToDDMMYYYY(new Date());
 
             mills.forEach((m, idx) => {
                 let allotment = m.allotment || 350;
                 let onDayQty = 0, uptoDayQty = 0;
                 db.MillReceipts.forEach(item => {
-                    if ((item.source || "").toUpperCase() === (m.name || "").toUpperCase()) {
+                    if ((item.source || "").toUpperCase() === (m.name || 
+
+"").toUpperCase()) {
                         uptoDayQty += item.qty;
                         if (item.date === filterDateFormatted) onDayQty += item.qty;
                     }
                 });
                 let balance = allotment - uptoDayQty;
                 let pct = allotment > 0 ? (uptoDayQty / allotment) * 100 : 0;
-                wsData.push([idx + 1, m.name, allotment, onDayQty, uptoDayQty, balance, pct.toFixed(1) + "%"]);
+                wsData.push([idx + 1, m.name, allotment, onDayQty, uptoDayQty, 
+
+balance, pct.toFixed(1) + "%"]);
             });
-            XLSX.utils.book_append_sheet(wb, XLSX.utils.aoa_to_sheet(wsData), "Millers_Rice_Receipt_Report");
+            XLSX.utils.book_append_sheet(wb, XLSX.utils.aoa_to_sheet(wsData), 
+
+"Millers_Rice_Receipt_Report");
             XLSX.writeFile(wb, `TNCSC_Millers_Rice_Receipt_Report.xlsx`);
         }
 
         function exportMillersPaddyExcel() {
             let wb = XLSX.utils.book_new();
-            let wsData = [["S.No", "Hulling Mill Name", "HO Paddy Allotment (MT)", "On-Day Paddy Issues (MT)", "Upto-Day Paddy Issues (MT)", "Balance (MT)", "% of Issues"]];
+            let wsData = [["S.No", "Hulling Mill Name", "HO Paddy Allotment (MT)", 
+
+"On-Day Paddy Issues (MT)", "Upto-Day Paddy Issues (MT)", "Balance (MT)", "% of 
+
+Issues"]];
             let filterDate = document.getElementById('filter-to-date')?.value || "";
-            let filterDateFormatted = filterDate ? formatDateToDDMMYYYY(filterDate) : formatDateToDDMMYYYY(new Date());
+            let filterDateFormatted = filterDate ? formatDateToDDMMYYYY(filterDate) : 
+
+formatDateToDDMMYYYY(new Date());
 
             mills.forEach((m, idx) => {
-                let allotment = m.paddyAllotment !== undefined ? m.paddyAllotment : 500;
+                let allotment = m.paddyAllotment !== undefined ? m.paddyAllotment : 
+
+500;
                 let onDayQty = 0, uptoDayQty = 0;
                 db.PaddyIssues.forEach(item => {
-                    if ((item.destination || "").toUpperCase() === (m.name || "").toUpperCase()) {
+                    if ((item.destination || "").toUpperCase() === (m.name || 
+
+"").toUpperCase()) {
                         uptoDayQty += item.qty;
                         if (item.date === filterDateFormatted) onDayQty += item.qty;
                     }
                 });
                 let balance = allotment - uptoDayQty;
                 let pct = allotment > 0 ? (uptoDayQty / allotment) * 100 : 0;
-                wsData.push([idx + 1, m.name, allotment, onDayQty, uptoDayQty, balance, pct.toFixed(1) + "%"]);
+                wsData.push([idx + 1, m.name, allotment, onDayQty, uptoDayQty, 
+
+balance, pct.toFixed(1) + "%"]);
             });
-            XLSX.utils.book_append_sheet(wb, XLSX.utils.aoa_to_sheet(wsData), "Millers_Paddy_Issue_Report");
+            XLSX.utils.book_append_sheet(wb, XLSX.utils.aoa_to_sheet(wsData), 
+
+"Millers_Paddy_Issue_Report");
             XLSX.writeFile(wb, `TNCSC_Millers_Paddy_Issue_Report.xlsx`);
         }
 
         function exportConsolidatedExcel() {
             let wb = XLSX.utils.book_new();
-            let wsData = [["S.No", "Region Name", "Total Qty Issued (Source) (MT)", "Total Qty Received (Destination) (MT)", "Total Issues to ADS (MT)", "Total Co-operative Sales (MT)"]];
+            let wsData = [["S.No", "Region Name", "Total Qty Issued (Source) (MT)", 
+
+"Total Qty Received (Destination) (MT)", "Total Issues to ADS (MT)", "Total Co-
+
+operative Sales (MT)"]];
             regions.forEach((r, idx) => {
                 let issuedQty = 0, receivedQty = 0, adsIssued = 0, coopIssued = 0;
-                db.RegionIssues.forEach(item => { if((item.source || "").toUpperCase() === r.toUpperCase()) issuedQty += item.qty; });
-                db.RegionIssues.forEach(item => { if((item.destination || "").toUpperCase() === r.toUpperCase()) receivedQty += item.qty; });
-                db.ADS_Issues.forEach(item => { if((item.entity || "").toUpperCase() === r.toUpperCase()) adsIssued += item.qty; });
-                db.Coop_Issues.forEach(item => { if((item.entity || "").toUpperCase() === r.toUpperCase()) coopIssued += item.qty; });
-                wsData.push([idx + 1, r, issuedQty, receivedQty, adsIssued, coopIssued]);
+                db.RegionIssues.forEach(item => { if((item.source || "").toUpperCase() 
+
+=== r.toUpperCase()) issuedQty += item.qty; });
+                db.RegionIssues.forEach(item => { if((item.destination || 
+
+"").toUpperCase() === r.toUpperCase()) receivedQty += item.qty; });
+                db.ADS_Issues.forEach(item => { if((item.entity || "").toUpperCase() 
+
+=== r.toUpperCase()) adsIssued += item.qty; });
+                db.Coop_Issues.forEach(item => { if((item.entity || "").toUpperCase() 
+
+=== r.toUpperCase()) coopIssued += item.qty; });
+                wsData.push([idx + 1, r, issuedQty, receivedQty, adsIssued, 
+
+coopIssued]);
             });
-            XLSX.utils.book_append_sheet(wb, XLSX.utils.aoa_to_sheet(wsData), "Consolidated_Report");
+            XLSX.utils.book_append_sheet(wb, XLSX.utils.aoa_to_sheet(wsData), 
+
+"Consolidated_Report");
             XLSX.writeFile(wb, `TNCSC_Consolidated_Issues_Report.xlsx`);
         }
 
         function exportConsolidatedExcel2() {
             let wb = XLSX.utils.book_new();
-            let wsData = [["S.No", "Hub Region Name", "Allotment (MT)", "On-Day Issues (MT)", "Upto-Day Issues (MT)", "Balance (MT)", "% of Issues"]];
+            let wsData = [["S.No", "Hub Region Name", "Allotment (MT)", "On-Day Issues 
+
+(MT)", "Upto-Day Issues (MT)", "Balance (MT)", "% of Issues"]];
             let filterDate = document.getElementById('filter-to-date')?.value || "";
-            let filterDateFormatted = filterDate ? formatDateToDDMMYYYY(filterDate) : formatDateToDDMMYYYY(new Date());
+            let filterDateFormatted = filterDate ? formatDateToDDMMYYYY(filterDate) : 
+
+formatDateToDDMMYYYY(new Date());
 
             hubRegions.forEach((h, idx) => {
-                let allotment = hubAllotments[h] !== undefined ? hubAllotments[h] : 1020;
+                let allotment = hubAllotments[h] !== undefined ? hubAllotments[h] : 
+
+1020;
                 let onDayQty = 0, uptoDayQty = 0;
                 db.RegionIssues.forEach(item => {
                     if ((item.source || "").toUpperCase() === h.toUpperCase()) {
@@ -1443,17 +2387,25 @@
                 });
                 let balance = allotment - uptoDayQty;
                 let pct = allotment > 0 ? (uptoDayQty / allotment) * 100 : 0;
-                wsData.push([idx + 1, h, allotment, onDayQty, uptoDayQty, balance, pct.toFixed(1) + "%"]);
+                wsData.push([idx + 1, h, allotment, onDayQty, uptoDayQty, balance, 
+
+pct.toFixed(1) + "%"]);
             });
-            XLSX.utils.book_append_sheet(wb, XLSX.utils.aoa_to_sheet(wsData), "Hub_Rice_Issued_Report");
+            XLSX.utils.book_append_sheet(wb, XLSX.utils.aoa_to_sheet(wsData), 
+
+"Hub_Rice_Issued_Report");
             XLSX.writeFile(wb, `TNCSC_Hub_Rice_Issued_Report.xlsx`);
         }
 
         function exportConsolidatedExcel3() {
             let wb = XLSX.utils.book_new();
-            let wsData = [["S.No", "Region Name (Received)", "Allotment (MT)", "On-Day Receipts (MT)", "Upto-Day Receipts (MT)", "Balance (MT)", "% of Receipts"]];
+            let wsData = [["S.No", "Region Name (Received)", "Allotment (MT)", "On-Day 
+
+Receipts (MT)", "Upto-Day Receipts (MT)", "Balance (MT)", "% of Receipts"]];
             let filterDate = document.getElementById('filter-to-date')?.value || "";
-            let filterDateFormatted = filterDate ? formatDateToDDMMYYYY(filterDate) : formatDateToDDMMYYYY(new Date());
+            let filterDateFormatted = filterDate ? formatDateToDDMMYYYY(filterDate) : 
+
+formatDateToDDMMYYYY(new Date());
 
             regions.forEach((r, idx) => {
                 let allotment = regionAllotments[r]?.general ?? 100.000;
@@ -1466,9 +2418,13 @@
                 });
                 let balance = allotment - uptoDayQty;
                 let pct = allotment > 0 ? (uptoDayQty / allotment) * 100 : 0;
-                wsData.push([idx + 1, r, allotment, onDayQty, uptoDayQty, balance, pct.toFixed(1) + "%"]);
+                wsData.push([idx + 1, r, allotment, onDayQty, uptoDayQty, balance, 
+
+pct.toFixed(1) + "%"]);
             });
-            XLSX.utils.book_append_sheet(wb, XLSX.utils.aoa_to_sheet(wsData), "Rice_Received_Report");
+            XLSX.utils.book_append_sheet(wb, XLSX.utils.aoa_to_sheet(wsData), 
+
+"Rice_Received_Report");
             XLSX.writeFile(wb, `TNCSC_Rice_Received_Report.xlsx`);
         }
     </script>
